@@ -59,7 +59,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
           <button
             onClick={onOpenLogbook}
-            className="px-4 py-2.5 bg-white text-purple-900 hover:bg-purple-50 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm transition-all btn-press"
+            className="px-4 py-2.5 bg-white dark:bg-slate-900 text-purple-900 hover:bg-purple-50 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm transition-all btn-press"
           >
             <BookOpen className="w-4 h-4 text-purple-700" />
             <span>কেস লগবুক খুলুন</span>
@@ -70,32 +70,32 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
       {/* 4 Stats Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <ScrollReveal animation="fade-up" delay={50}>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
-            <span className="text-[11px] text-slate-500 font-medium block">সংরক্ষিত ক্লিনিক্যাল কেস</span>
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xs">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">সংরক্ষিত ক্লিনিক্যাল কেস</span>
             <span className="text-2xl font-black text-purple-700 my-0.5 block">{toBn(14)} টি</span>
             <span className="text-[10px] text-emerald-600 font-bold">ভেরিফাইড: ১২টি</span>
           </div>
         </ScrollReveal>
 
         <ScrollReveal animation="fade-up" delay={100}>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
-            <span className="text-[11px] text-slate-500 font-medium block">OSCE স্টেশন স্কোর</span>
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xs">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">OSCE স্টেশন স্কোর</span>
             <span className="text-2xl font-black text-blue-600 my-0.5 block">{toBn(9.5)} / ১০</span>
             <span className="text-[10px] text-blue-600 font-bold">কার্ডিওভাসকুলার এক্সাম</span>
           </div>
         </ScrollReveal>
 
         <ScrollReveal animation="fade-up" delay={150}>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
-            <span className="text-[11px] text-slate-500 font-medium block">FCPS-1 প্র্যাকটিস স্কোর</span>
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xs">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">FCPS-1 প্র্যাকটিস স্কোর</span>
             <span className="text-2xl font-black text-emerald-600 my-0.5 block">৮৪%</span>
-            <span className="text-[10px] text-slate-400">ফার্মাকোলজি ও ফিজিওলজি</span>
+            <span className="text-[10px] text-slate-400 dark:text-slate-500">ফার্মাকোলজি ও ফিজিওলজি</span>
           </div>
         </ScrollReveal>
 
         <ScrollReveal animation="fade-up" delay={200}>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-2xs">
-            <span className="text-[11px] text-slate-500 font-medium block">ফোরাম কন্ট্রিবিউশন</span>
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xs">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">ফোরাম কন্ট্রিবিউশন</span>
             <span className="text-2xl font-black text-amber-600 my-0.5 block">{toBn(28)}</span>
             <span className="text-[10px] text-amber-700 font-bold">কেস মতামত ও লাইক</span>
           </div>
@@ -108,16 +108,16 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         <ScrollReveal animation="fade-up" delay={100}>
           <div
             onClick={onOpenLogbook}
-            className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-lg hover:border-purple-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
+            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-lg hover:border-purple-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <BookOpen className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-purple-600 transition-colors">
                 ক্লিনিক্যাল ওয়ার্ড কেস লগবুক
               </h3>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                 মেডিসিন, সার্জারি, গাইনি ও পেডিয়াট্রিক্স ওয়ার্ডের জন্য স্ট্যান্ডার্ড বেডসাইড হিস্ট্রি শীট রেকর্ড করুন।
               </p>
             </div>
@@ -133,16 +133,16 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         <ScrollReveal animation="fade-up" delay={150}>
           <div
             onClick={onOpenOSCE}
-            className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
+            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-blue-600 transition-colors">
                 OSCE / OSPE স্টেশন ও ভাইভা গাইড
               </h3>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                 ৫ মিনিটের প্রফেশনাল এক্সাম টাইমার, স্টেপ-বাই-স্টেপ এক্সাম চেকলিস্ট ও হাই-ইল্ড ভাইভা উত্তর।
               </p>
             </div>
@@ -158,16 +158,16 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         <ScrollReveal animation="fade-up" delay={200}>
           <div
             onClick={onOpenDoseCalc}
-            className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-lg hover:border-amber-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
+            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-lg hover:border-amber-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Calculator className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-amber-600 transition-colors">
                 পেডিয়াট্রিক mg/kg ডোজ ক্যালকুলেটর
               </h3>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                 প্যারাসিটামল, অ্যামোক্সিসিলিন, এজিথ্রোমাইসিনের মিলি/চামচ রূপান্তরসহ নিখুঁত শিশু ডোজ গণনা।
               </p>
             </div>
@@ -183,16 +183,16 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         <ScrollReveal animation="fade-up" delay={250}>
           <div
             onClick={onOpenQuiz}
-            className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-lg hover:border-emerald-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
+            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-lg hover:border-emerald-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Award className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-emerald-600 transition-colors">
                 FCPS-1 ও রেসিডেন্সি কুইজ হাব
               </h3>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                 বিসিপিএস ও বিএসএমএমইউ এর পূর্ববর্তী পরীক্ষার প্রশ্ন ব্যাংক ও পূর্ণাঙ্গ ক্লিনিক্যাল ব্যাখ্যা।
               </p>
             </div>
@@ -208,16 +208,16 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         <ScrollReveal animation="fade-up" delay={300}>
           <div
             onClick={onOpenForum}
-            className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
+            className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-lg hover:border-indigo-300 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
             <div>
               <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <MessageSquare className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-indigo-600 transition-colors">
                 ECG ও ক্লিনিক্যাল কেস ডিসকাশন ফোরাম
               </h3>
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                 ইসিজি স্ট্রিপ, চেস্ট এক্স-রে ও জটিল কেস নিয়ে সিনিয়র কনসালট্যান্টদের মতামত নিন।
               </p>
             </div>

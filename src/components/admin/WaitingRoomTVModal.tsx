@@ -44,7 +44,7 @@ export const WaitingRoomTVModal: React.FC<WaitingRoomTVModalProps> = ({ isOpen, 
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-wide">
               ল্যাবএইড ডায়াগনস্টিক সেন্টার • চেম্বার লাইভ সিরিয়াল মনিটর
             </h1>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-400 dark:text-slate-500">
               রুম ৩০৪ (৩য় তলা) • ShasthoSetu BD TV Display System
             </p>
           </div>
@@ -53,7 +53,7 @@ export const WaitingRoomTVModal: React.FC<WaitingRoomTVModalProps> = ({ isOpen, 
         <div className="flex items-center gap-4">
           <div className="text-right font-mono">
             <div className="text-xl sm:text-2xl font-black text-teal-400">{currentTime}</div>
-            <div className="text-xs text-slate-500">ঢাকা, বাংলাদেশ</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">ঢাকা, বাংলাদেশ</div>
           </div>
           <button
             onClick={onClose}
@@ -118,12 +118,12 @@ export const WaitingRoomTVModal: React.FC<WaitingRoomTVModalProps> = ({ isOpen, 
                   className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold text-slate-400">ধাপ +{toBn(offset)}</span>
+                    <span className="text-xs font-bold text-slate-400 dark:text-slate-500">ধাপ +{toBn(offset)}</span>
                     <span className="text-lg font-black font-mono text-teal-300">
                       টোকেন #{toBn(String(tokenNum).padStart(3, '0'))}
                     </span>
                   </div>
-                  <span className="text-xs text-slate-400 font-mono">
+                  <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
                     ~{toBn(offset * 4)} মিনিট
                   </span>
                 </div>
@@ -134,14 +134,14 @@ export const WaitingRoomTVModal: React.FC<WaitingRoomTVModalProps> = ({ isOpen, 
       </div>
 
       {/* Bottom Ticker Marquee */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 text-xs text-slate-400 flex items-center justify-between">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3 text-xs text-slate-400 dark:text-slate-500 flex items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-blue-400 shrink-0">
-          <span>📢 জরুরি নির্দেশনা:</span>
+          <span> জরুরি নির্দেশনা:</span>
         </div>
         <div className="truncate px-4 text-slate-300">
           অনুগ্রহ করে আপনার নির্ধারিত সিরিয়ালের জন্য অপেক্ষা করুন • রোগী দেখার সময় মোবাইল সাইলেন্ট রাখুন • জরুরি প্রয়োজনে রিসেপশনে যোগাযোগ করুন (হেল্পলাইন: 09678-123456)
         </div>
-        <div className="shrink-0 text-slate-500 font-mono">
+        <div className="shrink-0 text-slate-500 dark:text-slate-400 font-mono">
           মোট বুকিং: {toBn(totalTokens)}
         </div>
       </div>

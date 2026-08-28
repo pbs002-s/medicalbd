@@ -37,7 +37,7 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-3xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-red-600 to-rose-600 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -60,10 +60,10 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
         </div>
 
         {/* Filters */}
-        <div className="p-4 bg-slate-50 border-b border-slate-200 space-y-3 shrink-0 font-bangla">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 space-y-3 shrink-0 font-bangla">
           {/* Blood Group Pills */}
           <div>
-            <span className="text-xs font-bold text-slate-700 block mb-1.5">রক্তের গ্রুপ নির্বাচন করুন:</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1.5">রক্তের গ্রুপ নির্বাচন করুন:</span>
             <div className="flex flex-wrap gap-1.5">
               {bloodGroups.map((bg) => (
                 <button
@@ -72,7 +72,7 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
                   className={`px-3 py-1 rounded-xl text-xs font-bold font-mono transition-all ${
                     selectedGroup === bg
                       ? 'bg-red-600 text-white shadow-xs'
-                      : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
+                      : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   {bg === 'ALL' ? 'সকল গ্রুপ' : bg}
@@ -83,11 +83,11 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
 
           {/* District Selector */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-700 whitespace-nowrap">জেলা:</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300 whitespace-nowrap">জেলা:</span>
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="py-1.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-hidden"
+              className="py-1.5 px-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 focus:outline-hidden"
             >
               <option value="ALL">সকল জেলা</option>
               <option value="Dhaka">ঢাকা (Dhaka)</option>
@@ -100,7 +100,7 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
 
         {/* Donors List */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-3 flex-1 font-bangla">
-          <div className="text-xs text-slate-500 font-semibold mb-2">
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold mb-2">
             মোট পাওয়া গেছে: {toBn(filteredDonors.length)} জন রক্তদাতা
           </div>
 
@@ -108,7 +108,7 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
             {filteredDonors.map((donor) => (
               <div
                 key={donor.id}
-                className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-red-300 transition-all shadow-2xs space-y-2.5"
+                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-red-300 transition-all shadow-2xs space-y-2.5"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2.5">
@@ -116,19 +116,19 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
                       {donor.bloodGroup}
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm text-slate-900 leading-tight">{donor.name}</h4>
-                      <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                        <MapPin className="w-3 h-3 text-slate-400" />
+                      <h4 className="font-bold text-sm text-slate-900 dark:text-slate-50 leading-tight">{donor.name}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                        <MapPin className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                         <span>{donor.upazilaBn}, {donor.districtBn}</span>
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+                <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
                   <div>
-                    <span className="text-[10px] text-slate-400 block">মোট রক্তদান:</span>
-                    <strong className="text-slate-800">{toBn(donor.totalDonations)} বার</strong>
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 block">মোট রক্তদান:</span>
+                    <strong className="text-slate-800 dark:text-slate-100">{toBn(donor.totalDonations)} বার</strong>
                   </div>
 
                   {donor.isAvailable ? (
@@ -149,7 +149,7 @@ export const BloodBankModal: React.FC<BloodBankModalProps> = ({ isOpen, onClose 
                   className={`w-full py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-2xs ${
                     donor.isAvailable
                       ? 'bg-red-600 hover:bg-red-700 text-white'
-                      : 'bg-slate-100 text-slate-400 cursor-not-allowed pointer-events-none'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed pointer-events-none'
                   }`}
                 >
                   <PhoneCall className="w-3.5 h-3.5" />

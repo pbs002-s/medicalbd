@@ -97,7 +97,7 @@ export const PediatricDoseModal: React.FC<PediatricDoseModalProps> = ({ isOpen, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto font-bangla">
-      <div className="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -149,7 +149,7 @@ export const PediatricDoseModal: React.FC<PediatricDoseModalProps> = ({ isOpen, 
 
           {/* Drug Selection Pills */}
           <div>
-            <label className="text-xs font-bold text-slate-700 block mb-2">ওষুধ নির্বাচন করুন:</label>
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-2">ওষুধ নির্বাচন করুন:</label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
               {[
                 { id: 'paracetamol', label: 'Paracetamol (জ্বর/ব্যথা)' },
@@ -165,7 +165,7 @@ export const PediatricDoseModal: React.FC<PediatricDoseModalProps> = ({ isOpen, 
                   className={`p-2.5 rounded-xl border text-center font-bold transition-all ${
                     selectedDrug === d.id
                       ? 'bg-amber-600 text-white border-amber-600 shadow-2xs'
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                      : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
                   {d.label}
@@ -182,7 +182,7 @@ export const PediatricDoseModal: React.FC<PediatricDoseModalProps> = ({ isOpen, 
                   নির্ধারিত ফলাফল
                 </span>
                 <h3 className="text-base font-bold text-white mt-0.5">{result.drugName}</h3>
-                <p className="text-xs text-slate-400 mt-0.5">{result.standardRule}</p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{result.standardRule}</p>
               </div>
               <span className="px-2.5 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-mono font-black">
                 {toBn(result.totalMg)}
@@ -191,12 +191,12 @@ export const PediatricDoseModal: React.FC<PediatricDoseModalProps> = ({ isOpen, 
 
             <div className="space-y-2 text-xs text-slate-200">
               <div className="p-2.5 rounded-xl bg-slate-800/80 flex items-center gap-2">
-                <span className="text-amber-400 font-bold">🥄 সিরাপ ডোজ:</span>
+                <span className="text-amber-400 font-bold"> সিরাপ ডোজ:</span>
                 <span className="font-semibold text-white">{result.syrup}</span>
               </div>
 
               <div className="p-2.5 rounded-xl bg-slate-800/80 flex items-center gap-2">
-                <span className="text-teal-400 font-bold">💧 বিকল্প/ড্রপস:</span>
+                <span className="text-teal-400 font-bold"> বিকল্প/ড্রপস:</span>
                 <span className="text-slate-300">{result.drops}</span>
               </div>
             </div>

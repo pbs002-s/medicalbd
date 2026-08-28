@@ -47,7 +47,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
       setSelectedOption(null);
       setIsAnswerSubmitted(false);
     } else {
-      alert(`🎉 কুইজ সমাপ্ত! আপনার মোট স্কোর: ${score + (selectedOption === currentQ.correctOptionIndex ? 1 : 0)} / ${mockPostGradQuestions.length}`);
+      alert(` কুইজ সমাপ্ত! আপনার মোট স্কোর: ${score + (selectedOption === currentQ.correctOptionIndex ? 1 : 0)} / ${mockPostGradQuestions.length}`);
       setCurrentQIndex(0);
       setSelectedOption(null);
       setIsAnswerSubmitted(false);
@@ -57,7 +57,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto font-bangla">
-      <div className="bg-white rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-purple-700 to-indigo-800 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -77,16 +77,16 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
         </div>
 
         {/* Progress & Meta Bar */}
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs font-semibold">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-semibold">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-bold">
               {currentQ.examType}
             </span>
-            <span className="text-slate-500">বিষয়: {currentQ.subject}</span>
+            <span className="text-slate-500 dark:text-slate-400">বিষয়: {currentQ.subject}</span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-slate-600 font-mono">
+            <span className="text-slate-600 dark:text-slate-400 font-mono">
               প্রশ্ন: {toBn(currentQIndex + 1)} / {toBn(mockPostGradQuestions.length)}
             </span>
             <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold font-mono">
@@ -97,7 +97,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
 
         {/* Question & Options */}
         <div className="p-6 space-y-6 overflow-y-auto flex-1">
-          <h3 className="text-base font-bold text-slate-900 leading-snug">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 leading-snug">
             {currentQ.question}
           </h3>
 
@@ -106,7 +106,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
               const isSelected = selectedOption === idx;
               const isCorrect = currentQ.correctOptionIndex === idx;
 
-              let style = 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-800';
+              let style = 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100';
 
               if (isAnswerSubmitted) {
                 if (isCorrect) {
@@ -125,7 +125,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
                   className={`p-3.5 rounded-2xl border flex items-center justify-between cursor-pointer transition-all ${style}`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded-full bg-white border border-slate-300 text-slate-700 text-xs font-mono font-bold flex items-center justify-center shrink-0">
+                    <span className="w-6 h-6 rounded-full bg-white dark:bg-slate-900 border border-slate-300 text-slate-700 dark:text-slate-300 text-xs font-mono font-bold flex items-center justify-center shrink-0">
                       {String.fromCharCode(65 + idx)}
                     </span>
                     <span className="text-xs leading-relaxed">{opt}</span>
@@ -149,13 +149,13 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
                 <HelpCircle className="w-4 h-4 text-indigo-600" />
                 <span>মডেল ব্যাখ্যা ও ক্লিনিক্যাল যুক্তি (Rationale):</span>
               </h4>
-              <p className="text-slate-700 leading-relaxed">{currentQ.explanation}</p>
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{currentQ.explanation}</p>
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between shrink-0">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
           <button
             onClick={() => {
               setCurrentQIndex(0);
@@ -163,7 +163,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
               setIsAnswerSubmitted(false);
               setScore(0);
             }}
-            className="px-3 py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold flex items-center gap-1"
+            className="px-3 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 text-xs font-semibold flex items-center gap-1"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>রিসেট করুন</span>
@@ -176,7 +176,7 @@ export const PostGradQuizModal: React.FC<PostGradQuizModalProps> = ({ isOpen, on
               className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 selectedOption !== null
                   ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-md'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                  : 'bg-slate-200 text-slate-400 dark:text-slate-500 cursor-not-allowed'
               }`}
             >
               উত্তর সাবমিট করুন

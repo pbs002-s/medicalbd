@@ -56,7 +56,7 @@ export const WaitingRoomTVPage: React.FC<WaitingRoomTVPageProps> = ({ onBack }) 
         <div className="flex items-center gap-3">
           <button
             onClick={() => onBack ? onBack() : setActiveView('dashboard')}
-            className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+            className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 dark:text-slate-500 hover:text-white transition-colors"
             title="ড্যাশবোর্ডে ফিরে যান"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -68,14 +68,14 @@ export const WaitingRoomTVPage: React.FC<WaitingRoomTVPageProps> = ({ onBack }) 
                 ল্যাবএইড স্পেশালাইজড হসপিটাল • ডিজিটাল ওয়েটিং ডিসপ্লে
               </h1>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">রিয়েল-টাইম পেশেন্ট কিউ মনিটর</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">রিয়েল-টাইম পেশেন্ট কিউ মনিটর</p>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="text-right font-mono">
             <span className="text-xl sm:text-2xl font-black text-emerald-400 block leading-none">{currentTime}</span>
-            <span className="text-xs text-slate-400">২০ মে, ২০২৬ | মঙ্গলবার</span>
+            <span className="text-xs text-slate-400 dark:text-slate-500">২০ মে, ২০২৬ | মঙ্গলবার</span>
           </div>
 
           <button
@@ -110,7 +110,7 @@ export const WaitingRoomTVPage: React.FC<WaitingRoomTVPageProps> = ({ onBack }) 
             {/* Giant Token Display */}
             <div className="grid grid-cols-2 gap-4 text-center py-4 bg-slate-950/70 rounded-2xl border border-slate-800">
               <div className="p-2 border-r border-slate-800">
-                <span className="text-xs text-slate-400 block">চলতি সিরিয়াল (Serving)</span>
+                <span className="text-xs text-slate-400 dark:text-slate-500 block">চলতি সিরিয়াল (Serving)</span>
                 <span className="text-5xl sm:text-6xl font-black text-emerald-400 font-mono tracking-tight my-1 block">
                   #{toBn(c.serial)}
                 </span>
@@ -118,7 +118,7 @@ export const WaitingRoomTVPage: React.FC<WaitingRoomTVPageProps> = ({ onBack }) 
               </div>
 
               <div className="p-2">
-                <span className="text-xs text-slate-400 block">পরবর্তী সিরিয়াল (Next)</span>
+                <span className="text-xs text-slate-400 dark:text-slate-500 block">পরবর্তী সিরিয়াল (Next)</span>
                 <span className="text-5xl sm:text-6xl font-black text-amber-400 font-mono tracking-tight my-1 block">
                   #{toBn(c.next)}
                 </span>
@@ -148,7 +148,7 @@ export const WaitingRoomTVPage: React.FC<WaitingRoomTVPageProps> = ({ onBack }) 
           জরুরি নোটিশ
         </span>
         <div className="truncate font-semibold animate-pulse">
-          📢 সকল রোগীদের অনুরোধ করা হচ্ছে তাদের সিরিয়ালের ১৫ মিনিট পূর্বে চেম্বারের সামনে উপস্থিত থাকতে। ১৪ দিনের মধ্যে রিপোর্ট প্রদর্শন সম্পূর্ণ ফ্রি।
+           সকল রোগীদের অনুরোধ করা হচ্ছে তাদের সিরিয়ালের ১৫ মিনিট পূর্বে চেম্বারের সামনে উপস্থিত থাকতে। ১৪ দিনের মধ্যে রিপোর্ট প্রদর্শন সম্পূর্ণ ফ্রি।
         </div>
       </div>
     </div>

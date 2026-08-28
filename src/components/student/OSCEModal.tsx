@@ -67,7 +67,7 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto font-bangla">
-      <div className="bg-white rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[94vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[94vh] animate-slide-up">
         {/* Header */}
         <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Station Selectors & Timer Bar */}
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2">
             {mockOSCEStations.map((st) => (
               <button
@@ -101,7 +101,7 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   selectedStation.id === st.id
                     ? 'bg-blue-600 text-white shadow-2xs'
-                    : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100'
+                    : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 {st.title}
@@ -111,9 +111,9 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
 
           {/* Timer & Score Display */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs font-mono font-bold text-xs">
+            <div className="flex items-center gap-2 bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xs font-mono font-bold text-xs">
               <Timer className="w-4 h-4 text-blue-600" />
-              <span className={`text-sm ${timeLeftSeconds < 60 ? 'text-red-600 animate-pulse font-black' : 'text-slate-800'}`}>
+              <span className={`text-sm ${timeLeftSeconds < 60 ? 'text-red-600 animate-pulse font-black' : 'text-slate-800 dark:text-slate-100'}`}>
                 {toBn(String(minutes).padStart(2, '0'))}:{toBn(String(seconds).padStart(2, '0'))}
               </span>
               <button
@@ -124,7 +124,7 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
               </button>
               <button
                 onClick={resetTimer}
-                className="p-1 rounded-lg bg-slate-100 text-slate-500 hover:bg-slate-200"
+                className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-200"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -144,14 +144,14 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
             <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider block mb-1">
               স্টেশন সিনারিও (OSCE Scenario):
             </span>
-            <p className="text-sm font-bold text-slate-900 leading-snug">{selectedStation.scenario}</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-slate-50 leading-snug">{selectedStation.scenario}</p>
           </div>
 
           {/* Checklist */}
           <div className="space-y-3">
-            <h4 className="font-bold text-sm text-slate-900 flex items-center justify-between">
+            <h4 className="font-bold text-sm text-slate-900 dark:text-slate-50 flex items-center justify-between">
               <span>পরীক্ষকের মার্কিং চেকলিস্ট (Marking Checklist):</span>
-              <span className="text-xs text-slate-400 font-normal">ক্লিক করে প্র্যাকটিস স্কোর হিসেব করুন</span>
+              <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">ক্লিক করে প্র্যাকটিস স্কোর হিসেব করুন</span>
             </h4>
 
             <div className="space-y-2">
@@ -164,19 +164,19 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
                     className={`p-3 rounded-2xl border flex items-start justify-between gap-3 cursor-pointer transition-all ${
                       isChecked
                         ? 'bg-emerald-50/80 border-emerald-300 text-emerald-900 shadow-2xs'
-                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                        : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                     }`}
                   >
                     <div className="flex items-start gap-2.5">
                       {isChecked ? (
                         <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       ) : (
-                        <Square className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                        <Square className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 mt-0.5" />
                       )}
                       <span className="leading-relaxed">{item.text}</span>
                     </div>
 
-                    <span className="px-2 py-0.5 rounded-md bg-slate-100 font-mono font-bold text-slate-600 shrink-0">
+                    <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono font-bold text-slate-600 dark:text-slate-400 shrink-0">
                       +{toBn(item.marks)}
                     </span>
                   </div>
@@ -186,8 +186,8 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* High Yield Viva Questions */}
-          <div className="space-y-3 pt-4 border-t border-slate-200">
-            <h4 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+          <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <h4 className="font-bold text-sm text-slate-900 dark:text-slate-50 flex items-center gap-1.5">
               <HelpCircle className="w-4 h-4 text-purple-600" />
               <span>স্টেশন সংলগ্ন উচ্চ-গুরুত্বপূর্ণ ভাইভা প্রশ্ন (High-Yield Viva Q&A):</span>
             </h4>
@@ -201,15 +201,15 @@ export const OSCEModal: React.FC<OSCEModalProps> = ({ isOpen, onClose }) => {
                     </p>
                     <button
                       onClick={() => setShowVivaAnswers({ ...showVivaAnswers, [i]: !showVivaAnswers[i] })}
-                      className="px-2 py-1 bg-white hover:bg-purple-100 text-purple-700 rounded-lg text-[10px] font-bold border border-purple-200 shrink-0"
+                      className="px-2 py-1 bg-white dark:bg-slate-900 hover:bg-purple-100 text-purple-700 rounded-lg text-[10px] font-bold border border-purple-200 shrink-0"
                     >
                       {showVivaAnswers[i] ? 'উত্তর লুকান' : 'উত্তর দেখুন'}
                     </button>
                   </div>
 
                   {showVivaAnswers[i] && (
-                    <p className="p-2.5 bg-white rounded-xl border border-purple-200/60 text-slate-700 leading-relaxed text-[11px] animate-in fade-in">
-                      💡 <strong>মডেল উত্তর:</strong> {vq.answer}
+                    <p className="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-purple-200/60 text-slate-700 dark:text-slate-300 leading-relaxed text-[11px] animate-in fade-in">
+                       <strong>মডেল উত্তর:</strong> {vq.answer}
                     </p>
                   )}
                 </div>

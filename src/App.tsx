@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { QueueProvider } from './context/QueueContext';
 
@@ -105,7 +106,7 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
+    <div className="min-h-screen bg-paper flex flex-col font-sans">
       {/* Top Navbar */}
       <Navbar onOpenSearch={() => setActiveView('medicines')} />
 
@@ -125,7 +126,7 @@ const AppContent: React.FC = () => {
         />
 
         {/* Dynamic Center Main Area: Renders Dedicated Individual Pages */}
-        <main className="flex-1 overflow-y-auto bg-[#F8FAFC]">
+        <main className="flex-1 overflow-y-auto bg-paper">
           {/* 1. DASHBOARD VIEW (Role-based) */}
           {activeView === 'dashboard' && (
             <>
@@ -276,13 +277,15 @@ const AppContent: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <QueueProvider>
-          <AppContent />
-        </QueueProvider>
-      </AuthProvider>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <QueueProvider>
+            <AppContent />
+          </QueueProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 

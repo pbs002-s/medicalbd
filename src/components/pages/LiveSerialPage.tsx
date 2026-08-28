@@ -75,24 +75,24 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 font-bangla">
       {/* Breadcrumb & Header */}
       <ScrollReveal animation="fade-down" duration={400}>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-3xl border border-slate-100 shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs">
           <div className="flex items-center gap-3">
             <button
               onClick={() => onBack ? onBack() : setActiveView('dashboard')}
-              className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors btn-press"
+              className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors btn-press"
               title="ড্যাশবোর্ডে ফিরে যান"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <div className="flex items-center gap-2 text-xs text-slate-400 font-medium">
+              <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500 font-medium">
                 <span className="hover:text-blue-600 cursor-pointer" onClick={() => setActiveView('dashboard')}>
                   ড্যাশবোর্ড
                 </span>
                 <ChevronRight className="w-3 h-3" />
                 <span className="text-blue-600 font-semibold">লাইভ সিরিয়াল ট্র্যাকার</span>
               </div>
-              <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-0.5 flex items-center gap-2">
+              <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-0.5 flex items-center gap-2">
                 <span>লাইভ চেম্বার সিরিয়াল মনিটর</span>
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block" />
               </h1>
@@ -112,7 +112,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
 
             <button
               onClick={() => window.print()}
-              className="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 transition-colors btn-press"
+              className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 transition-colors btn-press"
               title="টোকেন প্রিন্ট করুন"
             >
               <Printer className="w-4 h-4" />
@@ -145,7 +145,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                       <span>{primaryAppointment.doctorNameBn}</span>
                     </h3>
                     <p className="text-xs text-slate-300 mt-0.5">{primaryAppointment.doctorSpecialtyBn}</p>
-                    <p className="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1">
+                    <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5 flex items-center gap-1">
                       <MapPin className="w-3 h-3 text-emerald-400" />
                       <span>{primaryAppointment.chamberName}</span>
                     </p>
@@ -157,7 +157,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>{doctorStatusBn}</span>
                   </span>
-                  <div className="text-[10px] text-slate-400 mt-1 font-mono">আপডেট: {lastUpdated}</div>
+                  <div className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 font-mono">আপডেট: {lastUpdated}</div>
                 </div>
               </div>
 
@@ -165,7 +165,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
               <div className="grid grid-cols-3 gap-3 text-center py-4 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-xs relative z-10">
                 {/* Current Serial */}
                 <div className="p-2">
-                  <span className="text-[11px] text-slate-400 block font-medium">চলতি সিরিয়াল</span>
+                  <span className="text-[11px] text-slate-400 dark:text-slate-500 block font-medium">চলতি সিরিয়াল</span>
                   <span className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono tracking-tight my-1 block">
                     #{toBn(String(currentSerial).padStart(2, '0'))}
                   </span>
@@ -223,14 +223,14 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
 
           {/* Quick Notification Settings */}
           <ScrollReveal animation="fade-up" delay={150}>
-            <div className="bg-white rounded-3xl border border-slate-100 p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-5 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
                   <Bell className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm">এসএমএস ও পুশ নোটিফিকেশন অ্যালার্ট</h4>
-                  <p className="text-[11px] text-slate-500">আপনার সিরিয়াল ৩ জন আগে আসলে স্বয়ংক্রিয় এসএমএস পাঠানো হবে।</p>
+                  <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs sm:text-sm">এসএমএস ও পুশ নোটিফিকেশন অ্যালার্ট</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">আপনার সিরিয়াল ৩ জন আগে আসলে স্বয়ংক্রিয় এসএমএস পাঠানো হবে।</p>
                 </div>
               </div>
 
@@ -241,7 +241,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                   onChange={(e) => setIsSmsEnabled(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white dark:bg-slate-900 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
             </div>
           </ScrollReveal>
@@ -251,32 +251,32 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
         <div className="lg:col-span-5 space-y-6">
           {/* Printable E-Token Pass */}
           <ScrollReveal animation="slide-left" duration={450}>
-            <div className="bg-white rounded-3xl border-2 border-dashed border-blue-200 p-6 shadow-xs relative overflow-hidden">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border-2 border-dashed border-blue-200 p-6 shadow-xs relative overflow-hidden">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600">ডিজিটাল সিরিয়াল টোকেন</span>
-                <span className="text-[10px] text-slate-400 font-mono">ID: TK-BD-8819</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">ID: TK-BD-8819</span>
               </div>
 
               <div className="text-center space-y-2">
-                <span className="text-xs text-slate-500 font-medium">রোগীর নাম</span>
-                <h3 className="text-lg font-black text-slate-900">সালমান আহমেদ</h3>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">রোগীর নাম</span>
+                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50">সালমান আহমেদ</h3>
 
                 <div className="py-3 bg-blue-50/70 rounded-2xl border border-blue-100 my-3">
                   <span className="text-[10px] text-blue-700 font-bold uppercase block">আপনার টোকেন নম্বর</span>
                   <span className="text-4xl font-black text-blue-600 font-mono block my-0.5">#১৮</span>
-                  <span className="text-[11px] text-slate-600">সময়: সকাল ১১:৩০ | রুম ৩০৪</span>
+                  <span className="text-[11px] text-slate-600 dark:text-slate-400">সময়: সকাল ১১:৩০ | রুম ৩০৪</span>
                 </div>
 
                 {/* QR Code Mockup */}
                 <div className="flex items-center justify-center gap-3 pt-2">
-                  <div className="p-2 bg-slate-50 border border-slate-200 rounded-xl">
-                    <QrCode className="w-16 h-16 text-slate-800" />
+                  <div className="p-2 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 rounded-xl">
+                    <QrCode className="w-16 h-16 text-slate-800 dark:text-slate-100" />
                   </div>
-                  <div className="text-left text-[11px] text-slate-500 space-y-1">
-                    <p className="font-semibold text-slate-800">ল্যাবএইড ধানমন্ডি</p>
+                  <div className="text-left text-[11px] text-slate-500 dark:text-slate-400 space-y-1">
+                    <p className="font-semibold text-slate-800 dark:text-slate-100">ল্যাবএইড ধানমন্ডি</p>
                     <p>ডা. তানভীর হাসান</p>
                     <span className="inline-block px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold">
-                      পেমেন্ট নিশ্চিত ✔
+                      পেমেন্ট নিশ্চিত 
                     </span>
                   </div>
                 </div>
@@ -286,9 +286,9 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
 
           {/* Live Queue Roll */}
           <ScrollReveal animation="fade-up" delay={200}>
-            <div className="bg-white rounded-3xl border border-slate-100 p-5 shadow-xs space-y-3">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-5 shadow-xs space-y-3">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-bold text-slate-900 text-sm">চেম্বারের সিরিয়াল সারি তালিকা</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-50 text-sm">চেম্বারের সিরিয়াল সারি তালিকা</h3>
                 <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
                   লাইভ ফিড
                 </span>
@@ -304,8 +304,8 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                         : item.isUser
                         ? 'bg-blue-50 border-blue-300 font-bold text-blue-950 ring-1 ring-blue-400'
                         : item.isPast
-                        ? 'bg-slate-50/60 border-slate-100 text-slate-400 line-through'
-                        : 'bg-white border-slate-100 text-slate-700'
+                        ? 'bg-slate-50/60 border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 line-through'
+                        : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
@@ -314,13 +314,13 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                           ? 'bg-emerald-600 text-white'
                           : item.isUser
                           ? 'bg-blue-600 text-white'
-                          : 'bg-slate-100 text-slate-600'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
                       }`}>
                         #{toBn(item.token)}
                       </span>
                       <div>
                         <p className="leading-tight">{item.name}</p>
-                        <span className="text-[10px] text-slate-400 font-mono">{item.time}</span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">{item.time}</span>
                       </div>
                     </div>
 
@@ -331,7 +331,7 @@ export const LiveSerialPage: React.FC<LiveSerialPageProps> = ({ onBack }) => {
                         ? 'bg-blue-200 text-blue-900'
                         : item.isNext
                         ? 'bg-amber-100 text-amber-900'
-                        : 'bg-slate-100 text-slate-500'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
                     }`}>
                       {item.status}
                     </span>

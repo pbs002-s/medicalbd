@@ -35,14 +35,14 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`🎉 অ্যাপয়েন্টমেন্ট সফলভাবে বুক হয়েছে!\n\n👨‍⚕️ চিকিৎসক: ${selectedDoctor}\n📍 চেম্বার: ল্যাবএইড ডায়াগনস্টিক, ধানমন্ডি\n🎫 আপনার সিরিয়াল টোকেন: #১৮\n📅 তারিখ: ২০ মে, ২০২৬\n💰 ফি: ${isFollowUp ? '৳ ০ (ফ্রি ফলোআপ)' : '৳ ১২০০'}`);
+    alert(` অ্যাপয়েন্টমেন্ট সফলভাবে বুক হয়েছে!\n\n চিকিৎসক: ${selectedDoctor}\n চেম্বার: ল্যাবএইড ডায়াগনস্টিক, ধানমন্ডি\n আপনার সিরিয়াল টোকেন: #১৮\n তারিখ: ২০ মে, ২০২৬\n ফি: ${isFollowUp ? '৳ ০ (ফ্রি ফলোআপ)' : '৳ ১২০০'}`);
     if (onBooked) onBooked();
     onClose();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto font-bangla">
-      <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-blue-600 to-teal-600 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -65,11 +65,11 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
         <form onSubmit={handleBooking} className="p-6 space-y-4 overflow-y-auto flex-1 text-xs">
           {/* Department */}
           <div>
-            <label className="block font-bold text-slate-700 mb-1">বিভাগ বা বিশেষত্ব (Specialty):</label>
+            <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">বিভাগ বা বিশেষত্ব (Specialty):</label>
             <select
               value={selectedSpecialty}
               onChange={(e) => setSelectedSpecialty(e.target.value)}
-              className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
+              className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
             >
               <option value="মেডিসিন">মেডিসিন ও ডায়াবেটিস (Internal Medicine)</option>
               <option value="কার্ডিওলজি">হৃদরোগ ও কার্ডিওলজি (Cardiology)</option>
@@ -82,11 +82,11 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
           {/* Doctor */}
           <div>
-            <label className="block font-bold text-slate-700 mb-1">ডাক্তার নির্বাচন করুন:</label>
+            <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">ডাক্তার নির্বাচন করুন:</label>
             <select
               value={selectedDoctor}
               onChange={(e) => setSelectedDoctor(e.target.value)}
-              className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
+              className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
             >
               <option value="ডা. তানভীর হাসান (MBBS, FCPS)">ডা. তানভীর হাসান (সহকারী অধ্যাপক, DMC - ল্যাবএইড ধানমন্ডি)</option>
               <option value="ডা. সায়রা আফরিন (MBBS, MD Cardiology)">ডা. সায়রা আফরিন (ন্যাশনাল হার্ট ফাউন্ডেশন)</option>
@@ -97,22 +97,22 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
           {/* Date & Slot */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-bold text-slate-700 mb-1">তারিখ:</label>
+              <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">তারিখ:</label>
               <input
                 type="date"
                 required
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs focus:outline-hidden focus:border-blue-500 font-mono"
+                className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs focus:outline-hidden focus:border-blue-500 font-mono"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-slate-700 mb-1">চেম্বার সময়:</label>
+              <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">চেম্বার সময়:</label>
               <select
                 value={selectedSlot}
                 onChange={(e) => setSelectedSlot(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
+                className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs font-semibold focus:outline-hidden focus:border-blue-500"
               >
                 <option value="সকাল ১১:৩০ - দুপুর ১:৩০">সকাল ১১:৩০ - দুপুর ১:৩০</option>
                 <option value="সন্ধ্যা ৬:০০ - রাত ৯:০০">সন্ধ্যা ৬:০০ - রাত ৯:০০</option>
@@ -137,8 +137,8 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
           </label>
 
           {/* Fee Breakdown */}
-          <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-            <span className="font-bold text-slate-700">অনুমোদিত কনসালটেশন ফি:</span>
+          <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span className="font-bold text-slate-700 dark:text-slate-300">অনুমোদিত কনসালটেশন ফি:</span>
             <span className="text-base font-black text-blue-600 font-mono">
               {isFollowUp ? '৳ ০ (ফ্রি রিভিউ)' : '৳ ১২০০'}
             </span>

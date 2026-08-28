@@ -45,7 +45,7 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-slate-100 overflow-hidden relative animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative animate-slide-up">
         {/* Header */}
         <div className="p-5 sm:p-6 bg-gradient-to-r from-blue-600 to-teal-600 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
 
         <div className="p-6 space-y-6">
           {/* Doctor Status Banner */}
-          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <img
                 src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80"
@@ -75,10 +75,10 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
                 className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-500/20"
               />
               <div>
-                <h4 className="font-bold text-slate-900 font-bangla text-sm sm:text-base">{doctorNameBn}</h4>
-                <p className="text-xs text-slate-600 font-bangla">{doctorSpecialtyBn}</p>
-                <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-bangla mt-0.5">
-                  <MapPin className="w-3 h-3 text-slate-400" />
+                <h4 className="font-bold text-slate-900 dark:text-slate-50 font-bangla text-sm sm:text-base">{doctorNameBn}</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 font-bangla">{doctorSpecialtyBn}</p>
+                <div className="flex items-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 font-bangla mt-0.5">
+                  <MapPin className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                   <span>ল্যাবএইড ডায়াগনস্টিক, ধানমন্ডি (রুম ৩০৪)</span>
                 </div>
               </div>
@@ -95,12 +95,12 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
           {/* Big Serial Numbers Display */}
           <div className="grid grid-cols-3 gap-3 text-center">
             {/* Current */}
-            <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200">
-              <span className="text-xs font-bold text-slate-500 font-bangla block">চলতি সিরিয়াল</span>
-              <span className="text-3xl sm:text-4xl font-black text-slate-900 font-bangla my-1 block">
+            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-bangla block">চলতি সিরিয়াল</span>
+              <span className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-50 font-bangla my-1 block">
                 {toBn(String(currentSerial).padStart(3, '0'))}
               </span>
-              <span className="text-[10px] text-slate-400 font-bangla">এখন চেম্বারে</span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bangla">এখন চেম্বারে</span>
             </div>
 
             {/* Your Token */}
@@ -115,22 +115,22 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
             </div>
 
             {/* Estimated Wait */}
-            <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200">
-              <span className="text-xs font-bold text-slate-500 font-bangla block">আনুমানিক সময়</span>
-              <span className="text-2xl sm:text-3xl font-black text-slate-900 font-bangla my-1 block">
+            <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-bangla block">আনুমানিক সময়</span>
+              <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-50 font-bangla my-1 block">
                 {toBn(estimatedMinutes)}
               </span>
-              <span className="text-[10px] text-slate-400 font-bangla">মিনিট অপেক্ষার সময়</span>
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bangla">মিনিট অপেক্ষার সময়</span>
             </div>
           </div>
 
           {/* Queue Progress Bar */}
           <div className="space-y-2">
-            <div className="flex justify-between text-xs font-bangla font-semibold text-slate-600">
+            <div className="flex justify-between text-xs font-bangla font-semibold text-slate-600 dark:text-slate-400">
               <span>সিরিয়াল অগ্রগতি: {toBn(currentSerial)} / {toBn(totalTokens)}</span>
               <span className="text-emerald-600">আপডেট: {lastUpdated}</span>
             </div>
-            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5">
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden p-0.5">
               <div
                 className="bg-gradient-to-r from-blue-600 to-teal-500 h-full rounded-full transition-all duration-500"
                 style={{ width: `${Math.min(100, (currentSerial / totalTokens) * 100)}%` }}
@@ -141,13 +141,13 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
           {/* Interactive Simulation Controls for Demo */}
           <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 space-y-3">
             <div className="flex items-center justify-between text-xs font-bangla">
-              <span className="font-bold text-blue-900">🎮 ডেমো লাইভ কন্ট্রোলার (সিমুলেশন)</span>
+              <span className="font-bold text-blue-900"> ডেমো লাইভ কন্ট্রোলার (সিমুলেশন)</span>
               <button
                 onClick={() => setIsChimeEnabled(!isChimeEnabled)}
-                className="flex items-center gap-1 text-slate-600 hover:text-blue-600"
+                className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-blue-600"
                 title="সাউন্ড বেল টগল"
               >
-                {isChimeEnabled ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+                {isChimeEnabled ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4 text-slate-400 dark:text-slate-500" />}
                 <span className="text-[11px]">{isChimeEnabled ? 'শব্দ চালু' : 'শব্দ বন্ধ'}</span>
               </button>
             </div>
@@ -164,12 +164,12 @@ export const LiveSerialModal: React.FC<LiveSerialModalProps> = ({ isOpen, onClos
               <select
                 value={doctorStatus}
                 onChange={(e: any) => updateDoctorStatus(e.target.value)}
-                className="py-2 px-3 bg-white border border-slate-200 rounded-xl text-xs font-bangla font-semibold text-slate-700 focus:outline-hidden"
+                className="py-2 px-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bangla font-semibold text-slate-700 dark:text-slate-300 focus:outline-hidden"
               >
-                <option value="in_chamber">🟢 চেম্বারে আছেন</option>
-                <option value="on_way">🟡 আসছেন</option>
-                <option value="break">☕ সাময়িক বিরতি</option>
-                <option value="emergency">🔴 জরুরি অপারেশনে</option>
+                <option value="in_chamber"> চেম্বারে আছেন</option>
+                <option value="on_way"> আসছেন</option>
+                <option value="break"> সাময়িক বিরতি</option>
+                <option value="emergency"> জরুরি অপারেশনে</option>
               </select>
             </div>
           </div>

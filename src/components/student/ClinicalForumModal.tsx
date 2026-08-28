@@ -70,7 +70,7 @@ export const ClinicalForumModal: React.FC<ClinicalForumModalProps> = ({ isOpen, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto font-bangla">
-      <div className="bg-white rounded-3xl max-w-3xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-3xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-indigo-700 via-purple-700 to-slate-900 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -92,7 +92,7 @@ export const ClinicalForumModal: React.FC<ClinicalForumModalProps> = ({ isOpen, 
         {/* Feed */}
         <div className="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
           {posts.map((post) => (
-            <div key={post.id} className="p-5 rounded-3xl bg-slate-50 border border-slate-200 space-y-3.5">
+            <div key={post.id} className="p-5 rounded-3xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 space-y-3.5">
               {/* Author Info */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -100,27 +100,27 @@ export const ClinicalForumModal: React.FC<ClinicalForumModalProps> = ({ isOpen, 
                     {post.author.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs text-slate-900 leading-tight">{post.author}</h4>
-                    <span className="text-[10px] text-slate-400">{post.timeBn}</span>
+                    <h4 className="font-bold text-xs text-slate-900 dark:text-slate-50 leading-tight">{post.author}</h4>
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500">{post.timeBn}</span>
                   </div>
                 </div>
               </div>
 
               {/* Title & Desc */}
               <div>
-                <h3 className="font-bold text-sm text-slate-900 mb-1">{post.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{post.desc}</p>
+                <h3 className="font-bold text-sm text-slate-900 dark:text-slate-50 mb-1">{post.title}</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{post.desc}</p>
               </div>
 
               {/* Optional ECG Image */}
               {post.ecgUrl && (
-                <div className="rounded-2xl overflow-hidden border border-slate-200 max-h-48">
+                <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 max-h-48">
                   <img src={post.ecgUrl} alt="Clinical Image" className="w-full h-48 object-cover" />
                 </div>
               )}
 
               {/* Likes & Comments Summary */}
-              <div className="flex items-center gap-4 text-xs text-slate-500 pt-2 border-t border-slate-200/60">
+              <div className="flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60">
                 <button
                   onClick={() =>
                     setPosts(
@@ -132,15 +132,15 @@ export const ClinicalForumModal: React.FC<ClinicalForumModalProps> = ({ isOpen, 
                   <ThumbsUp className="w-4 h-4" />
                   <span>{toBn(post.likes)} লাইক</span>
                 </button>
-                <span>💬 {toBn(post.comments.length)} মন্তব্য</span>
+                <span> {toBn(post.comments.length)} মন্তব্য</span>
               </div>
 
               {/* Comments Stream */}
               <div className="space-y-2 pt-2 border-t border-slate-200/60">
                 {post.comments.map((cm, i) => (
-                  <div key={i} className="p-2.5 bg-white rounded-xl border border-slate-200 text-xs">
-                    <strong className="text-slate-900 text-[11px] block">{cm.author}</strong>
-                    <p className="text-slate-600 mt-0.5">{cm.text}</p>
+                  <div key={i} className="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                    <strong className="text-slate-900 dark:text-slate-50 text-[11px] block">{cm.author}</strong>
+                    <p className="text-slate-600 dark:text-slate-400 mt-0.5">{cm.text}</p>
                   </div>
                 ))}
               </div>
@@ -152,7 +152,7 @@ export const ClinicalForumModal: React.FC<ClinicalForumModalProps> = ({ isOpen, 
                   value={commentInputs[post.id] || ''}
                   onChange={(e) => setCommentInputs({ ...commentInputs, [post.id]: e.target.value })}
                   placeholder="আপনার ক্লিনিক্যাল মতামত লিখুন..."
-                  className="flex-1 px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs focus:outline-hidden focus:border-indigo-500"
+                  className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs focus:outline-hidden focus:border-indigo-500"
                 />
                 <button
                   onClick={() => handleAddComment(post.id)}

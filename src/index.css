@@ -3,163 +3,139 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light mode surfaces */
+    --color-paper: 243 245 241;    /* page background */
+    --color-surface: 255 255 255;  /* card / elevated surface */
+    --color-ink: 17 26 21;         /* primary text */
+  }
+
+  .dark {
+    /* Night mode surfaces */
+    --color-paper: 10 16 13;
+    --color-surface: 17 27 22;
+    --color-ink: 232 238 233;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-[#F8FAFC] text-slate-900;
+    @apply bg-paper text-ink;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, .font-display {
+    @apply font-serif;
+  }
+
+  ::selection {
+    @apply bg-blue-200/70 text-blue-900;
+  }
+
+  .dark ::selection {
+    @apply bg-blue-800/60 text-blue-50;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-ink) / 0.35);
+    outline-offset: 2px;
   }
 }
 
-/* Custom smooth scrollbar */
+/* Slim scrollbar, theme-aware */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgb(var(--color-ink) / 0.18);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: rgb(var(--color-ink) / 0.32);
 }
 
-/* Interactive Click & Motion Utilities */
+/* Interactive click & motion utilities — used sparingly and consistently */
 @layer components {
-  /* Button click depression animation */
   .btn-press {
-    @apply transition-all duration-150 active:scale-[0.96] active:brightness-95 cursor-pointer;
+    @apply transition-all duration-150 active:scale-[0.97] cursor-pointer;
   }
 
-  /* Interactive card with hover lift & click spring */
   .card-interactive {
-    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-[0.98] active:translate-y-0 cursor-pointer;
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover active:scale-[0.99] active:translate-y-0 cursor-pointer;
   }
 
-  /* Shimmer effect on loading/live components */
   .shimmer-badge {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.35) 50%,
       rgba(255, 255, 255, 0) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 2.5s infinite;
   }
 
-  /* Compact option chip */
   .option-pill {
     @apply px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all duration-150 cursor-pointer inline-flex items-center gap-1.5;
   }
 }
 
-/* Custom Keyframe Animations */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
+
+.animate-slide-up { animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-down { animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-right { animation: slideInRight 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-left { animation: slideInLeft 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(30, 96, 235, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(30, 96, 235, 0);
-  }
-}
-
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.15); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.15); }
-  70% { transform: scale(1); }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-right {
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-left {
-  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulseGlow 2s infinite;
-}
 
-.animate-heart-beat {
-  animation: heartBeat 2s ease-in-out infinite;
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Printable prescription styling */

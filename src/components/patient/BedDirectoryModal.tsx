@@ -29,7 +29,7 @@ export const BedDirectoryModal: React.FC<BedDirectoryModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[92vh] animate-slide-up">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-teal-600 to-cyan-600 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -52,13 +52,13 @@ export const BedDirectoryModal: React.FC<BedDirectoryModalProps> = ({ isOpen, on
         </div>
 
         {/* Filter Bar */}
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0 font-bangla">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0 font-bangla">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-slate-700">জেলা ফিল্টার:</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">জেলা ফিল্টার:</span>
             <select
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
-              className="py-1.5 px-3 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-hidden"
+              className="py-1.5 px-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 focus:outline-hidden"
             >
               <option value="ALL">সকল জেলা</option>
               <option value="Dhaka">ঢাকা (Dhaka)</option>
@@ -77,22 +77,22 @@ export const BedDirectoryModal: React.FC<BedDirectoryModalProps> = ({ isOpen, on
           {filteredBeds.map((hosp) => (
             <div
               key={hosp.id}
-              className="p-5 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 transition-all shadow-2xs space-y-4"
+              className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-300 transition-all shadow-2xs space-y-4"
             >
               {/* Hospital Title */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-bold text-base text-slate-900 leading-tight">
+                  <h3 className="font-bold text-base text-slate-900 dark:text-slate-50 leading-tight">
                     {hosp.hospitalNameBn}
                   </h3>
-                  <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                     <span>{hosp.address}</span>
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-slate-400">আপডেট: {hosp.updatedTime}</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500">আপডেট: {hosp.updatedTime}</span>
                   <a
                     href={`tel:${hosp.phone}`}
                     className="px-3 py-1.5 bg-teal-50 hover:bg-teal-600 text-teal-700 hover:text-white rounded-xl text-xs font-bold font-mono border border-teal-200 flex items-center gap-1.5 transition-colors shadow-2xs"
@@ -106,10 +106,10 @@ export const BedDirectoryModal: React.FC<BedDirectoryModalProps> = ({ isOpen, on
               {/* Bed Metrics 4-Box Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {/* General Beds */}
-                <div className="p-3 rounded-2xl bg-slate-50 border border-slate-100 text-center">
-                  <span className="text-[11px] font-bold text-slate-500 block">জেনারেল বেড</span>
-                  <span className="text-xl font-black text-slate-900 font-mono my-0.5 block">
-                    {toBn(hosp.generalBeds.available)} <span className="text-xs text-slate-400 font-normal">/ {toBn(hosp.generalBeds.total)}</span>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">জেনারেল বেড</span>
+                  <span className="text-xl font-black text-slate-900 dark:text-slate-50 font-mono my-0.5 block">
+                    {toBn(hosp.generalBeds.available)} <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">/ {toBn(hosp.generalBeds.total)}</span>
                   </span>
                   <span className="text-[10px] text-emerald-600 font-bold">খালি আছে</span>
                 </div>

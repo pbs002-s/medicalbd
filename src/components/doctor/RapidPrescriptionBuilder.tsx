@@ -136,13 +136,13 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
   };
 
   const handleSave = () => {
-    alert('✅ ই-প্রেসক্রিপশন সফলভাবে তৈরি হয়েছে এবং রোগীর ডিজিটাল ভল্টে সেভ করা হয়েছে!');
+    alert(' ই-প্রেসক্রিপশন সফলভাবে তৈরি হয়েছে এবং রোগীর ডিজিটাল ভল্টে সেভ করা হয়েছে!');
     onSaved();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-5xl w-full shadow-2xl border border-slate-100 overflow-hidden relative my-4 flex flex-col max-h-[94vh] font-bangla animate-slide-up">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-5xl w-full shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden relative my-4 flex flex-col max-h-[94vh] font-bangla animate-slide-up">
         {/* Header */}
         <div className="p-4 sm:p-5 bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
@@ -162,82 +162,82 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
         </div>
 
         {/* Builder Workspace */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-100 overflow-y-auto flex-1 p-4 sm:p-6 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-100 dark:divide-slate-800 overflow-y-auto flex-1 p-4 sm:p-6 gap-6">
           {/* Left Column: Clinical Complaints, Vitals, Investigations */}
           <div className="lg:col-span-5 space-y-5">
             {/* Patient Info Bar */}
             <div className="p-3 bg-blue-50/60 rounded-2xl border border-blue-100 grid grid-cols-3 gap-2 text-xs">
               <div>
-                <span className="text-[10px] text-slate-400 block">রোগীর নাম</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block">রোগীর নাম</span>
                 <input
                   type="text"
                   value={patientName}
                   onChange={(e) => setPatientName(e.target.value)}
-                  className="font-bold text-slate-800 bg-transparent border-b border-blue-200 w-full focus:outline-hidden"
+                  className="font-bold text-slate-800 dark:text-slate-100 bg-transparent border-b border-blue-200 w-full focus:outline-hidden"
                 />
               </div>
               <div>
-                <span className="text-[10px] text-slate-400 block">বয়স (বছর)</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block">বয়স (বছর)</span>
                 <input
                   type="text"
                   value={patientAge}
                   onChange={(e) => setPatientAge(e.target.value)}
-                  className="font-bold text-slate-800 bg-transparent border-b border-blue-200 w-full focus:outline-hidden"
+                  className="font-bold text-slate-800 dark:text-slate-100 bg-transparent border-b border-blue-200 w-full focus:outline-hidden"
                 />
               </div>
               <div>
-                <span className="text-[10px] text-slate-400 block">লিঙ্গ</span>
-                <span className="font-bold text-slate-800 block">{patientGender}</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 block">লিঙ্গ</span>
+                <span className="font-bold text-slate-800 dark:text-slate-100 block">{patientGender}</span>
               </div>
             </div>
 
             {/* Vitals Keypad */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-2">শারীরিক পরীক্ষা (O/E Vitals):</h4>
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-2">শারীরিক পরীক্ষা (O/E Vitals):</h4>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 text-xs">
                 <div>
-                  <label className="text-[10px] text-slate-400 block">BP (mmHg)</label>
+                  <label className="text-[10px] text-slate-400 dark:text-slate-500 block">BP (mmHg)</label>
                   <input
                     type="text"
                     value={bp}
                     onChange={(e) => setBp(e.target.value)}
-                    className="w-full p-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono font-bold text-slate-800 text-center"
+                    className="w-full p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-800 dark:text-slate-100 text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-slate-400 block">Pulse (bpm)</label>
+                  <label className="text-[10px] text-slate-400 dark:text-slate-500 block">Pulse (bpm)</label>
                   <input
                     type="text"
                     value={pulse}
                     onChange={(e) => setPulse(e.target.value)}
-                    className="w-full p-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono font-bold text-slate-800 text-center"
+                    className="w-full p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-800 dark:text-slate-100 text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-slate-400 block">Temp (°F)</label>
+                  <label className="text-[10px] text-slate-400 dark:text-slate-500 block">Temp (°F)</label>
                   <input
                     type="text"
                     value={temp}
                     onChange={(e) => setTemp(e.target.value)}
-                    className="w-full p-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono font-bold text-slate-800 text-center"
+                    className="w-full p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-800 dark:text-slate-100 text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-slate-400 block">SpO2 (%)</label>
+                  <label className="text-[10px] text-slate-400 dark:text-slate-500 block">SpO2 (%)</label>
                   <input
                     type="text"
                     value={spo2}
                     onChange={(e) => setSpo2(e.target.value)}
-                    className="w-full p-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono font-bold text-slate-800 text-center"
+                    className="w-full p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-800 dark:text-slate-100 text-center"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-slate-400 block">Weight (kg)</label>
+                  <label className="text-[10px] text-slate-400 dark:text-slate-500 block">Weight (kg)</label>
                   <input
                     type="text"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
-                    className="w-full p-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono font-bold text-slate-800 text-center"
+                    className="w-full p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 font-mono font-bold text-slate-800 dark:text-slate-100 text-center"
                   />
                 </div>
               </div>
@@ -245,7 +245,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
 
             {/* Quick Complaints Chips */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-1.5">প্রধান উপসর্গ (Chief Complaints):</h4>
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-1.5">প্রধান উপসর্গ (Chief Complaints):</h4>
               <div className="flex flex-wrap gap-1.5">
                 {quickComplaintChips.map((chip, i) => {
                   const isSelected = selectedComplaints.some((c) => c.includes(chip.split(' ')[0]));
@@ -263,7 +263,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
                       className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all ${
                         isSelected
                           ? 'bg-blue-600 text-white shadow-2xs'
-                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                       }`}
                     >
                       {chip}
@@ -275,7 +275,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
 
             {/* Advised Investigations */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-1.5">প্রয়োজনীয় পরীক্ষা (Investigations):</h4>
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-1.5">প্রয়োজনীয় পরীক্ষা (Investigations):</h4>
               <div className="flex flex-wrap gap-1.5">
                 {quickInvestigationChips.map((inv, i) => {
                   const isSelected = selectedInvestigations.includes(inv);
@@ -293,7 +293,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
                       className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-all ${
                         isSelected
                           ? 'bg-teal-600 text-white shadow-2xs'
-                          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
                       }`}
                     >
                       {inv}
@@ -308,7 +308,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
           <div className="lg:col-span-7 space-y-5">
             {/* 1-Click Drug Presets */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-2">⚡ দ্রুত ঔষধ যুক্ত করুন (BD Top Brand Presets):</h4>
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-2"> দ্রুত ঔষধ যুক্ত করুন (BD Top Brand Presets):</h4>
               <div className="flex flex-wrap gap-1.5">
                 {quickDrugPresets.map((preset, i) => (
                   <button
@@ -326,31 +326,31 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
 
             {/* Prescribed Medicines Table */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-2">প্রেসক্রিপশনের ওষুধসমূহ ({medicines.length}):</h4>
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-2">প্রেসক্রিপশনের ওষুধসমূহ ({medicines.length}):</h4>
               <div className="space-y-2.5">
                 {medicines.map((m, idx) => (
                   <div
                     key={m.id}
-                    className="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3 text-xs"
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 text-xs"
                   >
                     <div className="flex items-center gap-2">
                       <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold flex items-center justify-center font-mono shrink-0">
                         {idx + 1}
                       </span>
                       <div>
-                        <strong className="text-slate-900 block">{m.brandName}</strong>
-                        <span className="text-slate-500 text-[11px]">{m.mealTiming} • {m.durationBn}</span>
+                        <strong className="text-slate-900 dark:text-slate-50 block">{m.brandName}</strong>
+                        <span className="text-slate-500 dark:text-slate-400 text-[11px]">{m.mealTiming} • {m.durationBn}</span>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="px-2 py-1 bg-white border border-slate-200 rounded-lg font-black font-mono text-blue-700">
+                      <span className="px-2 py-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg font-black font-mono text-blue-700">
                         {m.frequencyBn}
                       </span>
                       <button
                         type="button"
                         onClick={() => removeMedicine(m.id)}
-                        className="p-1 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                        className="p-1 rounded-lg text-slate-400 dark:text-slate-500 hover:text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -362,8 +362,8 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
 
             {/* Bengali Advice Box */}
             <div>
-              <h4 className="font-bold text-xs text-slate-800 mb-1.5">রোগীর পরামর্শ ও খাদ্য নির্দেশিকা:</h4>
-              <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
+              <h4 className="font-bold text-xs text-slate-800 dark:text-slate-100 mb-1.5">রোগীর পরামর্শ ও খাদ্য নির্দেশিকা:</h4>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1">
                 {selectedAdvice.map((adv, i) => (
                   <p key={i}>• {adv}</p>
                 ))}
@@ -379,10 +379,10 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between shrink-0">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-200 rounded-xl transition-colors"
+            className="px-4 py-2 text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200 rounded-xl transition-colors"
           >
             বাতিল করুন
           </button>
@@ -390,7 +390,7 @@ export const RapidPrescriptionBuilder: React.FC<RapidPrescriptionBuilderProps> =
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => window.print()}
-              className="px-4 py-2.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-all"
+              className="px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-all"
             >
               <Printer className="w-4 h-4" />
               <span>প্রিভিউ ও প্রিন্ট</span>

@@ -50,8 +50,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   const { setIsLoginModalOpen, setIsRegisterModalOpen, setActiveView } = useAuth();
   const { toBn } = useLanguage();
 
-  const [activeHeroTab, setActiveHeroTab] = useState<'queue' | 'rx' | 'meds' | 'reports'>('queue');
-
   const services = [
     {
       id: 'live_queue',
@@ -135,13 +133,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-bangla overflow-x-hidden">
+    <div className="min-h-screen bg-paper font-bangla overflow-x-hidden">
       {/* Top Landing Header */}
-      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-3.5 shadow-2xs">
+      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-4 sm:px-8 py-3.5 shadow-2xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <BrandLogo />
 
-          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-400">
             <a href="#hero" className="text-blue-600 hover:text-blue-700 transition-colors">হোম</a>
             <a href="#services" className="hover:text-blue-600 transition-colors">সেবাসমূহ</a>
             <a href="#how_it_works" className="hover:text-blue-600 transition-colors">কিভাবে কাজ করে</a>
@@ -153,7 +151,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-all btn-press"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all btn-press"
             >
               লগইন
             </button>
@@ -168,37 +166,36 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-8 sm:pt-14 pb-12 px-4 sm:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <section id="hero" className="pt-10 sm:pt-16 pb-14 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Hero Left Content */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-7 text-left">
             <ScrollReveal animation="fade-down" duration={400}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-50/80 border border-blue-200/60 rounded-full text-xs font-bold text-blue-700 shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                <span>🩺 বাংলাদেশের সর্বাধুনিক ডিজিটাল স্বাস্থ্য নেটওয়ার্ক</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+                <span>বাংলাদেশের ডিজিটাল স্বাস্থ্য নেটওয়ার্ক</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" duration={450} delay={100}>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.2] tracking-tight">
-                স্বাস্থ্যসেবা হবে <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-teal-600 to-blue-800">
-                  সহজ, দ্রুত ও বিশ্বাসযোগ্য
-                </span>
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold text-ink leading-[1.15] tracking-tight">
+                স্বাস্থ্যসেবা হবে<br />
+                <span className="text-blue-600 dark:text-blue-400">সহজ, দ্রুত ও বিশ্বাসযোগ্য</span>
               </h1>
+              <div className="mt-4 h-px w-24 bg-teal-600" />
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" duration={450} delay={150}>
-              <p className="text-base sm:text-lg font-medium text-slate-600 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
                 রোগী, চিকিৎসক ও মেডিকেল শিক্ষার্থীদের জন্য একটি স্মার্ট ডিজিটাল স্বাস্থ্যসেবা প্ল্যাটফর্ম। চেম্বারের দীর্ঘ অপেক্ষা পরিহার করুন এবং আধুনিক চিকিৎসাসেবার অভিজ্ঞতা নিন।
               </p>
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" duration={450} delay={200}>
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <button
                   onClick={onStartNow}
-                  className="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-sm font-bold shadow-md shadow-blue-500/25 flex items-center gap-2 transition-all hover:gap-3 btn-press"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition-colors btn-press"
                 >
                   <span>শুরু করুন এখনই</span>
                   <ArrowRight className="w-4 h-4" />
@@ -206,175 +203,120 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                 <a
                   href="#how_it_works"
-                  className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-2xl text-sm font-bold flex items-center gap-2 transition-all shadow-2xs btn-press"
+                  className="px-5 py-3 bg-surface hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors btn-press"
                 >
-                  <Play className="w-4 h-4 text-blue-600 fill-blue-600" />
+                  <Play className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span>কিভাবে কাজ করে</span>
                 </a>
               </div>
             </ScrollReveal>
 
-            {/* 4 Stats Badges with Hover Animation */}
+            {/* Stat strip */}
             <ScrollReveal animation="fade-up" duration={450} delay={250}>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-200/80">
-                <div className="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-blue-50/50 transition-colors card-interactive">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 shadow-2xs">
-                    <Users className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-base font-black text-slate-900">10K+</div>
-                    <div className="text-[11px] text-slate-500">সন্তুষ্ট রোগী</div>
-                  </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-5 pt-6 border-t border-slate-200 dark:border-slate-800">
+                <div>
+                  <div className="text-2xl font-serif font-semibold text-ink">১০,০০০+</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">সন্তুষ্ট রোগী</div>
                 </div>
-
-                <div className="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-emerald-50/50 transition-colors card-interactive">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 shadow-2xs">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-base font-black text-slate-900">500+</div>
-                    <div className="text-[11px] text-slate-500">বিশেষজ্ঞ ডাক্তার</div>
-                  </div>
+                <div>
+                  <div className="text-2xl font-serif font-semibold text-ink">৫০০+</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">বিশেষজ্ঞ ডাক্তার</div>
                 </div>
-
-                <div className="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-purple-50/50 transition-colors card-interactive">
-                  <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 shadow-2xs">
-                    <BedDouble className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-base font-black text-slate-900">50+</div>
-                    <div className="text-[11px] text-slate-500">হাসপাতাল ও ক্লিনিক</div>
-                  </div>
+                <div>
+                  <div className="text-2xl font-serif font-semibold text-ink">৫০+</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">হাসপাতাল ও ক্লিনিক</div>
                 </div>
-
-                <div className="flex items-center gap-2.5 p-2 rounded-2xl hover:bg-amber-50/50 transition-colors card-interactive">
-                  <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 shadow-2xs">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-base font-black text-slate-900">24/7</div>
-                    <div className="text-[11px] text-slate-500">সাপোর্ট সেবা</div>
-                  </div>
+                <div>
+                  <div className="text-2xl font-serif font-semibold text-ink">২৪/৭</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">সাপোর্ট সেবা</div>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Hero Right Visual */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            <div className="absolute -top-10 -right-10 w-72 h-72 bg-blue-200/50 rounded-full blur-3xl opacity-60 -z-10 animate-pulse-glow" />
-            <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-teal-200/50 rounded-full blur-3xl opacity-60 -z-10" />
-
-            <div className="relative w-full max-w-sm rounded-[2.5rem] bg-slate-900 p-3 shadow-2xl border-4 border-slate-800 animate-float">
-              <div className="bg-white rounded-[2rem] overflow-hidden p-4 space-y-3">
-                <div className="flex items-center justify-between text-[11px] font-bold text-slate-800 pb-1">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span>স্বাস্থ্যসেতু বিডি অ্যাপ</span>
-                  </span>
-                  <span className="text-[10px] text-slate-400 font-mono">11:30 AM</span>
+          {/* Hero Right: the live queue ticket — the product's actual signature feature,
+              styled after a real hospital token stub rather than a generic app screenshot. */}
+          <div className="lg:col-span-5">
+            <ScrollReveal animation="fade-up" duration={500} delay={150}>
+              <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-sm mx-auto lg:mx-0 lg:ml-auto">
+                <div className="px-5 pt-5 pb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-blue-700 dark:text-blue-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
+                    <span>লাইভ সিরিয়াল</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">চেম্বার ৪</span>
                 </div>
 
-                <div className="p-3 bg-gradient-to-r from-blue-50 via-teal-50/60 to-white rounded-2xl border border-blue-100">
-                  <div className="text-xs font-bold text-slate-900">সুপ্রভাত, সালমান! 👋</div>
-                  <div className="text-[10px] text-slate-500">আপনার স্বাস্থ্য, আমাদের অঙ্গীকার</div>
+                <div className="px-5 pb-5">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400">এখন চলছে সিরিয়াল</div>
+                  <div className="font-mono text-6xl font-semibold text-ink leading-none mt-1">১২</div>
+
+                  <div className="mt-4 flex items-center justify-between text-xs">
+                    <span className="text-slate-500 dark:text-slate-400">আপনার সিরিয়াল <span className="font-mono font-bold text-ink">১৮</span></span>
+                    <span className="text-slate-500 dark:text-slate-400">আনুমানিক <span className="font-mono font-bold text-ink">২৫ মিনিট</span></span>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => {
-                      setActiveHeroTab('queue');
-                      onOpenLiveQueue();
-                    }}
-                    className={`p-2.5 rounded-xl border text-center transition-all card-interactive ${
-                      activeHeroTab === 'queue' ? 'bg-blue-100 border-blue-300 shadow-xs' : 'bg-blue-50/80 border-blue-100'
-                    }`}
-                  >
-                    <Clock className="w-4 h-4 text-blue-600 mx-auto mb-1" />
-                    <span className="text-[10px] font-bold text-slate-800 block">সিরিয়াল ট্র্যাকিং</span>
-                    <span className="text-[9px] text-blue-600 font-semibold">লাইভ দেখুন ➔</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveHeroTab('rx');
-                      onOpenPrescriptions();
-                    }}
-                    className={`p-2.5 rounded-xl border text-center transition-all card-interactive ${
-                      activeHeroTab === 'rx' ? 'bg-teal-100 border-teal-300 shadow-xs' : 'bg-teal-50/80 border-teal-100'
-                    }`}
-                  >
-                    <FileText className="w-4 h-4 text-teal-600 mx-auto mb-1" />
-                    <span className="text-[10px] font-bold text-slate-800 block">ই-প্রেসক্রিপশন</span>
-                    <span className="text-[9px] text-teal-600 font-semibold">সব রেকর্ড ➔</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveHeroTab('meds');
-                      onOpenMedicines();
-                    }}
-                    className={`p-2.5 rounded-xl border text-center transition-all card-interactive ${
-                      activeHeroTab === 'meds' ? 'bg-emerald-100 border-emerald-300 shadow-xs' : 'bg-emerald-50/80 border-emerald-100'
-                    }`}
-                  >
-                    <Pill className="w-4 h-4 text-emerald-600 mx-auto mb-1" />
-                    <span className="text-[10px] font-bold text-slate-800 block">ওষুধ ও বিকল্প</span>
-                    <span className="text-[9px] text-emerald-600 font-semibold">দাম যাচাই ➔</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setActiveHeroTab('reports');
-                      onStartNow();
-                    }}
-                    className={`p-2.5 rounded-xl border text-center transition-all card-interactive ${
-                      activeHeroTab === 'reports' ? 'bg-purple-100 border-purple-300 shadow-xs' : 'bg-purple-50/80 border-purple-100'
-                    }`}
-                  >
-                    <RefreshCw className="w-4 h-4 text-purple-600 mx-auto mb-1" />
-                    <span className="text-[10px] font-bold text-slate-800 block">রিপোর্ট ফলোআপ</span>
-                    <span className="text-[9px] text-purple-600 font-semibold">১৪ দিনের সুযোগ ➔</span>
-                  </button>
+                {/* Perforated tear line, like a real token stub */}
+                <div className="relative border-t border-dashed border-slate-300 dark:border-slate-700">
+                  <div className="absolute -left-2.5 -top-2.5 w-5 h-5 rounded-full bg-paper border border-slate-200 dark:border-slate-800" />
+                  <div className="absolute -right-2.5 -top-2.5 w-5 h-5 rounded-full bg-paper border border-slate-200 dark:border-slate-800" />
                 </div>
 
-                <div
-                  onClick={onOpenLiveQueue}
-                  className="p-2.5 bg-slate-50 hover:bg-emerald-50 rounded-xl border border-slate-100 hover:border-emerald-200 flex items-center justify-between transition-all cursor-pointer card-interactive"
-                >
-                  <div className="flex items-center gap-2">
+                <div className="px-5 py-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
                     <img
                       src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80"
                       alt="Doctor"
-                      className="w-8 h-8 rounded-full object-cover ring-2 ring-emerald-500/20"
+                      className="w-9 h-9 rounded-full object-cover"
                     />
                     <div>
-                      <div className="text-[10px] font-bold text-slate-800">ডা. তানভীর হাসান</div>
-                      <div className="text-[9px] text-slate-500">মেডিসিন বিশেষজ্ঞ (DMC)</div>
+                      <div className="text-xs font-bold text-ink">ডা. তানভীর হাসান</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">মেডিসিন বিশেষজ্ঞ · চেম্বারে আছেন</div>
                     </div>
                   </div>
-                  <span className="text-[9px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full">
-                    সিরিয়াল ১৮
-                  </span>
+                  <button
+                    onClick={onOpenLiveQueue}
+                    className="text-xs font-bold text-blue-700 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-1 shrink-0"
+                  >
+                    ট্র্যাক করুন
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
-            </div>
+
+              {/* Secondary quick links to the other core services */}
+              <div className="grid grid-cols-3 gap-2 mt-3 max-w-sm mx-auto lg:mx-0 lg:ml-auto">
+                <button onClick={onOpenPrescriptions} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
+                  <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">প্রেসক্রিপশন</span>
+                </button>
+                <button onClick={onOpenMedicines} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
+                  <Pill className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">ওষুধ সূচক</span>
+                </button>
+                <button onClick={onOpenBloodBank} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
+                  <Droplet className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">রক্তদান</span>
+                </button>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Services Grid (8 Services) */}
-      <section id="services" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100">
+      <section id="services" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800">
         <ScrollReveal animation="fade-up" duration={450}>
           <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold">
               <Sparkles className="w-3.5 h-3.5" />
               <span>সুবিধাসমূহ</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-50">
               আমাদের ডিজিটাল সেবাসমূহ
             </h2>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               আপনার স্বাস্থ্যসেবা যাত্রাকে সহজ ও স্মার্ট করতে আমরা আছি সার্বক্ষণিক পাশে।
             </p>
           </div>
@@ -387,16 +329,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <ScrollReveal key={s.id} animation="fade-up" delay={index * 60}>
                 <div
                   onClick={s.action}
-                  className="bg-white p-6 rounded-3xl border border-slate-100 shadow-2xs hover:shadow-xl hover:border-blue-200 card-interactive flex flex-col justify-between group h-full"
+                  className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-xl hover:border-blue-200 card-interactive flex flex-col justify-between group h-full"
                 >
                   <div>
                     <div className={`w-12 h-12 rounded-2xl ${s.color} border flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-2xs`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-blue-600 transition-colors">
                       {s.titleBn}
                     </h3>
-                    <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
                       {s.descBn}
                     </p>
                   </div>
@@ -435,17 +377,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <div className="flex items-center gap-3 bg-white/10 border border-white/20 p-2.5 rounded-2xl backdrop-blur-md hover:bg-white/15 transition-colors">
                     <QrCode className="w-12 h-12 text-white" />
                     <div className="text-left text-xs">
-                      <span className="text-[10px] text-slate-400 block">QR কোড স্ক্যান করুন</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block">QR কোড স্ক্যান করুন</span>
                       <span className="font-bold text-white">অ্যাপ ডাউনলোড</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <div className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-semibold cursor-pointer transition-all btn-press">
-                      📱 Google Play তে ইনস্টল করুন
+                       Google Play তে ইনস্টল করুন
                     </div>
                     <div className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-semibold cursor-pointer transition-all btn-press">
-                      🍏 App Store থেকে ডাউনলোড
+                       App Store থেকে ডাউনলোড
                     </div>
                   </div>
                 </div>
@@ -494,17 +436,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* How it Works */}
-      <section id="how_it_works" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100">
+      <section id="how_it_works" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800">
         <ScrollReveal animation="fade-up" duration={450}>
           <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>প্রক্রিয়া</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-50">
               কিভাবে কাজ করে
             </h2>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               মাত্র ৪টি সহজ ধাপে স্বাস্থ্যসেবা গ্রহণ করুন।
             </p>
           </div>
@@ -513,14 +455,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((step, index) => (
             <ScrollReveal key={step.num} animation="fade-up" delay={index * 100}>
-              <div className="p-6 rounded-3xl bg-white border border-slate-100 text-center relative shadow-2xs hover:shadow-md transition-all card-interactive group h-full">
+              <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-center relative shadow-2xs hover:shadow-md transition-all card-interactive group h-full">
                 <div className="w-11 h-11 rounded-full bg-emerald-500 text-white font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
                   {toBn(step.num)}
                 </div>
-                <h3 className="font-bold text-slate-900 text-base group-hover:text-emerald-700 transition-colors">
+                <h3 className="font-bold text-slate-900 dark:text-slate-50 text-base group-hover:text-emerald-700 transition-colors">
                   {step.titleBn}
                 </h3>
-                <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                   {step.descBn}
                 </p>
               </div>
@@ -530,21 +472,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* Pharma Partners */}
-      <section id="partners" className="py-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 text-center">
+      <section id="partners" className="py-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800 text-center">
         <ScrollReveal animation="fade-up" duration={400}>
-          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-8">
+          <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-8">
             বিশ্বস্ত সহযোগী ও ওষুধ ডেটাবেজ পার্টনার
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
             {partners.map((p, i) => (
               <div
                 key={i}
-                className="p-4 rounded-2xl bg-white border border-slate-100 shadow-2xs hover:shadow-md transition-all card-interactive text-center font-sans min-w-[140px] group"
+                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-md transition-all card-interactive text-center font-sans min-w-[140px] group"
               >
                 <span className={`text-xl font-black tracking-tight ${p.color} block group-hover:scale-105 transition-transform`}>
                   {p.name}
                 </span>
-                <span className="text-[10px] text-slate-400 font-medium">{p.sub}</span>
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{p.sub}</span>
               </div>
             ))}
           </div>
@@ -554,18 +496,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* Family Health CTA Banner */}
       <section className="py-8 px-4 sm:px-8 max-w-7xl mx-auto">
         <ScrollReveal animation="zoom-in" duration={450}>
-          <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 rounded-3xl p-8 sm:p-10 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
-            <div className="space-y-1 text-center sm:text-left relative z-10">
-              <h3 className="text-xl sm:text-2xl font-extrabold">
+          <div className="bg-blue-600 rounded-3xl p-8 sm:p-10 text-white flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="space-y-1 text-center sm:text-left">
+              <h3 className="font-serif text-xl sm:text-2xl font-semibold">
                 আপনার ও আপনার পরিবারের স্বাস্থ্য আমাদের অঙ্গীকার
               </h3>
-              <p className="text-xs sm:text-sm text-emerald-100">
+              <p className="text-xs sm:text-sm text-blue-100">
                 আজই যোগ দিন স্বাস্থ্যসেতু বিডির সাথে এবং স্মার্ট ডিজিটাল স্বাস্থ্যসেবার অভিজ্ঞতা নিন।
               </p>
             </div>
             <button
               onClick={() => setIsRegisterModalOpen(true)}
-              className="whitespace-nowrap px-6 py-3.5 bg-white text-emerald-700 hover:bg-emerald-50 rounded-2xl font-bold text-xs sm:text-sm shadow-md transition-all flex items-center gap-2 btn-press relative z-10"
+              className="whitespace-nowrap px-6 py-3 bg-white text-blue-700 hover:bg-blue-50 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 btn-press"
             >
               <span>অ্যাকাউন্ট করুন এখনই</span>
               <ArrowRight className="w-4 h-4" />
@@ -575,18 +517,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="bg-white border-t border-slate-100 pt-12 pb-8 px-4 sm:px-8 mt-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-100">
+      <footer id="contact" className="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 pt-12 pb-8 px-4 sm:px-8 mt-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-100 dark:border-slate-800">
           <div className="space-y-3">
             <BrandLogo />
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               বাংলাদেশের সর্বাধুনিক ডিজিটাল স্বাস্থ্য ও মেডিকেল এডুকেশন নেটওয়ার্ক। রোগী, ডাক্তার ও শিক্ষার্থীদের এক ছাতার নিচে সেতুবন্ধন।
             </p>
           </div>
 
           <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 text-xs">দ্রুত লিঙ্ক</h4>
-            <ul className="text-xs text-slate-500 space-y-1.5">
+            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">দ্রুত লিঙ্ক</h4>
+            <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
               <li><a href="#hero" className="hover:text-blue-600 transition-colors">হোম</a></li>
               <li><a href="#services" className="hover:text-blue-600 transition-colors">সেবাসমূহ</a></li>
               <li><button onClick={onOpenMedicines} className="hover:text-blue-600 transition-colors">ওষুধের তালিকা</button></li>
@@ -595,8 +537,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 text-xs">সহায়তা</h4>
-            <ul className="text-xs text-slate-500 space-y-1.5">
+            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">সহায়তা</h4>
+            <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
               <li><a href="#" className="hover:text-blue-600 transition-colors">সাধারণ প্রশ্ন (FAQ)</a></li>
               <li><a href="#" className="hover:text-blue-600 transition-colors">গোপনীয়তা নীতি</a></li>
               <li><a href="#" className="hover:text-blue-600 transition-colors">ব্যবহারের শর্তাবলী</a></li>
@@ -604,16 +546,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 text-xs">যোগাযোগ</h4>
-            <p className="text-xs text-slate-500">
-              📞 09678-123456 <br />
-              ✉️ support@shasthosetu.gov.bd <br />
-              📍 বাড়ি #১২, রোড #৫, ধানমন্ডি, ঢাকা-১২০৫
+            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">যোগাযোগ</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+               09678-123456 <br />
+               support@shasthosetu.gov.bd <br />
+               বাড়ি #১২, রোড #৫, ধানমন্ডি, ঢাকা-১২০৫
             </p>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-6 text-center text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto pt-6 text-center text-xs text-slate-400 dark:text-slate-500">
           © ২০২৬ স্বাস্থ্যসেতু বিডি (OpenHealthBD). সর্বস্বত্ব সংরক্ষিত।
         </div>
       </footer>
