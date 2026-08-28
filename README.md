@@ -1,7 +1,7 @@
-# 🩺 স্বাস্থ্যসেতু বিডি (ShasthoSetu BD) — OpenHealthBD
+# 🩺 ShasthoSetu BD (OpenHealthBD)
 
-> **বাংলাদেশের সর্বাধুনিক ওপেন-সোর্স ডিজিটাল স্বাস্থ্য ও মেডিকেল এডুকেশন প্ল্যাটফর্ম**  
-> *A Modern, Comprehensive Digital Healthcare & Medical Education Platform for Bangladesh.*
+> **Bangladesh's Modern Open-Source Digital Healthcare & Medical Education Platform**  
+> *Bridging patients, doctors, medical students, and healthcare institutions with next-generation digital tools.*
 
 [![React](https://img.shields.io/badge/React-18.x-blue.svg?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
@@ -11,89 +11,93 @@
 
 ---
 
-## 🌟 প্রকল্প ওভারভিউ (Overview)
+## 🌟 Overview
 
-**স্বাস্থ্যসেতু বিডি (ShasthoSetu BD)** হলো বাংলাদেশ স্বাস্থ্য ব্যবস্থার বাস্তব প্রেক্ষাপট বিবেচনায় তৈরিকৃত একটি আধুনিক স্বাস্থ্যসেবা ওয়েব প্ল্যাটফর্ম। এটি রোগী, চিকিৎসক, মেডিকেল শিক্ষার্থী এবং হাসপাতাল প্রশাসনের মাঝে একটি কার্যকর ডিজিটাল সেতুবন্ধন তৈরি করে।
+**ShasthoSetu BD (OpenHealthBD)** is a purpose-built healthcare web platform tailored to address the unique dynamics of Bangladesh's medical ecosystem. Designed to simplify clinical workflows, empower medical education, and streamline patient care, it connects key stakeholders in one cohesive, accessible application.
 
-- **রোগীদের জন্য**: দীর্ঘ লাইন পরিহার করে রিয়েল-টাইম চেম্বার সিরিয়াল ট্র্যাকিং, আজীবন ই-প্রেসক্রিপশন ভল্ট, ল্যাব রিপোর্ট ট্র্যাকার, জরুরি রক্তদাতা অনুসন্ধান এবং লাইভ হাসপাতাল বেড/আইসিইউ ডিরেক্টরি।
-- **চিকিৎসকদের জন্য**: BMDC স্ট্যান্ডার্ড অনুযায়ী ২ মিনিটের মধ্যে প্রেসক্রিপশন লেখার জন্য স্মার্ট অটো-কমপ্লিট র‍্যাপিড বিল্ডার এবং চেম্বার কিউ ম্যানেজমেন্ট।
-- **মেডিকেল শিক্ষার্থীদের জন্য**: ক্লিনিক্যাল ওয়ার্ড লগবুক, ৫ মিনিটের OSCE এক্সাম টাইমার ও ভাইভা গাইড, পেডিয়াট্রিক ওজনভিত্তিক ডোজ ক্যালকুলেটর, FCPS-1/রেসিডেন্সি কুইজ এবং কেস ডিসকাশন ফোরাম।
-- **হাসপাতাল ও ওয়েটিং রুমের জন্য**: বড় স্ক্রিনের জন্য হাই-কনট্রাস্ট মাল্টি-চেম্বার ওয়েটিং রুম টিভি ডিসপ্লে মোড।
-
----
-
-## 🚀 প্রধান সেবাসমূহ (Key Features)
-
-### ১. ⏱️ লাইভ সিরিয়াল ও চেম্বার কিউ ট্র্যাকার (Live Queue Tracker)
-- ডাক্তারের চেম্বারের রিয়েল-টাইম সিরিয়াল কাউন্টার ও লাইভ পালস স্ট্যাটাস।
-- বাংলা ভয়েস সিন্থেসিস অডিও ঘোষণা (`Web Speech API`) — *"সিরিয়াল নম্বর ১২, চেম্বারে প্রবেশ করুন"*)।
-- আনুমানিক অপেক্ষার সময় কাউন্টডাউন এবং প্রিন্টযোগ্য কিউ টোকেন।
-
-### ২. 📄 ডিজিটাল ই-প্রেসক্রিপশন ভল্ট (e-Prescription Vault)
-- BMDC ও ডিজিএইচএস স্ট্যান্ডার্ড অনুযায়ী অফিসিয়াল Rx প্রেসক্রিপশন লেআউট।
-- ওষুধ সেবনবিধি (খাবার আগে/পরে), ডোজ ফ্রিকোয়েন্সি (`১+০+১`), এবং কিউআর কোড ভেরিফিকেশন।
-- এক ক্লিকে প্রেসক্রিপশন প্রিন্ট এবং ইনস্ট্যান্ট PDF ডাউনলোড।
-
-### ৩. 🧪 ল্যাব টেস্ট রিপোর্ট ও ১৪ দিনের ফ্রি ফলোআপ
-- বিভিন্ন ডায়াগনস্টিক সেন্টারের টেস্ট রিপোর্ট ক্লাউডে সংরক্ষণ।
-- প্রতিটি বায়োমার্কারের রেফারেন্স সীমা (Reference Range) মিটার।
-- ডাক্তারের ১৪ দিনের ফ্রি রিভিউ উইন্ডো ট্র্যাকিং ও রিমাইন্ডার।
-
-### ৪. 💊 ডিজিডিএ ওষুধ মূল্য ও জেনেরিক বিকল্প (Medicine & Generic Directory)
-- DGDA অনুমোদিত ওষুধ ডাটাবেজ, ব্র্যান্ড নাম, শক্তি ও সর্বোচ্চ খুচরা মূল্য (MRP)।
-- একই জেনেরিকের সাশ্রয়ী বিকল্প ব্র্যান্ডের মূল্য তুলনা।
-- গর্ভাবস্থায় সুরক্ষা শ্রেণি (Pregnancy Safety Category) সতর্কতা।
-
-### ৫. 🩸 জরুরি রক্তদাতা নেটওয়ার্ক (Emergency Blood Network)
-- রক্তের গ্রুপভিত্তিক (`A+`, `A-`, `B+`, `B-`, `O+`, `O-`, `AB+`, `AB-`) দ্রুত ফিল্টার।
-- ৯০ দিনের ডোনেশন কুলডাউন যাচাই ও তাৎক্ষণিক কল করার সুবিধা।
-- জরুরি রক্তের প্রয়োজন লাইভ ব্রডকাস্ট ফিড।
-
-### ৬. 🛏️ লাইভ হাসপাতাল বেড ও ICU ডিরেক্টরি (Bed & ICU Directory)
-- জেলা ও হাসপাতালভিত্তিক সাধারণ ওয়ার্ড, ICU, CCU, HDU এবং NICU বেডের লাইভ প্রাপ্যতা।
-- জাতীয় স্বাস্থ্য বাতায়ন (১৬২৬৩) ও হাসপাতাল ইমার্জেন্সি সরাসরি হটলাইন।
-
-### ৭. 🎓 মেডিকেল শিক্ষার্থী হাব (Medical Student Hub)
-- **ওয়ার্ড কেস লগবুক**: মেডিসিন, সার্জারি, গাইনি ও পেডিয়াট্রিক্স ওয়ার্ডের জন্য স্ট্যান্ডার্ড বেডসাইড হিস্ট্রি শিট।
-- **OSCE / OSPE স্টেশন**: ৫ মিনিটের এক্সাম টাইমার, স্টেপ-বাই-স্টেপ মার্কিং চেকলিস্ট ও হাই-ইল্ড ভাইভা উত্তর।
-- **পেডিয়াট্রিক ডোজ ক্যালকুলেটর**: শিশুর ওজন (`mg/kg`) অনুযায়ী সিরাপ ও ড্রপসের সঠিক চামচ ও মিলি রূপান্তর।
-- **পোস্টগ্রাজুয়েট কুইজ হাব**: FCPS-1 ও MD/MS রেসিডেন্সি পরীক্ষার প্রশ্ন ব্যাংক ও বিশদ ব্যাখ্যা।
-- **ক্লিনিক্যাল কেস ফোরাম**: ECG স্ট্রিপ ও জটিল কেস নিয়ে অভিজ্ঞ চিকিৎসকদের সাথে আলোচনা।
-
-### ৮. 📺 ওয়েটিং রুম টিভি ডিসপ্লে মোড (Waiting Room TV Display)
-- ক্লিনিক ও হাসপাতালের ওয়েটিং রুমের স্মার্ট টিভির জন্য ফুলস্ক্রিন ডিসপ্লে।
-- বড় অক্ষরের লাইভ টোকেন নম্বর ও সাউন্ড অ্যালার্ট।
+- **For Patients**: Real-time chamber serial tracking, lifetime digital e-prescription vault, diagnostic lab report manager, emergency blood donor network, and live hospital bed/ICU directory.
+- **For Doctors**: Rapid 2-minute prescription builder adhering to BMDC standards, smart drug auto-complete, customizable dosage templates, and live chamber queue management.
+- **For Medical Students**: Bedside clinical case logbook, 5-minute OSCE exam stations with interactive timer and marking checklists, weight-based pediatric dose calculator, FCPS-1 / Residency quiz bank, and peer clinical discussion forum.
+- **For Hospitals & Clinics**: Large-screen, high-contrast Waiting Room TV display mode with real-time multi-chamber token broadcasts and automated voice announcements.
 
 ---
 
-## 🛠️ প্রযুক্তি স্ট্যাক (Tech Stack)
+## 🚀 Key Modules & Features
 
-| স্তর (Layer) | প্রযুক্তি (Technologies) |
+### 1. ⏱️ Live Serial & Chamber Queue Tracker
+- Real-time chamber serial counter with live pulse status and estimated wait time countdown.
+- Natural Bengali & English voice announcements via `Web Speech API` (*e.g., "Serial number 12, please enter chamber"*).
+- One-click token generation and printable queue slips for walk-in and booked patients.
+
+### 2. 📄 Digital e-Prescription Vault
+- Official Rx prescription layout compliant with BMDC and DGHS standards.
+- Detailed dosage frequency (`1+0+1`), meal timings (Before / After meal), duration, instructions, and QR code verification.
+- Instant print layout, PDF download, and permanent cloud-synced prescription history.
+
+### 3. 🧪 Diagnostic Lab Reports & 14-Day Free Follow-up
+- Centralized digital archive for diagnostic test reports (CBC, Lipid Profile, LFT, Creatinine, etc.).
+- Visual reference range meters highlighting normal, high, or critical biomarker values.
+- Automatic 14-day free doctor consultation review window countdown and reminder alerts.
+
+### 4. 💊 DGDA Medicine Index & Generic Substitutes
+- Comprehensive Directorate General of Drug Administration (DGDA) pharmaceutical database.
+- Compare brand names, generic formulations, strengths, manufacturers, and Maximum Retail Prices (MRP).
+- Cost-effective generic alternative recommendations and FDA pregnancy safety category alerts (A, B, C, D, X).
+
+### 5. 🩸 Emergency Blood Donor Network
+- Instant filtering by blood group (`A+`, `A-`, `B+`, `B-`, `O+`, `O-`, `AB+`, `AB-`) and geographic district.
+- Verified donor status, 90-day donation cooldown tracking, and direct one-click calling.
+- Real-time emergency blood broadcast feed for critical patient requirements.
+
+### 6. 🛏️ Live Hospital Bed & ICU Directory
+- Real-time bed availability tracking for General Wards, ICU, CCU, HDU, and NICU across public and private hospitals.
+- District and hospital name search with direct emergency hotlines and National Shastho Batayan (`16263`) integration.
+
+### 7. 🎓 Medical Student & Trainee Hub
+- **Clinical Case Logbook**: Bedside history taking and systemic examination sheets for Medicine, Surgery, Gynae/Obs, and Pediatrics.
+- **OSCE / OSPE Station Simulator**: 5-minute station countdown timer with structured marking checklists, procedural instructions, and high-yield viva Q&As.
+- **Weight-Based Pediatric Dose Calculator**: Accurate `mg/kg/day` dosage calculation with automatic milliliter (ml) and spoon conversions.
+- **Postgraduate Quiz Hub**: Comprehensive MCQs for FCPS Part-1, MD/MS Residency, and Diploma examinations with detailed clinical rationales.
+- **Clinical Case Forum**: ECG strip interpretation, radiological image review, and peer discussions with senior clinicians.
+
+### 8. 📺 Waiting Room TV Display Kiosk
+- Fullscreen, high-contrast multi-chamber broadcast mode engineered for clinic waiting room TVs and monitors.
+- Dynamic audible voice alerts and visual status updates for active tokens and incoming serials.
+
+### 9. 🌓 Theme System & Dual-Language Support
+- Full dark mode and light mode support with smooth transitions across all pages and modals.
+- Instant bilingual toggle between **Bangla (বাংলা)** and **English** for user accessibility.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
 |---|---|
-| **Frontend Framework** | React 18 (TypeScript) |
+| **Frontend Framework** | React 18 with TypeScript |
 | **Build Tool & Dev Server** | Vite 6 |
-| **Styling & Design System** | Tailwind CSS, Custom Design Tokens, CSS Keyframes |
-| **Animation Engine** | Custom `ScrollReveal` (`IntersectionObserver`), Smooth Transitions |
-| **Icons & Visuals** | Lucide React |
-| **Audio Engine** | Web Speech API (Bengali Voice Synthesis) |
-| **Typography** | Hind Siliguri, Noto Sans Bengali, Inter |
+| **Styling & Design System** | Tailwind CSS 3, Custom CSS Design Tokens, Glassmorphism Effects |
+| **Icons & Media** | Lucide React |
+| **State & Context** | React Context API (`AuthContext`, `LanguageContext`, `QueueContext`, `ThemeContext`) |
+| **Audio Engine** | Web Speech API (Voice Synthesis) |
+| **Typography** | Inter, Hind Siliguri, Noto Sans Bengali |
 
 ---
 
-## 📂 ফোল্ডার স্ট্রাকচার (Project Structure)
+## 📂 Project Structure
 
 ```text
 medical/
-├── public/                     # স্ট্যাটিক অ্যাসেটস
+├── public/                     # Static assets, logos, and audio files
 ├── src/
 │   ├── components/
-│   │   ├── admin/             # অ্যাডমিন ড্যাশবোর্ড ও টিভি মোডাল
-│   │   ├── auth/              # লগইন ও রেজিস্ট্রেশন মোডাল
-│   │   ├── common/            # ScrollReveal, BrandLogo রিইউজেবল উপাদান
-│   │   ├── doctor/            # ডক্টর ড্যাশবোর্ড ও র‍্যাপিড প্রেসক্রিপশন বিল্ডার
-│   │   ├── landing/           # ল্যান্ডিং পেজ ও হিরো সেকশন
-│   │   ├── layout/            # টপ ন্যাভবার ও সাইডবার নেভিগেশন
-│   │   ├── pages/             # ১২টি ডেডিকেটেড স্ট্যান্ডঅ্যালোন পেজ
+│   │   ├── admin/             # Admin dashboard & Waiting Room TV kiosk modal
+│   │   ├── auth/              # Login and registration authentication modals
+│   │   ├── common/            # BrandLogo, ScrollReveal, and shared UI primitives
+│   │   ├── doctor/            # Doctor dashboard & Rapid Prescription Builder
+│   │   ├── landing/           # Landing page, hero, feature showcases, and footer
+│   │   ├── layout/            # Top Navbar, responsive sidebar, and role switchers
+│   │   ├── pages/             # 12 dedicated standalone full-page views
 │   │   │   ├── AppointmentsPage.tsx
 │   │   │   ├── BedDirectoryPage.tsx
 │   │   │   ├── BloodBankPage.tsx
@@ -106,75 +110,80 @@ medical/
 │   │   │   ├── SettingsPage.tsx
 │   │   │   ├── StudentHubPage.tsx
 │   │   │   └── WaitingRoomTVPage.tsx
-│   │   ├── patient/           # পেশেন্ট ড্যাশবোর্ড ও কুইক মোডালসমূহ
-│   │   └── student/           # স্টুডেন্ট ড্যাশবোর্ড ও লার্নিং মোডালসমূহ
-│   ├── context/               # AuthContext, LanguageContext, QueueContext
-│   ├── mockData.ts            # সম্পূর্ণ মক ডাটাবেজ (প্রেসক্রিপশন, রক্তদাতা, বেড ইত্যাদি)
-│   ├── types.ts               # টাইপস্ক্রিপ্ট টাইপ ডেফিনিশনসমূহ
-│   ├── index.css              # গ্লোবাল স্টাইল, অ্যানিমেশন কীফ্রেম ও ডিজাইন টোকেন
-│   ├── App.tsx                # সেন্ট্রাল ডায়নামিক ভিউ রাউটার
-│   └── main.tsx               # রুট এন্ট্রি পয়েন্ট
-├── OPENHEALTHBD_PLAN.md       # বিস্তারিত সিস্টেম আর্কিটেকচার ও ফিচার প্ল্যান
-├── package.json               # প্রজেক্ট ডিপেন্ডেন্সি ও স্ক্রিপ্ট
-├── tailwind.config.js         # টেইলউইন্ড কনফিগারেশন
-├── tsconfig.json              # টাইপস্ক্রিপ্ট কনফিগারেশন
-└── vite.config.ts             # ভাইট কনফিগারেশন
+│   │   ├── patient/           # Patient dashboard & interactive service modals
+│   │   └── student/           # Medical student portal & clinical tools modals
+│   ├── context/               # Auth, Language, Queue, and Theme Context providers
+│   ├── mockData.ts            # Realistic healthcare mock data (doctors, medicines, beds, etc.)
+│   ├── types.ts               # Core TypeScript interfaces and type declarations
+│   ├── index.css              # Global styles, animation keyframes, and theme variables
+│   ├── App.tsx                # Central dynamic view router and layout orchestrator
+│   └── main.tsx               # Application root entry point
+├── OPENHEALTHBD_PLAN.md       # Architectural specifications and feature roadmap
+├── package.json               # Project dependencies and npm scripts
+├── tailwind.config.js         # Tailwind styling and dark mode configuration
+├── tsconfig.json              # TypeScript compilation rules
+└── vite.config.ts             # Vite bundler configuration
 ```
 
 ---
 
-## 💻 লোকাল ইনস্টলেশন ও রান করার নিয়ম (Getting Started)
+## 💻 Getting Started
 
-### পূর্বশর্ত (Prerequisites)
-- [Node.js](https://nodejs.org/) (v18 বা তদূর্ধ্ব)
-- [npm](https://www.npmjs.com/) বা [yarn](https://yarnpkg.com/)
+### Prerequisites
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-### ১. রিপোজিটরি ক্লোন করুন
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/pbs002-s/medicalbd.git
 cd medicalbd
 ```
 
-### ২. ডিপেন্ডেন্সি ইনস্টল করুন
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### ৩. ডেভেলপমেন্ট সার্ভার চালু করুন
+### 3. Start the Development Server
 ```bash
 npm run dev
 ```
-ব্রাউজারে ওপেন করুন: `http://localhost:3000/`
+Open your browser and navigate to: `http://localhost:3000/`
 
-### ৪. প্রোডাকশন বিল্ড তৈরি করুন
+### 4. Build for Production
 ```bash
 npm run build
+```
+To preview the production build locally:
+```bash
+npm run preview
 ```
 
 ---
 
-## 👥 ভূমিকা নির্বাচন ও ডেমো অ্যাকাউন্ট (Demo User Roles)
+## 👥 Demo User Roles
 
-ন্যাভবারের টপ-রাইট রোল সুইচার থেকে তাৎক্ষণিক বিভিন্ন রোলে সুইচ করা যায়:
-1. **👨‍💼 রোগী (Patient)**: অ্যাপয়েন্টমেন্ট বুকিং, লাইভ সিরিয়াল, ই-প্রেসক্রিপশন, রিপোর্ট এবং স্বাস্থ্য ইতিহাস।
-2. **👨‍⚕️ চিকিৎসক (Doctor)**: চেম্বার কিউ ম্যানেজমেন্ট, পেশেন্ট কলিং, এবং স্মার্ট র‍্যাপিড প্রেসক্রিপশন বিল্ডার।
-3. **🎓 মেডিকেল শিক্ষার্থী (Medical Student)**: ওয়ার্ড লগবুক, OSCE এক্সাম স্টেশন, পেডিয়াট্রিক ক্যালকুলেটর ও কুইজ।
-4. **🏥 হাসপাতাল প্রশাসন (Admin)**: চেম্বার মনিটরিং ও ওয়েটিং রুম টিভি ডিসপ্লে মোড।
+Switch instantly between roles using the role selector in the top-right navbar:
 
----
-
-## 📄 লাইসেন্স (License)
-
-এই প্রজেক্টটি [MIT License](LICENSE)-এর অধীনে উন্মুক্ত।
+1. **👨‍💼 Patient**: Book appointments, track live serials, access the e-prescription vault, view lab reports, and manage health records.
+2. **👨‍⚕️ Doctor**: Manage active chamber queues, call patients with voice announcements, and write prescriptions via the Rapid Builder.
+3. **🎓 Medical Student**: Bedside case logbooks, timed OSCE station checklists, pediatric dose calculations, and postgraduate exam prep.
+4. **🏥 Hospital Admin**: Chamber queue oversight, hospital bed occupancy status, and full-screen Waiting Room TV broadcast.
 
 ---
 
-## 🤝 অবদান (Contributing)
+## 📄 License
 
-আমরা যে কোনো পরামর্শ, বাগ রিপোর্ট বা পুল রিকোয়েস্টকে স্বাগত জানাই!
-- কোনো বাগ পেলে অনুগ্রহ করে একটি [Issue](https://github.com/pbs002-s/medicalbd/issues) তৈরি করুন।
-- নতুন ফিচারের জন্য ফর্ক করে পুল রিকোয়েস্ট পাঠাতে পারেন।
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-*Made with ❤️ for Bangladesh's Digital Health Ecosystem by **Pritom Biswas** & the OpenHealthBD Team.*
+## 🤝 Contributing
+
+Contributions, feedback, and feature suggestions are warmly welcomed!
+- If you discover a bug, please submit an [Issue](https://github.com/pbs002-s/medicalbd/issues).
+- For new features or improvements, feel free to fork the repository and submit a Pull Request.
+
+---
+
+*Developed with ❤️ for Bangladesh's Digital Health Ecosystem by **Pritom Biswas** & the OpenHealthBD Team.*
