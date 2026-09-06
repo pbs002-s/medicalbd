@@ -1,118 +1,102 @@
-import React, { useState } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
-import { LanguageProvider } from './context/LanguageContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { QueueProvider } from './context/QueueContext';
 
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
-import { LandingPage } from './components/landing/LandingPage';
 import { LoginModal } from './components/auth/LoginModal';
 import { RegisterModal } from './components/auth/RegisterModal';
+import { EmergencySOS } from './components/common/EmergencySOS';
 
-// Role Dashboards
-import { PatientDashboard } from './components/patient/PatientDashboard';
-import { DoctorDashboard } from './components/doctor/DoctorDashboard';
-import { StudentDashboard } from './components/student/StudentDashboard';
-import { AdminDashboard } from './components/admin/AdminDashboard';
+/*
+ * Every route below is code-split. The landing page and the four role
+ * dashboards are the only things most visitors ever load; pulling the
+ * prescription builder, the QR encoder and the student hub into the initial
+ * bundle made first paint slower for everyone on a rural 3G connection.
+ */
+const LandingPage = lazy(() => import('./components/landing/LandingPage').then((m) => ({ default: m.LandingPage })));
 
-// Standalone Individual Pages
-import { AppointmentsPage } from './components/pages/AppointmentsPage';
-import { LiveSerialPage } from './components/pages/LiveSerialPage';
-import { PrescriptionsPage } from './components/pages/PrescriptionsPage';
-import { ReportsPage } from './components/pages/ReportsPage';
-import { HealthTimelinePage } from './components/pages/HealthTimelinePage';
-import { MedicineIndexPage } from './components/pages/MedicineIndexPage';
-import { BloodBankPage } from './components/pages/BloodBankPage';
-import { BedDirectoryPage } from './components/pages/BedDirectoryPage';
-import { StudentHubPage } from './components/pages/StudentHubPage';
-import { RapidPrescriptionBuilderPage } from './components/pages/RapidPrescriptionBuilderPage';
-import { WaitingRoomTVPage } from './components/pages/WaitingRoomTVPage';
-import { SettingsPage } from './components/pages/SettingsPage';
+const PatientDashboard = lazy(() => import('./components/patient/PatientDashboard').then((m) => ({ default: m.PatientDashboard })));
+const DoctorDashboard = lazy(() => import('./components/doctor/DoctorDashboard').then((m) => ({ default: m.DoctorDashboard })));
+const StudentDashboard = lazy(() => import('./components/student/StudentDashboard').then((m) => ({ default: m.StudentDashboard })));
+const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then((m) => ({ default: m.AdminDashboard })));
 
-// Quick Modal Dialogs
-import { LiveSerialModal } from './components/patient/LiveSerialModal';
-import { PrescriptionModal } from './components/patient/PrescriptionModal';
-import { MedicineIndexModal } from './components/patient/MedicineIndexModal';
-import { BloodBankModal } from './components/patient/BloodBankModal';
-import { BedDirectoryModal } from './components/patient/BedDirectoryModal';
-import { BookAppointmentModal } from './components/patient/BookAppointmentModal';
-import { HealthTimelineModal } from './components/patient/HealthTimelineModal';
-import { RapidPrescriptionBuilder } from './components/doctor/RapidPrescriptionBuilder';
-import { WaitingRoomTVModal } from './components/admin/WaitingRoomTVModal';
-import { CaseLogbookModal } from './components/student/CaseLogbookModal';
-import { OSCEModal } from './components/student/OSCEModal';
-import { PediatricDoseModal } from './components/student/PediatricDoseModal';
-import { PostGradQuizModal } from './components/student/PostGradQuizModal';
-import { ClinicalForumModal } from './components/student/ClinicalForumModal';
+const AppointmentsPage = lazy(() => import('./components/pages/AppointmentsPage').then((m) => ({ default: m.AppointmentsPage })));
+const LiveSerialPage = lazy(() => import('./components/pages/LiveSerialPage').then((m) => ({ default: m.LiveSerialPage })));
+const PrescriptionsPage = lazy(() => import('./components/pages/PrescriptionsPage').then((m) => ({ default: m.PrescriptionsPage })));
+const ReportsPage = lazy(() => import('./components/pages/ReportsPage').then((m) => ({ default: m.ReportsPage })));
+const HealthTimelinePage = lazy(() => import('./components/pages/HealthTimelinePage').then((m) => ({ default: m.HealthTimelinePage })));
+const MedicineIndexPage = lazy(() => import('./components/pages/MedicineIndexPage').then((m) => ({ default: m.MedicineIndexPage })));
+const BloodBankPage = lazy(() => import('./components/pages/BloodBankPage').then((m) => ({ default: m.BloodBankPage })));
+const BedDirectoryPage = lazy(() => import('./components/pages/BedDirectoryPage').then((m) => ({ default: m.BedDirectoryPage })));
+const StudentHubPage = lazy(() => import('./components/pages/StudentHubPage').then((m) => ({ default: m.StudentHubPage })));
+const RapidPrescriptionBuilderPage = lazy(() => import('./components/pages/RapidPrescriptionBuilderPage').then((m) => ({ default: m.RapidPrescriptionBuilderPage })));
+const WaitingRoomTVPage = lazy(() => import('./components/pages/WaitingRoomTVPage').then((m) => ({ default: m.WaitingRoomTVPage })));
+const SettingsPage = lazy(() => import('./components/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
+
+/** Shown while a lazily loaded route is fetched. */
+const RouteFallback: React.FC = () => {
+  const { tr } = useLanguage();
+  return (
+    <div className="flex items-center justify-center py-24" role="status" aria-live="polite">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 rounded-full border-2 border-blue-600 border-t-transparent animate-spin" />
+        <span className="text-xs text-muted font-medium">{tr('Loading…', 'লোড হচ্ছে…')}</span>
+      </div>
+    </div>
+  );
+};
 
 const AppContent: React.FC = () => {
-  const { activeRole, activeView, setActiveView } = useAuth();
+  const { activeRole, activeView, setActiveView, selectedRxId, openPrescription } = useAuth();
+  const { tr } = useLanguage();
+  const goHome = () => setActiveView('dashboard');
 
-  // Modals state for quick launcher dialogs
-  const [isLiveQueueOpen, setIsLiveQueueOpen] = useState(false);
-  const [isPrescriptionOpen, setIsPrescriptionOpen] = useState(false);
-  const [selectedRxId, setSelectedRxId] = useState<string | undefined>(undefined);
-  const [isMedicineIndexOpen, setIsMedicineIndexOpen] = useState(false);
-  const [isBloodBankOpen, setIsBloodBankOpen] = useState(false);
-  const [isBedDirectoryOpen, setIsBedDirectoryOpen] = useState(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [isHealthTimelineOpen, setIsHealthTimelineOpen] = useState(false);
-
-  const [isRxBuilderOpen, setIsRxBuilderOpen] = useState(false);
-  const [isTVDisplayOpen, setIsTVDisplayOpen] = useState(false);
-
-  const [isLogbookOpen, setIsLogbookOpen] = useState(false);
-  const [isOSCEOpen, setIsOSCEOpen] = useState(false);
-  const [isDoseCalcOpen, setIsDoseCalcOpen] = useState(false);
-  const [isQuizOpen, setIsQuizOpen] = useState(false);
-  const [isForumOpen, setIsForumOpen] = useState(false);
-
-  const openPrescription = (id?: string) => {
-    setSelectedRxId(id);
-    setActiveView('prescriptions');
-  };
-
-  // If view is landing, render full landing page
   if (activeView === 'landing') {
     return (
       <>
-        <LandingPage
-          onStartNow={() => setActiveView('dashboard')}
-          onOpenLiveQueue={() => setActiveView('live_serial')}
-          onOpenPrescriptions={() => setActiveView('prescriptions')}
-          onOpenMedicines={() => setActiveView('medicines')}
-          onOpenBloodBank={() => setActiveView('blood_bank')}
-          onOpenBeds={() => setActiveView('beds')}
-          onOpenStudentHub={() => setActiveView('student_hub')}
-          onOpenForum={() => setActiveView('student_forum')}
-        />
+        <Suspense fallback={<RouteFallback />}>
+          <LandingPage
+            onStartNow={goHome}
+            onOpenLiveQueue={() => setActiveView('live_serial')}
+            onOpenPrescriptions={() => setActiveView('prescriptions')}
+            onOpenMedicines={() => setActiveView('medicines')}
+            onOpenBloodBank={() => setActiveView('blood_bank')}
+            onOpenBeds={() => setActiveView('beds')}
+            onOpenStudentHub={() => setActiveView('student_hub')}
+            onOpenForum={() => setActiveView('student_forum')}
+          />
+        </Suspense>
         <LoginModal />
         <RegisterModal />
-        <LiveSerialModal isOpen={isLiveQueueOpen} onClose={() => setIsLiveQueueOpen(false)} />
-        <PrescriptionModal isOpen={isPrescriptionOpen} onClose={() => setIsPrescriptionOpen(false)} rxId={selectedRxId} />
-        <MedicineIndexModal isOpen={isMedicineIndexOpen} onClose={() => setIsMedicineIndexOpen(false)} />
-        <BloodBankModal isOpen={isBloodBankOpen} onClose={() => setIsBloodBankOpen(false)} />
-        <BedDirectoryModal isOpen={isBedDirectoryOpen} onClose={() => setIsBedDirectoryOpen(false)} />
-        <CaseLogbookModal isOpen={isLogbookOpen} onClose={() => setIsLogbookOpen(false)} />
-        <ClinicalForumModal isOpen={isForumOpen} onClose={() => setIsForumOpen(false)} />
+        <EmergencySOS
+          onOpenBeds={() => setActiveView('beds')}
+          onOpenBloodBank={() => setActiveView('blood_bank')}
+        />
       </>
     );
   }
 
-  // Full Screen TV Display Mode
+  // Fullscreen TV mode renders on its own, without the app chrome.
   if (activeView === 'tv_display_fullscreen') {
-    return <WaitingRoomTVPage onBack={() => setActiveView('dashboard')} />;
+    return (
+      <Suspense fallback={<RouteFallback />}>
+        <WaitingRoomTVPage onBack={goHome} />
+      </Suspense>
+    );
   }
 
   return (
     <div className="min-h-screen bg-paper flex flex-col font-sans">
-      {/* Top Navbar */}
+      <a href="#main-content" className="skip-link">
+        {tr('Skip to main content', 'মূল বিষয়বস্তুতে যান')}
+      </a>
+
       <Navbar onOpenSearch={() => setActiveView('medicines')} />
 
-      {/* Main Dashboard Layout with Sidebar */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Sidebar */}
         <Sidebar
           onOpenLiveQueue={() => setActiveView('live_serial')}
           onOpenPrescriptions={() => setActiveView('prescriptions')}
@@ -125,168 +109,109 @@ const AppContent: React.FC = () => {
           onOpenTVDisplay={() => setActiveView('tv_display')}
         />
 
-        {/* Dynamic Center Main Area: Renders Dedicated Individual Pages */}
-        <main className="flex-1 overflow-y-auto bg-paper">
-          {/* 1. DASHBOARD VIEW (Role-based) */}
-          {activeView === 'dashboard' && (
-            <>
-              {activeRole === 'patient' && (
-                <PatientDashboard
-                  onOpenLiveQueue={() => setActiveView('live_serial')}
-                  onOpenPrescription={(id) => {
-                    setSelectedRxId(id);
-                    setActiveView('prescriptions');
-                  }}
-                  onOpenReports={() => setActiveView('reports')}
-                  onOpenAppointmentBooking={() => setActiveView('appointments')}
-                  onOpenMedicineIndex={() => setActiveView('medicines')}
-                  onOpenBloodBank={() => setActiveView('blood_bank')}
-                  onOpenBedDirectory={() => setActiveView('beds')}
-                  onOpenStudentHub={() => setActiveView('student_hub')}
-                  onOpenDoseCalc={() => setActiveView('student_dose')}
-                />
-              )}
+        <main id="main-content" className="flex-1 overflow-y-auto bg-paper">
+          <Suspense fallback={<RouteFallback />}>
+            {activeView === 'dashboard' && (
+              <>
+                {activeRole === 'patient' && (
+                  <PatientDashboard
+                    onOpenLiveQueue={() => setActiveView('live_serial')}
+                    onOpenPrescription={openPrescription}
+                    onOpenReports={() => setActiveView('reports')}
+                    onOpenAppointmentBooking={() => setActiveView('appointments')}
+                    onOpenMedicineIndex={() => setActiveView('medicines')}
+                    onOpenBloodBank={() => setActiveView('blood_bank')}
+                    onOpenBedDirectory={() => setActiveView('beds')}
+                    onOpenStudentHub={() => setActiveView('student_hub')}
+                    onOpenDoseCalc={() => setActiveView('student_dose')}
+                  />
+                )}
 
-              {activeRole === 'doctor' && (
-                <DoctorDashboard
-                  onOpenPrescriptionBuilder={() => setActiveView('rx_builder')}
-                  onOpenTVDisplay={() => setActiveView('tv_display')}
-                />
-              )}
+                {activeRole === 'doctor' && (
+                  <DoctorDashboard
+                    onOpenPrescriptionBuilder={() => setActiveView('rx_builder')}
+                    onOpenTVDisplay={() => setActiveView('tv_display')}
+                  />
+                )}
 
-              {activeRole === 'student' && (
-                <StudentDashboard
-                  onOpenLogbook={() => setActiveView('student_logbook')}
-                  onOpenOSCE={() => setActiveView('student_osce')}
-                  onOpenDoseCalc={() => setActiveView('student_dose')}
-                  onOpenQuiz={() => setActiveView('student_quiz')}
-                  onOpenForum={() => setActiveView('student_forum')}
-                />
-              )}
+                {activeRole === 'student' && (
+                  <StudentDashboard
+                    onOpenLogbook={() => setActiveView('student_logbook')}
+                    onOpenOSCE={() => setActiveView('student_osce')}
+                    onOpenDoseCalc={() => setActiveView('student_dose')}
+                    onOpenQuiz={() => setActiveView('student_quiz')}
+                    onOpenForum={() => setActiveView('student_forum')}
+                  />
+                )}
 
-              {activeRole === 'admin' && (
-                <AdminDashboard onOpenTVDisplay={() => setActiveView('tv_display')} />
-              )}
-            </>
-          )}
+                {activeRole === 'admin' && <AdminDashboard onOpenTVDisplay={() => setActiveView('tv_display')} />}
+              </>
+            )}
 
-          {/* 2. DEDICATED INDIVIDUAL PAGES */}
-          {activeView === 'appointments' && (
-            <AppointmentsPage
-              onBack={() => setActiveView('dashboard')}
-              onOpenLiveQueue={() => setActiveView('live_serial')}
-            />
-          )}
+            {activeView === 'appointments' && (
+              <AppointmentsPage onBack={goHome} onOpenLiveQueue={() => setActiveView('live_serial')} />
+            )}
 
-          {activeView === 'live_serial' && (
-            <LiveSerialPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'live_serial' && <LiveSerialPage onBack={goHome} />}
 
-          {activeView === 'prescriptions' && (
-            <PrescriptionsPage
-              onBack={() => setActiveView('dashboard')}
-              initialRxId={selectedRxId}
-            />
-          )}
+            {activeView === 'prescriptions' && (
+              <PrescriptionsPage onBack={goHome} initialRxId={selectedRxId} />
+            )}
 
-          {activeView === 'reports' && (
-            <ReportsPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'reports' && <ReportsPage onBack={goHome} />}
 
-          {activeView === 'health_timeline' && (
-            <HealthTimelinePage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'health_timeline' && <HealthTimelinePage onBack={goHome} />}
 
-          {activeView === 'medicines' && (
-            <MedicineIndexPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'medicines' && <MedicineIndexPage onBack={goHome} />}
 
-          {activeView === 'blood_bank' && (
-            <BloodBankPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'blood_bank' && <BloodBankPage onBack={goHome} />}
 
-          {activeView === 'beds' && (
-            <BedDirectoryPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'beds' && <BedDirectoryPage onBack={goHome} />}
 
-          {/* Student Hub & Sub-modules */}
-          {activeView === 'student_hub' && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="logbook" />
-          )}
-          {activeView === 'student_logbook' && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="logbook" />
-          )}
-          {activeView === 'student_osce' && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="osce" />
-          )}
-          {activeView === 'student_dose' && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="dose" />
-          )}
-          {activeView === 'student_quiz' && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="quiz" />
-          )}
-          {(activeView === 'student_forum' || activeView === 'forum') && (
-            <StudentHubPage onBack={() => setActiveView('dashboard')} initialTab="forum" />
-          )}
+            {/* Student hub, opened on the tab the caller asked for. */}
+            {(activeView === 'student_hub' || activeView === 'student_logbook') && (
+              <StudentHubPage onBack={goHome} initialTab="logbook" />
+            )}
+            {activeView === 'student_osce' && <StudentHubPage onBack={goHome} initialTab="osce" />}
+            {activeView === 'student_dose' && <StudentHubPage onBack={goHome} initialTab="dose" />}
+            {activeView === 'student_quiz' && <StudentHubPage onBack={goHome} initialTab="quiz" />}
+            {(activeView === 'student_forum' || activeView === 'forum') && (
+              <StudentHubPage onBack={goHome} initialTab="forum" />
+            )}
 
-          {/* Doctor Rapid Rx Builder */}
-          {activeView === 'rx_builder' && (
-            <RapidPrescriptionBuilderPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'rx_builder' && <RapidPrescriptionBuilderPage onBack={goHome} />}
 
-          {/* Waiting Room TV */}
-          {activeView === 'tv_display' && (
-            <WaitingRoomTVPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'tv_display' && <WaitingRoomTVPage onBack={goHome} />}
 
-          {/* Settings & Profile */}
-          {activeView === 'settings' && (
-            <SettingsPage onBack={() => setActiveView('dashboard')} />
-          )}
+            {activeView === 'settings' && <SettingsPage onBack={goHome} />}
+          </Suspense>
         </main>
       </div>
 
-      {/* Quick Action Modals & Dialogs */}
       <LoginModal />
       <RegisterModal />
 
-      <LiveSerialModal isOpen={isLiveQueueOpen} onClose={() => setIsLiveQueueOpen(false)} />
-      <PrescriptionModal isOpen={isPrescriptionOpen} onClose={() => setIsPrescriptionOpen(false)} rxId={selectedRxId} />
-      <MedicineIndexModal isOpen={isMedicineIndexOpen} onClose={() => setIsMedicineIndexOpen(false)} />
-      <BloodBankModal isOpen={isBloodBankOpen} onClose={() => setIsBloodBankOpen(false)} />
-      <BedDirectoryModal isOpen={isBedDirectoryOpen} onClose={() => setIsBedDirectoryOpen(false)} />
-      <BookAppointmentModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-      <HealthTimelineModal isOpen={isHealthTimelineOpen} onClose={() => setIsHealthTimelineOpen(false)} />
-
-      <RapidPrescriptionBuilder
-        isOpen={isRxBuilderOpen}
-        onClose={() => setIsRxBuilderOpen(false)}
-        onSaved={() => setIsRxBuilderOpen(false)}
-      />
-
-      <WaitingRoomTVModal isOpen={isTVDisplayOpen} onClose={() => setIsTVDisplayOpen(false)} />
-
-      <CaseLogbookModal isOpen={isLogbookOpen} onClose={() => setIsLogbookOpen(false)} />
-      <OSCEModal isOpen={isOSCEOpen} onClose={() => setIsOSCEOpen(false)} />
-      <PediatricDoseModal isOpen={isDoseCalcOpen} onClose={() => setIsDoseCalcOpen(false)} />
-      <PostGradQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
-      <ClinicalForumModal isOpen={isForumOpen} onClose={() => setIsForumOpen(false)} />
+      {/* Hidden on the TV display, which is not an interactive surface. */}
+      {activeView !== 'tv_display' && (
+        <EmergencySOS
+          onOpenBeds={() => setActiveView('beds')}
+          onOpenBloodBank={() => setActiveView('blood_bank')}
+        />
+      )}
     </div>
   );
 };
 
-export const App: React.FC = () => {
-  return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AuthProvider>
-          <QueueProvider>
-            <AppContent />
-          </QueueProvider>
-        </AuthProvider>
-      </LanguageProvider>
-    </ThemeProvider>
-  );
-};
+export const App: React.FC = () => (
+  <ThemeProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <QueueProvider>
+          <AppContent />
+        </QueueProvider>
+      </AuthProvider>
+    </LanguageProvider>
+  </ThemeProvider>
+);
 
 export default App;

@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import { BrandLogo } from '../common/BrandLogo';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import { ScrollReveal } from '../common/ScrollReveal';
 import {
   Clock,
   FileText,
   Pill,
-  RefreshCw,
   Droplet,
   BedDouble,
   GraduationCap,
-  MessageSquare,
   ChevronRight,
-  Play,
-  QrCode,
-  Users,
   Shield,
   PhoneCall,
   CheckCircle2,
@@ -23,7 +19,13 @@ import {
   Heart,
   Sparkles,
   Award,
-  Activity
+  Sun,
+  Moon,
+  Palette,
+  Check,
+  Building2,
+  Activity,
+  Users
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -47,516 +49,599 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onOpenStudentHub,
   onOpenForum
 }) => {
-  const { setIsLoginModalOpen, setIsRegisterModalOpen, setActiveView } = useAuth();
-  const { toBn } = useLanguage();
+  const { setIsLoginModalOpen, setIsRegisterModalOpen, setActiveView, switchRole } = useAuth();
+  const { language, setLanguage, tr, num, isBn } = useLanguage();
+  const { resolvedTheme, toggleTheme, mood, setMood, moods } = useTheme();
 
-  const services = [
+  const [isMoodOpen, setIsMoodOpen] = useState(false);
+
+  const bentoFeatures = [
     {
-      id: 'live_queue',
-      titleBn: 'লাইভ সিরিয়াল ট্র্যাকিং',
-      descBn: 'ডাক্তারের চেম্বারের লাইভ সিরিয়াল দেখুন এবং অপেক্ষার সময় জানতে পারবেন।',
+      index: '01',
+      tagEn: 'LIVE QUEUE',
+      tagBn: 'লাইভ সিরিয়াল',
+      titleEn: 'Real-Time Chamber Serial Tracker',
+      titleBn: 'লাইভ চেম্বার সিরিয়াল ট্র্যাকিং',
+      descEn: 'Eliminate 3-5 hour waiting room chaos. Know exact calling token, doctor arrival state, and estimated wait before leaving home.',
+      descBn: 'চেম্বারে ঘণ্টার পর ঘণ্টা অপেক্ষার দিন শেষ। বাসা থেকেই জানুন ডাক্তার কখন উপস্থিত হচ্ছেন এবং আপনার সিরিয়াল আসতে আর কত সময় বাকি।',
       icon: Clock,
-      color: 'bg-blue-50 text-blue-600 border-blue-100',
-      action: onOpenLiveQueue
+      action: onOpenLiveQueue,
+      color: 'text-blue-600 dark:text-blue-400',
+      bg: 'bg-blue-50 dark:bg-blue-900/30'
     },
     {
-      id: 'prescriptions',
-      titleBn: 'ই-প্রেসক্রিপশন',
-      descBn: 'ডাক্তারের ডিজিটাল প্রেসক্রিপশন সহজে দেখুন ও প্রিন্ট বা সংরক্ষণ করুন।',
+      index: '02',
+      tagEn: 'BMDC E-PRESCRIPTION',
+      tagBn: 'ই-প্রেসক্রিপশন',
+      titleEn: 'Digital Rx & Lifelong Health Vault',
+      titleBn: 'ডিজিটাল প্রেসক্রিপশন ও আজীবন হেলথ ভল্ট',
+      descEn: 'Clear bilingual e-prescriptions with dosage chips (1+0+1 after meals), investigations, and QR verification. Exportable print-ready PDF.',
+      descBn: 'স্পষ্ট বাংলা ডোজেস নির্দেশনাসহ প্রেসক্রিপশন। প্রেসক্রিপশন হারিয়ে যাওয়ার ভয় নেই, সংরক্ষিত থাকবে আজীবন ক্লাউড ভল্টে।',
       icon: FileText,
-      color: 'bg-teal-50 text-teal-600 border-teal-100',
-      action: onOpenPrescriptions
+      action: onOpenPrescriptions,
+      color: 'text-emerald-600 dark:text-emerald-400',
+      bg: 'bg-emerald-50 dark:bg-emerald-900/30'
     },
     {
-      id: 'medicines',
-      titleBn: 'ওষুধ মূল্য ও বিকল্প',
-      descBn: 'ওষুধের দাম ও সেরা জেনেরিক বিকল্প তুলনা করে সাশ্রয়ী নির্বাচন করুন।',
+      index: '03',
+      tagEn: 'DGDA PRICING',
+      tagBn: 'ওষুধের দাম',
+      titleEn: 'Medicine Prices & Generic Substitutes',
+      titleBn: 'ওষুধ মূল্য ও সাশ্রয়ী বিকল্প নির্দেশিকা',
+      descEn: 'Search any Bangladeshi brand to inspect official DGDA prices, formula, and top-tier cheaper generic alternatives from Square, Incepta, and Beximco.',
+      descBn: 'ব্র্যান্ড অনুযায়ী সরকারি এমআরপি মূল্য জানুন এবং একই মানের কম দামি জেনেরিক বিকল্প ওষুধ সহজে খুঁজে সাশ্রয় করুন।',
       icon: Pill,
-      color: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-      action: onOpenMedicines
+      action: onOpenMedicines,
+      color: 'text-purple-600 dark:text-purple-400',
+      bg: 'bg-purple-50 dark:bg-purple-900/30'
     },
     {
-      id: 'reports',
-      titleBn: 'রিপোর্ট ফলোআপ',
-      descBn: '১৪ দিনের ফ্রি রিপোর্ট রিভিউ ট্র্যাক করুন ও অটোমেটিক রিমাইন্ডার পান।',
-      icon: RefreshCw,
-      color: 'bg-purple-50 text-purple-600 border-purple-100',
-      action: onStartNow
-    },
-    {
-      id: 'blood_bank',
-      titleBn: 'রক্তদাতা নেটওয়ার্ক',
-      descBn: 'জেলা ভিত্তিক ৯০ দিনের কুলডাউন যাচাইকৃত রক্তদাতা খুঁজুন ও সহায়তা নিন।',
+      index: '04',
+      tagEn: 'VERIFIED DONORS',
+      tagBn: 'রক্তদান',
+      titleEn: 'Blood Donor Network with 90-Day Cooldown',
+      titleBn: 'যাচাইকৃত রক্তদাতা নেটওয়ার্ক (৯০ দিনের বিরতি)',
+      descEn: 'Filter verified blood donors across 64 districts and upazilas. Automated 90-day cooldown timer ensures only ready, healthy donors show as available.',
+      descBn: '৬৪ জেলা ও উপজেলায় রক্তের গ্রুপ অনুযায়ী রক্তদাতা খুঁজুন। ৯০ দিনের স্বয়ংক্রিয় স্বাস্থ্য সুরক্ষা ফিল্টার নিশ্চিত করে সক্রিয় ডোনারদের তালিকা।',
       icon: Droplet,
-      color: 'bg-red-50 text-red-600 border-red-100',
-      action: onOpenBloodBank
+      action: onOpenBloodBank,
+      color: 'text-red-600 dark:text-red-400',
+      bg: 'bg-red-50 dark:bg-red-900/30'
     },
     {
-      id: 'beds',
-      titleBn: 'বেড ও ICU ডিরেক্টরি',
-      descBn: 'হাসপাতালের সাধারণ বেড, ICU ও CCU এর লাইভ অ্যাভেইলেবিলিটি চেক করুন।',
+      index: '05',
+      tagEn: 'EMERGENCY DIRECTORY',
+      tagBn: 'বেড ও ICU',
+      titleEn: 'Hospital Bed & ICU Vacancy Counter',
+      titleBn: 'হাসপাতাল বেড ও ICU রিয়েল-টাইম ডিরেক্টরি',
+      descEn: 'Live vacancy counts of General Beds, ICU, CCU, HDU, and NICU units across registered government medicals and private clinics with direct dispatch dials.',
+      descBn: 'জরুরি সময়ে জেনারেল বেড, আইসিইউ, সিসিইউ ও এনআইসিইউ এর বর্তমান খালি সংখ্যা দেখুন এবং সরাসরি হাসপাতালে যোগাযোগ করুন।',
       icon: BedDouble,
-      color: 'bg-cyan-50 text-cyan-600 border-cyan-100',
-      action: onOpenBeds
+      action: onOpenBeds,
+      color: 'text-cyan-600 dark:text-cyan-400',
+      bg: 'bg-cyan-50 dark:bg-cyan-900/30'
     },
     {
-      id: 'student_hub',
-      titleBn: 'মেডিকেল শিক্ষার্থী হাব',
-      descBn: 'ক্লিনিক্যাল ওয়ার্ড লগবুক, OSCE চেকলিস্ট, ডোজ ক্যালকুলেটর ও কুইজ।',
+      index: '06',
+      tagEn: 'MEDICAL EDUCATION',
+      tagBn: 'মেডিকেল শিক্ষা',
+      titleEn: 'Student Hub, OSCE & Weight-Based Dose Calc',
+      titleBn: 'শিক্ষার্থী হাব, OSCE স্টেশন ও পেডিয়াট্রিক ডোজ',
+      descEn: 'MBBS clinical ward logbooks, interactive 5-min OSCE examination timers with viva checklists, and pediatric mg/kg emergency dose calculators.',
+      descBn: 'এমবিবিএস শিক্ষার্থীদের জন্য ক্লিনিক্যাল ওয়ার্ড লগবুক, ৫ মিনিটের ওএসসিই ভাইভা চেকলিস্ট এবং শিশুর ওজনভিত্তিক নিখুঁত ওষুধ ক্যালকুলেটর।',
       icon: GraduationCap,
-      color: 'bg-amber-50 text-amber-600 border-amber-100',
-      action: onOpenStudentHub
-    },
-    {
-      id: 'case_forum',
-      titleBn: 'কেস ডিসকাশন ফোরাম',
-      descBn: 'ECG, X-Ray ও ক্লিনিক্যাল কেস নিয়ে অভিজ্ঞ ডাক্তারদের সাথে আলোচনা করুন।',
-      icon: MessageSquare,
-      color: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-      action: onOpenForum
+      action: onOpenStudentHub,
+      color: 'text-amber-600 dark:text-amber-400',
+      bg: 'bg-amber-50 dark:bg-amber-900/30'
     }
   ];
 
   const steps = [
-    { num: 1, titleBn: 'অ্যাকাউন্ট তৈরি করুন', descBn: 'আপনার মোবাইল নম্বর দিয়ে রোগী, ডাক্তার বা শিক্ষার্থী হিসেবে সহজে রেজিস্টার করুন।' },
-    { num: 2, titleBn: 'সেবা নির্বাচন করুন', descBn: 'সিরিয়াল ট্র্যাকার, ই-প্রেসক্রিপশন বা রক্তদাতা নেটওয়ার্ক থেকে সেবা বেছে নিন।' },
-    { num: 3, titleBn: 'লাইভ আপডেট পান', descBn: 'ডাক্তারের আগমন ও চেম্বার সিরিয়ালের রিয়েল-টাইম নোটিফিকেশন ট্র্যাক করুন।' },
-    { num: 4, titleBn: 'ডিজিটাল ভল্টে সংরক্ষণ', descBn: 'প্রেসক্রিপশন ও ল্যাব টেস্টের রিপোর্ট আজীবন সুরক্ষিত ভল্টে রাখুন।' }
+    {
+      num: 1,
+      titleEn: 'Create Account or Choose Role',
+      titleBn: 'অ্যাকাউন্ট তৈরি বা ভূমিকা নির্বাচন',
+      descEn: 'Quick registration for patients, doctors, or medical students with phone verification.',
+      descBn: 'রোগী, চিকিৎসক বা মেডিকেল শিক্ষার্থী হিসেবে সহজেই রেজিস্ট্রেশন করুন।'
+    },
+    {
+      num: 2,
+      titleEn: 'Book Serial & Track Live',
+      titleBn: 'সিরিয়াল বুকিং ও লাইভ ট্র্যাকিং',
+      descEn: 'Select doctor chamber, get token number, and watch real-time queue progression from home.',
+      descBn: 'চেম্বারের সিরিয়াল নম্বর নিন এবং বাসা থেকেই লাইভ সিরিয়াল মনিটর করুন।'
+    },
+    {
+      num: 3,
+      titleEn: 'Consultation & Digital Prescription',
+      titleBn: 'পরামর্শ ও ডিজিটাল ই-প্রেসক্রিপশন',
+      descEn: 'Receive clear, structured prescriptions with BMDC registration QR code and Bengali advice.',
+      descBn: 'ডাক্তারের কাছ থেকে পান বিএমডিসি ভেরিফাইড ডিজিটাল ই-প্রেসক্রিপশন।'
+    },
+    {
+      num: 4,
+      titleEn: 'Lifetime Vault & 14-Day Free Review',
+      titleBn: 'আজীবন ভল্ট ও ১৪ দিনের ফ্রি ফলোআপ',
+      descEn: 'Access past records anytime and track remaining days for complimentary lab report review.',
+      descBn: 'রিপোর্ট প্রদর্শনীর ১৪ দিনের ফ্রি রিভিউ উইন্ডো স্বয়ংক্রিয়ভাবে ট্র্যাক করুন।'
+    }
   ];
 
-  const partners = [
-    { name: 'Square', sub: 'Pharmaceuticals Ltd.', color: 'text-blue-700' },
-    { name: 'incepta', sub: 'Incepta Pharmaceuticals Ltd.', color: 'text-emerald-700' },
-    { name: 'BEXIMCO', sub: 'PHARMA', color: 'text-purple-700' },
-    { name: 'Renata', sub: 'Limited', color: 'text-rose-700' },
-    { name: 'MEDICINE', sub: 'CORNER', color: 'text-cyan-700' }
+  const announcements = [
+    {
+      type: 'EMERGENCY',
+      titleEn: 'Heavy Dengue Vector Warning — Dhaka & Chattogram',
+      titleBn: 'ডেঙ্গু বিস্তার প্রতিরোধে জরুরি স্বাস্থ্য সতর্কবার্তা — ঢাকা ও চট্টগ্রাম',
+      descEn: 'DGHS advisory: avoid stagnant water, consult early for high fever, and test CBC + NS1 within 48 hours.',
+      descBn: 'স্বাস্থ্য অধিদপ্তরের পরামর্শ: জ্বর হলে অবহেলা না করে ৪৮ ঘণ্টার মধ্যে এনএস১ পরীক্ষা করান এবং চিকিৎসকের পরামর্শ নিন।'
+    },
+    {
+      type: 'HOTLINE',
+      titleEn: '24/7 National Health Hotline 16263 Available Nationwide',
+      titleBn: 'টোল-ফ্রি জাতীয় স্বাস্থ্য বাতায়ন ১৬২৬৩ সার্বক্ষণিক সক্রিয়',
+      descEn: 'Direct access to government registered medical officers for free preliminary medical advice.',
+      descBn: 'যেকোনো স্বাস্থ্য পরামর্শের জন্য ১৬২৬৩ নম্বরে বিনা খরচে সরকারি চিকিৎসকের পরামর্শ নিন।'
+    },
+    {
+      type: 'EDUCATION',
+      titleEn: 'BCPS FCPS-1 & BSMMU Residency Mock Banks Updated',
+      titleBn: 'এফসিপিএস-১ ও রেসিডেন্সি পরীক্ষার প্রশ্ন ব্যাংক হালনাগাদ',
+      descEn: 'High-yield past clinical MCQs, SBAs, and explanatory rationales added to the Student Hub.',
+      descBn: 'মেডিকেল শিক্ষার্থী হাবে যুক্ত হয়েছে উচ্চ-ফলনশীল প্রশ্ন ও বিস্তারিত ব্যাখ্যা।'
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-paper font-bangla overflow-x-hidden">
-      {/* Top Landing Header */}
-      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-4 sm:px-8 py-3.5 shadow-2xs">
+    <div className="min-h-screen bg-paper overflow-x-hidden">
+      {/* Public Navigation (OpenGovtBD style) */}
+      <nav className="sticky top-0 z-40 bg-surface/95 backdrop-blur-md border-b border-border px-4 sm:px-8 py-3 transition-colors">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <BrandLogo />
 
-          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600 dark:text-slate-400">
-            <a href="#hero" className="text-blue-600 hover:text-blue-700 transition-colors">হোম</a>
-            <a href="#services" className="hover:text-blue-600 transition-colors">সেবাসমূহ</a>
-            <a href="#how_it_works" className="hover:text-blue-600 transition-colors">কিভাবে কাজ করে</a>
-            <a href="#mobile_app" className="hover:text-blue-600 transition-colors">মোবাইল অ্যাপ</a>
-            <a href="#partners" className="hover:text-blue-600 transition-colors">সহযোগী প্রতিষ্ঠান</a>
-            <a href="#contact" className="hover:text-blue-600 transition-colors">যোগাযোগ</a>
+          <div className="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-semibold text-muted">
+            <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {tr('Services', 'সেবাসমূহ')}
+            </a>
+            <a href="#how_it_works" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {tr('How It Works', 'কিভাবে কাজ করে')}
+            </a>
+            <a href="#announcements" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {tr('Announcements', 'জরুরি বার্তা')}
+            </a>
+            <button
+              onClick={() => {
+                switchRole('student');
+                setActiveView('student_hub');
+              }}
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              {tr('Medical Students', 'শিক্ষার্থী হাব')}
+            </button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* 1-Click Language Switcher (OpenGovtBD pill) */}
+            <div className="flex items-center bg-paper border border-border p-0.5 rounded-xl shadow-2xs text-xs font-bold select-none">
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-lg transition-all ${
+                  language === 'en'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-muted hover:text-ink'
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage('bn')}
+                className={`px-2.5 py-1 rounded-lg transition-all font-bangla ${
+                  language === 'bn'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'text-muted hover:text-ink'
+                }`}
+                title="বাংলা ভাষায় পরিবর্তন"
+              >
+                বাং
+              </button>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl text-muted hover:text-ink hover:bg-paper border border-border transition-colors shadow-2xs"
+              title={resolvedTheme === 'dark' ? tr('Light Mode', 'লাইট মোড') : tr('Dark Mode', 'ডার্ক মোড')}
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
+
+            {/* Colour Mood Toggle */}
+            <div className="relative">
+              <button
+                onClick={() => setIsMoodOpen(!isMoodOpen)}
+                className="p-2 rounded-xl text-muted hover:text-blue-600 hover:bg-paper border border-border transition-colors shadow-2xs flex items-center gap-1.5"
+                title={tr('Change Colour Theme', 'রঙের থিম')}
+              >
+                <Palette className="w-4 h-4 text-blue-600" />
+                <span
+                  className="w-2.5 h-2.5 rounded-full ring-1 ring-black/20"
+                  style={{ background: moods.find((m) => m.id === mood)?.swatch[0] || '#0B4F8A' }}
+                />
+              </button>
+
+              {isMoodOpen && (
+                <div className="absolute right-0 mt-2 w-60 bg-surface rounded-2xl shadow-card-hover border border-border p-3 z-50 animate-slide-down">
+                  <div className="text-xs font-bold text-ink pb-2 border-b border-border mb-2 flex items-center gap-1.5">
+                    <Palette className="w-3.5 h-3.5 text-blue-600" />
+                    <span>{tr('Palette Mood', 'রঙের মুড')}</span>
+                  </div>
+                  <div className="space-y-1">
+                    {moods.map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => {
+                          setMood(opt.id);
+                          setIsMoodOpen(false);
+                        }}
+                        className={`w-full p-2 rounded-xl border flex items-center gap-2 text-xs transition-all ${
+                          mood === opt.id
+                            ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/25 font-bold'
+                            : 'border-border bg-paper hover:bg-surface font-medium'
+                        }`}
+                      >
+                        <span
+                          className="w-3.5 h-3.5 rounded-full ring-1 ring-black/10 shrink-0"
+                          style={{ background: opt.swatch[0] }}
+                        />
+                        <span className="text-ink flex-1 text-left">
+                          {isBn ? opt.labelBn : opt.labelEn}
+                        </span>
+                        {mood === opt.id && <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Login / Register Buttons */}
             <button
               onClick={() => setIsLoginModalOpen(true)}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all btn-press"
+              className="btn btn-ghost btn-sm hidden sm:inline-flex"
             >
-              লগইন
+              {tr('Log in', 'লগ ইন')}
             </button>
+
             <button
-              onClick={() => setIsRegisterModalOpen(true)}
-              className="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/25 transition-all btn-press"
+              onClick={onStartNow}
+              className="btn btn-primary btn-sm"
             >
-              অ্যাকাউন্ট করুন
+              <span>{tr('Open Dashboard', 'ড্যাশবোর্ডে প্রবেশ')}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="hero" className="pt-10 sm:pt-16 pb-14 px-4 sm:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Hero Left Content */}
-          <div className="lg:col-span-7 space-y-7 text-left">
-            <ScrollReveal animation="fade-down" duration={400}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-                <span>বাংলাদেশের ডিজিটাল স্বাস্থ্য নেটওয়ার্ক</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fade-up" duration={450} delay={100}>
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold text-ink leading-[1.15] tracking-tight">
-                স্বাস্থ্যসেবা হবে<br />
-                <span className="text-blue-600 dark:text-blue-400">সহজ, দ্রুত ও বিশ্বাসযোগ্য</span>
-              </h1>
-              <div className="mt-4 h-px w-24 bg-teal-600" />
-            </ScrollReveal>
-
-            <ScrollReveal animation="fade-up" duration={450} delay={150}>
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-                রোগী, চিকিৎসক ও মেডিকেল শিক্ষার্থীদের জন্য একটি স্মার্ট ডিজিটাল স্বাস্থ্যসেবা প্ল্যাটফর্ম। চেম্বারের দীর্ঘ অপেক্ষা পরিহার করুন এবং আধুনিক চিকিৎসাসেবার অভিজ্ঞতা নিন।
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fade-up" duration={450} delay={200}>
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <button
-                  onClick={onStartNow}
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition-colors btn-press"
-                >
-                  <span>শুরু করুন এখনই</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <a
-                  href="#how_it_works"
-                  className="px-5 py-3 bg-surface hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold flex items-center gap-2 transition-colors btn-press"
-                >
-                  <Play className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <span>কিভাবে কাজ করে</span>
-                </a>
-              </div>
-            </ScrollReveal>
-
-            {/* Stat strip */}
-            <ScrollReveal animation="fade-up" duration={450} delay={250}>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-5 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <div>
-                  <div className="text-2xl font-serif font-semibold text-ink">১০,০০০+</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">সন্তুষ্ট রোগী</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-serif font-semibold text-ink">৫০০+</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">বিশেষজ্ঞ ডাক্তার</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-serif font-semibold text-ink">৫০+</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">হাসপাতাল ও ক্লিনিক</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-serif font-semibold text-ink">২৪/৭</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">সাপোর্ট সেবা</div>
-                </div>
-              </div>
-            </ScrollReveal>
+      {/* Hero Section (OpenGovtBD signature hero style) */}
+      <section className="pt-12 sm:pt-20 pb-16 px-4 sm:px-8 max-w-7xl mx-auto text-center space-y-7">
+        <ScrollReveal animation="fade-down" duration={450}>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border text-xs font-semibold text-muted shadow-2xs mb-2">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span>{tr("Bangladesh's Open Digital Healthcare & Medical Education Platform", 'বাংলাদেশের ওপেন ডিজিটাল স্বাস্থ্যসেবা ও চিকিৎসা শিক্ষা প্ল্যাটফর্ম')}</span>
           </div>
 
-          {/* Hero Right: the live queue ticket — the product's actual signature feature,
-              styled after a real hospital token stub rather than a generic app screenshot. */}
-          <div className="lg:col-span-5">
-            <ScrollReveal animation="fade-up" duration={500} delay={150}>
-              <div className="bg-surface border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-sm mx-auto lg:mx-0 lg:ml-auto">
-                <div className="px-5 pt-5 pb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-blue-700 dark:text-blue-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-                    <span>লাইভ সিরিয়াল</span>
-                  </div>
-                  <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">চেম্বার ৪</span>
-                </div>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-ink tracking-tight max-w-4xl mx-auto leading-tight">
+            {tr(
+              'The digital bridge between patients, doctors & healthcare.',
+              'রোগী, চিকিৎসক ও স্বাস্থ্যসেবার আধুনিক ডিজিটাল সেতু।'
+            )}
+          </h1>
 
-                <div className="px-5 pb-5">
-                  <div className="text-[11px] text-slate-500 dark:text-slate-400">এখন চলছে সিরিয়াল</div>
-                  <div className="font-mono text-6xl font-semibold text-ink leading-none mt-1">১২</div>
+          <p className="text-sm sm:text-base lg:text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+            {tr(
+              'Track live chamber serials without waiting room chaos, access legible e-prescriptions, find verified blood donors, and explore open medical education tools.',
+              'চেম্বারে ঘণ্টার পর ঘণ্টা অপেক্ষা ছাড়াই লাইভ সিরিয়াল ট্র্যাক করুন, বিএমডিসি মানের ই-প্রেসক্রিপশন সংরক্ষণ করুন এবং জরুরি রক্তদাতা ও আইসিইউ বেড খুঁজুন সহজে।'
+            )}
+          </p>
 
-                  <div className="mt-4 flex items-center justify-between text-xs">
-                    <span className="text-slate-500 dark:text-slate-400">আপনার সিরিয়াল <span className="font-mono font-bold text-ink">১৮</span></span>
-                    <span className="text-slate-500 dark:text-slate-400">আনুমানিক <span className="font-mono font-bold text-ink">২৫ মিনিট</span></span>
-                  </div>
-                </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button
+              onClick={onStartNow}
+              className="btn btn-primary text-sm sm:text-base py-3 px-6 shadow-elevation-2"
+            >
+              <span>{tr('Launch Patient Portal', 'রোগী পোর্টাল চালু করুন')}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
-                {/* Perforated tear line, like a real token stub */}
-                <div className="relative border-t border-dashed border-slate-300 dark:border-slate-700">
-                  <div className="absolute -left-2.5 -top-2.5 w-5 h-5 rounded-full bg-paper border border-slate-200 dark:border-slate-800" />
-                  <div className="absolute -right-2.5 -top-2.5 w-5 h-5 rounded-full bg-paper border border-slate-200 dark:border-slate-800" />
-                </div>
-
-                <div className="px-5 py-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <img
-                      src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80"
-                      alt="Doctor"
-                      className="w-9 h-9 rounded-full object-cover"
-                    />
-                    <div>
-                      <div className="text-xs font-bold text-ink">ডা. তানভীর হাসান</div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400">মেডিসিন বিশেষজ্ঞ · চেম্বারে আছেন</div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={onOpenLiveQueue}
-                    className="text-xs font-bold text-blue-700 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 flex items-center gap-1 shrink-0"
-                  >
-                    ট্র্যাক করুন
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Secondary quick links to the other core services */}
-              <div className="grid grid-cols-3 gap-2 mt-3 max-w-sm mx-auto lg:mx-0 lg:ml-auto">
-                <button onClick={onOpenPrescriptions} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
-                  <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">প্রেসক্রিপশন</span>
-                </button>
-                <button onClick={onOpenMedicines} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
-                  <Pill className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">ওষুধ সূচক</span>
-                </button>
-                <button onClick={onOpenBloodBank} className="flex flex-col items-center gap-1.5 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-surface hover:border-blue-300 dark:hover:border-blue-700 transition-colors card-interactive">
-                  <Droplet className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-300">রক্তদান</span>
-                </button>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Grid (8 Services) */}
-      <section id="services" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800">
-        <ScrollReveal animation="fade-up" duration={450}>
-          <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>সুবিধাসমূহ</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-50">
-              আমাদের ডিজিটাল সেবাসমূহ
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              আপনার স্বাস্থ্যসেবা যাত্রাকে সহজ ও স্মার্ট করতে আমরা আছি সার্বক্ষণিক পাশে।
-            </p>
+            <button
+              onClick={() => {
+                switchRole('doctor');
+                setActiveView('dashboard');
+              }}
+              className="btn btn-outline text-sm sm:text-base py-3 px-6"
+            >
+              <Activity className="w-4 h-4 text-blue-600" />
+              <span>{tr('Doctor / Clinic Login', 'চিকিৎসক ও ক্লিনিক পোর্টাল')}</span>
+            </button>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {services.map((s, index) => {
-            const Icon = s.icon;
+        {/* Stats Band (OpenGovtBD style) */}
+        <ScrollReveal animation="fade-up" delay={150}>
+          <div className="card card-pad bg-surface border border-border shadow-elevation-1 max-w-5xl mx-auto mt-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-border">
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-black text-blue-600">{num(64)}</div>
+                <div className="text-xs font-semibold text-muted mt-1">{tr('Districts Covered', '৬৪ জেলায় কাভারেজ')}</div>
+              </div>
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-black text-emerald-600">{num('500')}+</div>
+                <div className="text-xs font-semibold text-muted mt-1">{tr('Registered BMDC Doctors', 'নিবন্ধিত চিকিৎসক')}</div>
+              </div>
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-black text-ink">{tr('100%', '১০০%')}</div>
+                <div className="text-xs font-semibold text-muted mt-1">{tr('Open-Source & Free', 'ওপেন-সোর্স ও উন্মুক্ত')}</div>
+              </div>
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-black text-red-600">{tr('24/7', '২৪/৭')}</div>
+                <div className="text-xs font-semibold text-muted mt-1">{tr('Emergency Availability', 'সার্বক্ষণিক হেল্পলাইন')}</div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* Bento Grid: "Everything a Citizen & Doctor Needs" */}
+      <section id="features" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto space-y-8">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="section-eyebrow">
+            <span className="n">01 /</span>
+            <span>{tr('Core Modules', 'মূল সেবাসমূহ')}</span>
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-ink">
+            {tr('Everything you need, in one cohesive platform', 'আপনার প্রয়োজনীয় সবকিছু এক ছাদের নিচে')}
+          </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            {tr(
+              'Engineered specifically to solve real, everyday medical friction in Bangladesh.',
+              'বাংলাদেশের স্বাস্থ্য ব্যবস্থার বাস্তব সমস্যা সমাধানে বিশেষভাবে নির্মিত।'
+            )}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {bentoFeatures.map((feat) => {
+            const Icon = feat.icon;
             return (
-              <ScrollReveal key={s.id} animation="fade-up" delay={index * 60}>
-                <div
-                  onClick={s.action}
-                  className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-xl hover:border-blue-200 card-interactive flex flex-col justify-between group h-full"
-                >
-                  <div>
-                    <div className={`w-12 h-12 rounded-2xl ${s.color} border flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-2xs`}>
-                      <Icon className="w-6 h-6" />
+              <div
+                key={feat.index}
+                onClick={feat.action}
+                className="card card-pad hoverable cursor-pointer group flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className={`stat-icon w-11 h-11 ${feat.bg} ${feat.color} group-hover:scale-105 transition-transform`}>
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 group-hover:text-blue-600 transition-colors">
-                      {s.titleBn}
-                    </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-                      {s.descBn}
-                    </p>
+                    <span className="font-mono text-xs font-bold text-muted">
+                      {feat.index} / {isBn ? feat.tagBn : feat.tagEn}
+                    </span>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-50 flex items-center text-xs font-bold text-blue-600 group-hover:gap-1.5 transition-all">
-                    <span>ক্লিক করে ব্যবহার করুন</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </div>
+                  <h3 className="text-base font-bold text-ink group-hover:text-blue-600 transition-colors">
+                    {isBn ? feat.titleBn : feat.titleEn}
+                  </h3>
+
+                  <p className="text-xs text-muted leading-relaxed">
+                    {isBn ? feat.descBn : feat.descEn}
+                  </p>
                 </div>
-              </ScrollReveal>
+
+                <div className="mt-4 pt-3 border-t border-border flex items-center justify-between text-xs font-bold text-blue-600">
+                  <span>{tr('Explore Feature', 'বিস্তারিত দেখুন')}</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
             );
           })}
         </div>
       </section>
 
-      {/* Dark Blue Mobile App Banner */}
-      <section id="mobile_app" className="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
-        <ScrollReveal animation="fade-up" duration={450}>
-          <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 rounded-full blur-2xl" />
+      {/* How It Works (OpenGovtBD 4-step process) */}
+      <section id="how_it_works" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto space-y-8">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="section-eyebrow">
+            <span className="n">02 /</span>
+            <span>{tr('Transparent Process', 'সহজ ধাপসমূহ')}</span>
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-ink">
+            {tr('How ShasthoSetu BD works', 'স্বাস্থ্যসেতু বিডি কিভাবে কাজ করে')}
+          </h2>
+          <p className="text-xs sm:text-sm text-muted">
+            {tr('From chamber queue to lifelong digital care in four seamless steps.', 'সিরিয়াল বুকিং থেকে শুরু করে আজীবন ডিজিটাল সেবা মাত্র ৪ ধাপে।')}
+          </p>
+        </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-              <div className="lg:col-span-7 space-y-4">
-                <span className="text-xs font-bold text-teal-400 tracking-wider uppercase">
-                  সব সেবা আপনার হাতের মুঠোয়
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-extrabold leading-tight">
-                  স্বাস্থ্যসেবা এখন <br />
-                  আপনার হাতের মুঠোয়
-                </h2>
-                <p className="text-sm text-slate-300 max-w-md leading-relaxed">
-                  আমাদের মোবাইল অ্যাপের মাধ্যমে লাইভ সিরিয়াল ট্র্যাক করুন, প্রেসক্রিপশন দেখুন এবং জরুরি রক্তদাতা খুঁজুন মাত্র এক ট্যাপে।
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4 pt-4">
-                  <div className="flex items-center gap-3 bg-white/10 border border-white/20 p-2.5 rounded-2xl backdrop-blur-md hover:bg-white/15 transition-colors">
-                    <QrCode className="w-12 h-12 text-white" />
-                    <div className="text-left text-xs">
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 block">QR কোড স্ক্যান করুন</span>
-                      <span className="font-bold text-white">অ্যাপ ডাউনলোড</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <div className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-semibold cursor-pointer transition-all btn-press">
-                       Google Play তে ইনস্টল করুন
-                    </div>
-                    <div className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs font-semibold cursor-pointer transition-all btn-press">
-                       App Store থেকে ডাউনলোড
-                    </div>
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {steps.map((step) => (
+            <div key={step.num} className="card card-pad relative space-y-2">
+              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white font-mono font-black text-sm flex items-center justify-center shadow-2xs">
+                {num(step.num)}
               </div>
-
-              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
-                <div
-                  onClick={onOpenLiveQueue}
-                  className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 hover:bg-white/15 transition-all cursor-pointer card-interactive"
-                >
-                  <Clock className="w-6 h-6 text-teal-400 mb-2" />
-                  <h4 className="font-bold text-sm">লাইভ সিরিয়াল</h4>
-                  <p className="text-[11px] text-slate-300 mt-0.5">রিয়েল-টাইম ডাক্তার ট্র্যাকিং</p>
-                </div>
-
-                <div
-                  onClick={onOpenBloodBank}
-                  className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 hover:bg-white/15 transition-all cursor-pointer card-interactive"
-                >
-                  <Droplet className="w-6 h-6 text-red-400 mb-2 animate-heart-beat" />
-                  <h4 className="font-bold text-sm">রক্তদাতা খুঁজুন</h4>
-                  <p className="text-[11px] text-slate-300 mt-0.5">যাচাইকৃত ডোনার নেটওয়ার্ক</p>
-                </div>
-
-                <div
-                  onClick={onOpenBeds}
-                  className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 hover:bg-white/15 transition-all cursor-pointer card-interactive"
-                >
-                  <BedDouble className="w-6 h-6 text-emerald-400 mb-2" />
-                  <h4 className="font-bold text-sm">বেড খালি আছে</h4>
-                  <p className="text-[11px] text-slate-300 mt-0.5">ICU ও সাধারণ বেড আপডেট</p>
-                </div>
-
-                <div
-                  onClick={onOpenMedicines}
-                  className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 hover:bg-white/15 transition-all cursor-pointer card-interactive"
-                >
-                  <Pill className="w-6 h-6 text-amber-400 mb-2" />
-                  <h4 className="font-bold text-sm">ওষুধের বিকল্প</h4>
-                  <p className="text-[11px] text-slate-300 mt-0.5">সাশ্রয়ী জেনেরিক বিকল্প</p>
-                </div>
-              </div>
+              <h4 className="font-bold text-sm text-ink pt-1">
+                {isBn ? step.titleBn : step.titleEn}
+              </h4>
+              <p className="text-xs text-muted leading-relaxed">
+                {isBn ? step.descBn : step.descEn}
+              </p>
             </div>
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* How it Works */}
-      <section id="how_it_works" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800">
-        <ScrollReveal animation="fade-up" duration={450}>
-          <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>প্রক্রিয়া</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-50">
-              কিভাবে কাজ করে
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              মাত্র ৪টি সহজ ধাপে স্বাস্থ্যসেবা গ্রহণ করুন।
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, index) => (
-            <ScrollReveal key={step.num} animation="fade-up" delay={index * 100}>
-              <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-center relative shadow-2xs hover:shadow-md transition-all card-interactive group h-full">
-                <div className="w-11 h-11 rounded-full bg-emerald-500 text-white font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
-                  {toBn(step.num)}
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-50 text-base group-hover:text-emerald-700 transition-colors">
-                  {step.titleBn}
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
-                  {step.descBn}
-                </p>
-              </div>
-            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      {/* Pharma Partners */}
-      <section id="partners" className="py-12 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-100 dark:border-slate-800 text-center">
-        <ScrollReveal animation="fade-up" duration={400}>
-          <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-8">
-            বিশ্বস্ত সহযোগী ও ওষুধ ডেটাবেজ পার্টনার
-          </h3>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
-            {partners.map((p, i) => (
-              <div
-                key={i}
-                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xs hover:shadow-md transition-all card-interactive text-center font-sans min-w-[140px] group"
-              >
-                <span className={`text-xl font-black tracking-tight ${p.color} block group-hover:scale-105 transition-transform`}>
-                  {p.name}
-                </span>
-                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">{p.sub}</span>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Family Health CTA Banner */}
-      <section className="py-8 px-4 sm:px-8 max-w-7xl mx-auto">
-        <ScrollReveal animation="zoom-in" duration={450}>
-          <div className="bg-blue-600 rounded-3xl p-8 sm:p-10 text-white flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="space-y-1 text-center sm:text-left">
-              <h3 className="font-serif text-xl sm:text-2xl font-semibold">
-                আপনার ও আপনার পরিবারের স্বাস্থ্য আমাদের অঙ্গীকার
-              </h3>
-              <p className="text-xs sm:text-sm text-blue-100">
-                আজই যোগ দিন স্বাস্থ্যসেতু বিডির সাথে এবং স্মার্ট ডিজিটাল স্বাস্থ্যসেবার অভিজ্ঞতা নিন।
-              </p>
-            </div>
-            <button
-              onClick={() => setIsRegisterModalOpen(true)}
-              className="whitespace-nowrap px-6 py-3 bg-white text-blue-700 hover:bg-blue-50 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 btn-press"
-            >
-              <span>অ্যাকাউন্ট করুন এখনই</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </ScrollReveal>
-      </section>
-
-      {/* Footer */}
-      <footer id="contact" className="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 pt-12 pb-8 px-4 sm:px-8 mt-12">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-100 dark:border-slate-800">
-          <div className="space-y-3">
-            <BrandLogo />
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              বাংলাদেশের সর্বাধুনিক ডিজিটাল স্বাস্থ্য ও মেডিকেল এডুকেশন নেটওয়ার্ক। রোগী, ডাক্তার ও শিক্ষার্থীদের এক ছাতার নিচে সেতুবন্ধন।
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">দ্রুত লিঙ্ক</h4>
-            <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
-              <li><a href="#hero" className="hover:text-blue-600 transition-colors">হোম</a></li>
-              <li><a href="#services" className="hover:text-blue-600 transition-colors">সেবাসমূহ</a></li>
-              <li><button onClick={onOpenMedicines} className="hover:text-blue-600 transition-colors">ওষুধের তালিকা</button></li>
-              <li><button onClick={onOpenBloodBank} className="hover:text-blue-600 transition-colors">রক্তদাতা অনুসন্ধান</button></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">সহায়তা</h4>
-            <ul className="text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
-              <li><a href="#" className="hover:text-blue-600 transition-colors">সাধারণ প্রশ্ন (FAQ)</a></li>
-              <li><a href="#" className="hover:text-blue-600 transition-colors">গোপনীয়তা নীতি</a></li>
-              <li><a href="#" className="hover:text-blue-600 transition-colors">ব্যবহারের শর্তাবলী</a></li>
-            </ul>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-bold text-slate-900 dark:text-slate-50 text-xs">যোগাযোগ</h4>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-               09678-123456 <br />
-               support@shasthosetu.gov.bd <br />
-               বাড়ি #১২, রোড #৫, ধানমন্ডি, ঢাকা-১২০৫
-            </p>
-          </div>
+      {/* Latest Announcements & Advisories (OpenGovtBD announcements band) */}
+      <section id="announcements" className="py-14 px-4 sm:px-8 max-w-7xl mx-auto space-y-8">
+        <div className="space-y-1">
+          <span className="section-eyebrow">
+            <span className="n">03 /</span>
+            <span>{tr('Health Advisories', 'স্বাস্থ্য বুলেটিন')}</span>
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-ink">
+            {tr('Latest Clinical & Emergency Announcements', 'সাম্প্রতিক স্বাস্থ্য ও চিকিৎসা বার্তা')}
+          </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-6 text-center text-xs text-slate-400 dark:text-slate-500">
-          © ২০২৬ স্বাস্থ্যসেতু বিডি (OpenHealthBD). সর্বস্বত্ব সংরক্ষিত।
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {announcements.map((item, idx) => (
+            <div key={idx} className="card card-pad space-y-2.5">
+              <span className={`pill ${item.type === 'EMERGENCY' ? 'pill-error' : item.type === 'HOTLINE' ? 'pill-info' : 'pill-success'} text-[10px]`}>
+                {item.type}
+              </span>
+              <h4 className="font-bold text-sm text-ink leading-snug">
+                {isBn ? item.titleBn : item.titleEn}
+              </h4>
+              <p className="text-xs text-muted leading-relaxed">
+                {isBn ? item.descBn : item.descEn}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Final CTA Band (OpenGovtBD CTA banner) */}
+      <section className="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div className="card card-pad bg-gradient-to-r from-blue-700 via-blue-800 to-slate-950 text-white text-center py-10 sm:py-14 space-y-4 rounded-3xl shadow-elevation-3">
+          <h2 className="text-2xl sm:text-4xl font-black text-white max-w-2xl mx-auto leading-tight">
+            {tr(
+              'Join thousands of patients, doctors & students across Bangladesh',
+              'বাংলাদেশের হাজারো রোগী, চিকিৎসক ও শিক্ষার্থীর সাথে যুক্ত হোন'
+            )}
+          </h2>
+          <p className="text-xs sm:text-sm text-blue-100 max-w-xl mx-auto">
+            {tr(
+              'Free, open, and built to transform healthcare delivery nationwide.',
+              'সম্পূর্ণ উন্মুক্ত ও আধুনিক চিকিৎসাসেবায় দেশব্যাপী বিপ্লব ঘটাতে অঙ্গীকারবদ্ধ।'
+            )}
+          </p>
+
+          <div className="pt-2">
+            <button
+              onClick={onStartNow}
+              className="btn btn-primary bg-white text-blue-900 hover:bg-blue-50 py-3 px-8 text-sm font-bold shadow-md border-0"
+            >
+              <span>{tr('Get Started Free', 'বিনামূল্যে শুরু করুন')}</span>
+              <ArrowRight className="w-4 h-4 text-blue-700" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer (OpenGovtBD clean footer style) */}
+      <footer className="border-t border-border bg-surface py-12 px-4 sm:px-8 mt-12 transition-colors">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="space-y-3">
+              <BrandLogo />
+              <p className="text-xs text-muted max-w-xs leading-relaxed">
+                {tr(
+                  'A transparent, modern digital healthcare bridge connecting citizens, doctors, students, and healthcare facilities in Bangladesh.',
+                  'বাংলাদেশের রোগী, চিকিৎসক, শিক্ষার্থী ও হাসপাতালসমূহের মধ্যে স্বচ্ছ ও আধুনিক ডিজিটাল স্বাস্থ্যসেবার সেতু।'
+                )}
+              </p>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <h5 className="font-bold text-ink uppercase tracking-wider text-[11px] font-mono">
+                {tr('For Patients', 'রোগীদের জন্য')}
+              </h5>
+              <div className="space-y-1.5 flex flex-col text-muted">
+                <button onClick={onOpenLiveQueue} className="hover:text-blue-600 text-left">
+                  {tr('Chamber Serial Tracker', 'লাইভ সিরিয়াল ট্র্যাকার')}
+                </button>
+                <button onClick={onOpenPrescriptions} className="hover:text-blue-600 text-left">
+                  {tr('Digital e-Prescription Vault', 'ডিজিটাল প্রেসক্রিপশন')}
+                </button>
+                <button onClick={onOpenMedicines} className="hover:text-blue-600 text-left">
+                  {tr('Medicine MRP & Generic Finder', 'ওষুধের দাম ও জেনেরিক')}
+                </button>
+                <button onClick={onOpenBloodBank} className="hover:text-blue-600 text-left">
+                  {tr('Verified Blood Donors', 'রক্তদাতা নেটওয়ার্ক')}
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <h5 className="font-bold text-ink uppercase tracking-wider text-[11px] font-mono">
+                {tr('For Doctors & Clinics', 'চিকিৎসক ও চেম্বার')}
+              </h5>
+              <div className="space-y-1.5 flex flex-col text-muted">
+                <button
+                  onClick={() => {
+                    switchRole('doctor');
+                    setActiveView('rx_builder');
+                  }}
+                  className="hover:text-blue-600 text-left"
+                >
+                  {tr('Rapid Rx Builder', 'দ্রুত প্রেসক্রিপশন বিল্ডার')}
+                </button>
+                <button
+                  onClick={() => {
+                    switchRole('admin');
+                    setActiveView('tv_display');
+                  }}
+                  className="hover:text-blue-600 text-left"
+                >
+                  {tr('Waiting Room TV Mode', 'ওয়েটিং রুম টিভি ডিসপ্লে')}
+                </button>
+                <button onClick={onOpenBeds} className="hover:text-blue-600 text-left">
+                  {tr('Bed & ICU Directory', 'বেড ও ICU তালিকা')}
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <h5 className="font-bold text-ink uppercase tracking-wider text-[11px] font-mono">
+                {tr('Medical Students & Legal', 'শিক্ষার্থী ও লিগ্যাল')}
+              </h5>
+              <div className="space-y-1.5 flex flex-col text-muted">
+                <button
+                  onClick={() => {
+                    switchRole('student');
+                    setActiveView('student_hub');
+                  }}
+                  className="hover:text-blue-600 text-left"
+                >
+                  {tr('OSCE & Bedside Logbook', 'OSCE ও কেস লগবুক')}
+                </button>
+                <a
+                  href="https://github.com/pbs002-s/medicalbd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-600 text-left"
+                >
+                  {tr('Source Code on GitHub', 'সোর্স কোড (গিটহাব)')}
+                </a>
+                <span className="text-muted/60">
+                  {tr('MIT License • Open Platform', 'এমআইটি লাইসেন্স • উন্মুক্ত')}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between text-xs text-muted gap-2">
+            <span>
+              © 2026 {tr('ShasthoSetu BD (OpenHealthBD). Built for Bangladesh healthcare.', 'স্বাস্থ্যসেতু বিডি (ওপেনহেলথ বিডি) • জনস্বার্থে উন্মুক্ত।')}
+            </span>
+            <span className="font-mono text-[11px]">
+              {tr('National Health Hotline: 16263 • Emergency: 999', 'স্বাস্থ্য বাতায়ন: ১৬২৬৩ • জাতীয় জরুরি সেবা: ৯৯৯')}
+            </span>
+          </div>
         </div>
       </footer>
     </div>
