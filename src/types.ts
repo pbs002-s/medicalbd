@@ -1,5 +1,32 @@
 export type UserRole = 'patient' | 'doctor' | 'student' | 'admin';
 
+/**
+ * Every screen the app can show. A union rather than a bare string so a typo in
+ * setActiveView is a compile error instead of a silently blank page.
+ */
+export type AppView =
+  | 'landing'
+  | 'dashboard'
+  | 'appointments'
+  | 'live_serial'
+  | 'prescriptions'
+  | 'reports'
+  | 'health_timeline'
+  | 'medicines'
+  | 'blood_bank'
+  | 'beds'
+  | 'student_hub'
+  | 'student_logbook'
+  | 'student_osce'
+  | 'student_dose'
+  | 'student_quiz'
+  | 'student_forum'
+  | 'forum'
+  | 'rx_builder'
+  | 'tv_display'
+  | 'tv_display_fullscreen'
+  | 'settings';
+
 export interface User {
   id: string;
   name: string;
