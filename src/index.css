@@ -2,154 +2,515 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================
+   ShasthoSetu BD — OpenHealthBD Design System
+   Inspired by OpenGovtBD: Primary Setu Blue, Bangladesh Green,
+   crisp airy surfaces (#F4F7FB), clean elevation, and full
+   dynamic colour mood switching.
+   ========================================================= */
+
+@layer base {
+  :root,
+  :root[data-mood='setu'] {
+    --accent-50: 234 242 251;
+    --accent-100: 213 230 248;
+    --accent-200: 171 206 242;
+    --accent-300: 121 176 233;
+    --accent-400: 68 141 219;
+    --accent-500: 27 110 197;
+    --accent-600: 11 79 138;   /* Primary Setu Trust Blue #0B4F8A */
+    --accent-700: 7 55 97;     /* #073761 */
+    --accent-800: 6 43 75;
+    --accent-900: 5 36 61;
+    --accent-950: 3 22 38;
+
+    --highlight-50: 231 245 236;
+    --highlight-100: 207 236 217;
+    --highlight-200: 161 217 180;
+    --highlight-300: 112 195 141;
+    --highlight-400: 63 169 99;
+    --highlight-500: 22 163 74;
+    --highlight-600: 4 106 56;  /* BD Green #046A38 */
+    --highlight-700: 3 84 44;
+    --highlight-800: 3 67 36;
+    --highlight-900: 3 55 30;
+    --highlight-950: 1 31 16;
+
+    --setu-blue: #0B4F8A;
+    --setu-blue-dark: #073761;
+    --setu-blue-light: #EAF2FB;
+    --bd-green: #046A38;
+    --bd-green-light: #E7F5EC;
+  }
+
+  :root[data-mood='clinical'] {
+    --accent-50: 231 245 236;
+    --accent-100: 207 236 217;
+    --accent-200: 161 217 180;
+    --accent-300: 112 195 141;
+    --accent-400: 63 169 99;
+    --accent-500: 22 163 74;
+    --accent-600: 4 106 56;  /* #046A38 */
+    --accent-700: 3 84 44;
+    --accent-800: 3 67 36;
+    --accent-900: 3 55 30;
+    --accent-950: 1 31 16;
+
+    --highlight-50: 234 242 251;
+    --highlight-100: 213 230 248;
+    --highlight-200: 171 206 242;
+    --highlight-300: 121 176 233;
+    --highlight-400: 68 141 219;
+    --highlight-500: 27 110 197;
+    --highlight-600: 11 79 138;
+    --highlight-700: 7 55 97;
+    --highlight-800: 6 43 75;
+    --highlight-900: 5 36 61;
+    --highlight-950: 3 22 38;
+
+    --setu-blue: #046A38;
+    --setu-blue-dark: #03542C;
+    --setu-blue-light: #E7F5EC;
+    --bd-green: #0B4F8A;
+    --bd-green-light: #EAF2FB;
+  }
+
+  :root[data-mood='ocean'] {
+    --accent-50: 240 249 255;
+    --accent-100: 224 242 254;
+    --accent-200: 186 230 253;
+    --accent-300: 125 211 252;
+    --accent-400: 56 189 248;
+    --accent-500: 14 165 233;
+    --accent-600: 3 105 161;  /* #0369A1 */
+    --accent-700: 7 89 133;
+    --accent-800: 12 74 110;
+    --accent-900: 12 61 90;
+    --accent-950: 8 47 73;
+
+    --highlight-50: 255 251 235;
+    --highlight-100: 254 243 199;
+    --highlight-200: 253 230 138;
+    --highlight-300: 252 211 77;
+    --highlight-400: 251 191 36;
+    --highlight-500: 245 158 11;
+    --highlight-600: 217 119 6;
+    --highlight-700: 180 83 9;
+    --highlight-800: 146 64 14;
+    --highlight-900: 120 53 15;
+    --highlight-950: 69 26 3;
+
+    --setu-blue: #0369A1;
+    --setu-blue-dark: #075985;
+    --setu-blue-light: #E0F2FE;
+    --bd-green: #046A38;
+    --bd-green-light: #E7F5EC;
+  }
+
+  :root[data-mood='sunset'] {
+    --accent-50: 255 241 242;
+    --accent-100: 255 228 230;
+    --accent-200: 254 205 211;
+    --accent-300: 253 164 175;
+    --accent-400: 251 113 133;
+    --accent-500: 225 29 72;
+    --accent-600: 190 18 60;  /* #BE123C */
+    --accent-700: 159 18 57;
+    --accent-800: 136 19 55;
+    --accent-900: 113 18 47;
+    --accent-950: 76 5 25;
+
+    --highlight-50: 255 247 237;
+    --highlight-100: 255 237 213;
+    --highlight-200: 254 215 170;
+    --highlight-300: 253 186 116;
+    --highlight-400: 251 146 60;
+    --highlight-500: 249 115 22;
+    --highlight-600: 234 88 12;
+    --highlight-700: 194 65 12;
+    --highlight-800: 154 52 18;
+    --highlight-900: 124 45 18;
+    --highlight-950: 67 20 7;
+
+    --setu-blue: #BE123C;
+    --setu-blue-dark: #9F1239;
+    --setu-blue-light: #FFE4E6;
+    --bd-green: #046A38;
+    --bd-green-light: #E7F5EC;
+  }
+
+  :root[data-mood='violet'] {
+    --accent-50: 245 243 255;
+    --accent-100: 237 233 254;
+    --accent-200: 221 214 254;
+    --accent-300: 196 181 253;
+    --accent-400: 167 139 250;
+    --accent-500: 124 58 237;
+    --accent-600: 109 40 217; /* #6D28D9 */
+    --accent-700: 91 33 182;
+    --accent-800: 76 29 149;
+    --accent-900: 59 24 115;
+    --accent-950: 46 16 101;
+
+    --highlight-50: 253 242 248;
+    --highlight-100: 252 231 243;
+    --highlight-200: 251 207 232;
+    --highlight-300: 249 168 212;
+    --highlight-400: 244 114 182;
+    --highlight-500: 236 72 153;
+    --highlight-600: 219 39 119;
+    --highlight-700: 190 24 93;
+    --highlight-800: 157 23 77;
+    --highlight-900: 131 24 67;
+    --highlight-950: 80 7 36;
+
+    --setu-blue: #6D28D9;
+    --setu-blue-dark: #5B21B6;
+    --setu-blue-light: #EDE9FE;
+    --bd-green: #046A38;
+    --bd-green-light: #E7F5EC;
+  }
+
+  :root[data-mood='graphite'] {
+    --accent-50: 248 250 252;
+    --accent-100: 241 245 249;
+    --accent-200: 226 232 240;
+    --accent-300: 203 213 225;
+    --accent-400: 148 163 184;
+    --accent-500: 71 85 105;
+    --accent-600: 51 65 85;   /* #334155 */
+    --accent-700: 39 51 68;
+    --accent-800: 30 41 59;
+    --accent-900: 22 31 45;
+    --accent-950: 12 18 28;
+
+    --highlight-50: 240 249 255;
+    --highlight-100: 224 242 254;
+    --highlight-200: 186 230 253;
+    --highlight-300: 125 211 252;
+    --highlight-400: 56 189 248;
+    --highlight-500: 14 165 233;
+    --highlight-600: 2 132 199;
+    --highlight-700: 3 105 161;
+    --highlight-800: 7 89 133;
+    --highlight-900: 12 74 110;
+    --highlight-950: 8 47 73;
+
+    --setu-blue: #334155;
+    --setu-blue-dark: #1E293B;
+    --setu-blue-light: #F1F5F9;
+    --bd-green: #046A38;
+    --bd-green-light: #E7F5EC;
+  }
+
+  :root[data-mood='bottle'] {
+    --accent-50: 238 244 240;
+    --accent-100: 214 230 220;
+    --accent-200: 175 206 187;
+    --accent-300: 130 176 150;
+    --accent-400: 87 144 111;
+    --accent-500: 59 117 84;
+    --accent-600: 44 95 67;   /* #2C5F43 */
+    --accent-700: 32 72 51;
+    --accent-800: 24 55 38;
+    --accent-900: 18 41 28;
+    --accent-950: 11 31 20;
+
+    --highlight-50: 251 238 234;
+    --highlight-100: 245 217 208;
+    --highlight-200: 232 178 160;
+    --highlight-300: 218 138 110;
+    --highlight-400: 194 103 58;
+    --highlight-500: 185 85 47;
+    --highlight-600: 168 70 42;
+    --highlight-700: 134 54 32;
+    --highlight-800: 105 42 25;
+    --highlight-900: 79 31 19;
+    --highlight-950: 58 22 14;
+
+    --setu-blue: #2C5F43;
+    --setu-blue-dark: #1C402E;
+    --setu-blue-light: #EDF4F0;
+    --bd-green: #B9552F;
+    --bd-green-light: #FBF0EB;
+  }
+}
+
 @layer base {
   :root {
-    /* Light mode surfaces */
-    --color-paper: 243 245 241;    /* page background */
-    --color-surface: 255 255 255;  /* card / elevated surface */
-    --color-ink: 17 26 21;         /* primary text */
+    /* Light Mode — OpenGovtBD Clean Surfaces */
+    --color-paper: 244 247 251;   /* #F4F7FB */
+    --color-surface: 255 255 255; /* #FFFFFF */
+    --color-border: 228 233 240;  /* #E4E9F0 */
+    --color-ink: 16 24 40;        /* #101828 */
+    --color-muted: 102 112 133;   /* #667085 */
+
+    --bg: #F4F7FB;
+    --surface: #FFFFFF;
+    --border: #E4E9F0;
+    --ink: #101828;
+    --muted: #667085;
+
+    --success: #16A34A;
+    --success-bg: #E9F9EE;
+    --warning: #F59E0B;
+    --warning-bg: #FEF6E7;
+    --error: #DC2626;
+    --error-bg: #FDEEEE;
+    --info-bg: #EAF2FB;
+
+    --radius: 16px;
+    --radius-sm: 10px;
+    --elevation-1: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 1px rgba(16, 24, 40, 0.03);
+    --elevation-2: 0 4px 10px rgba(11, 79, 138, 0.07), 0 1px 3px rgba(16, 24, 40, 0.04);
+    --elevation-3: 0 14px 34px rgba(11, 79, 138, 0.14), 0 4px 10px rgba(16, 24, 40, 0.06);
   }
 
   .dark {
-    /* Night mode surfaces */
-    --color-paper: 10 16 13;
-    --color-surface: 17 27 22;
-    --color-ink: 232 238 233;
+    /* Dark Mode — OpenGovtBD Night Surfaces */
+    --color-paper: 11 18 32;      /* #0B1220 */
+    --color-surface: 19 28 46;    /* #131C2E */
+    --color-border: 34 48 73;     /* #223049 */
+    --color-ink: 242 245 250;     /* #F2F5FA */
+    --color-muted: 146 160 184;   /* #92A0B8 */
+
+    --bg: #0B1220;
+    --surface: #131C2E;
+    --border: #223049;
+    --ink: #F2F5FA;
+    --muted: #92A0B8;
+
+    --success-bg: #102B1D;
+    --warning-bg: #2B210A;
+    --error-bg: #2B1214;
+    --info-bg: #122138;
+
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --elevation-2: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --elevation-3: 0 16px 40px rgba(0, 0, 0, 0.5);
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  body {
-    @apply bg-paper text-ink;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  html[lang="bn"],
+  [lang="bn"] {
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif;
   }
 
-  h1, h2, h3, .font-display {
-    @apply font-serif;
+  html[lang="en"],
+  [lang="en"] {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .font-bangla {
+    font-family: 'Hind Siliguri', sans-serif !important;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans;
+    background-color: var(--bg);
+    color: var(--ink);
+  }
+
+  /* Clean OpenGovtBD Headings — Sans-serif, NOT serif! */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold tracking-tight text-ink;
   }
 
   ::selection {
-    @apply bg-blue-200/70 text-blue-900;
-  }
-
-  .dark ::selection {
-    @apply bg-blue-800/60 text-blue-50;
+    @apply bg-blue-600 text-white;
   }
 
   :focus-visible {
-    outline: 2px solid rgb(var(--color-ink) / 0.35);
+    outline: 2px solid rgb(var(--accent-600));
     outline-offset: 2px;
   }
 }
 
-/* Slim scrollbar, theme-aware */
+/* =========================================================
+   OpenGovtBD-Style Component Classes
+   ========================================================= */
+
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-150 active:scale-[0.97] cursor-pointer whitespace-nowrap;
+  }
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white;
+    box-shadow: var(--elevation-1);
+  }
+  .btn-primary:hover {
+    box-shadow: var(--elevation-2);
+  }
+  .btn-green {
+    background-color: var(--bd-green);
+    color: #fff;
+    box-shadow: var(--elevation-1);
+    @apply hover:brightness-105;
+  }
+  .btn-green:hover {
+    box-shadow: var(--elevation-2);
+  }
+  .btn-outline {
+    @apply bg-transparent text-blue-600 border border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/40;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-ink border border-border hover:bg-paper;
+  }
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white;
+    box-shadow: var(--elevation-1);
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs rounded-lg;
+  }
+
+  /* Cards */
+  .card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--elevation-1);
+    @apply transition-all duration-200;
+  }
+  .card.hoverable:hover {
+    box-shadow: var(--elevation-2);
+    transform: translateY(-2px);
+  }
+  .card-pad {
+    @apply p-5 sm:p-6;
+  }
+  .card-pad-sm {
+    @apply p-3.5 sm:p-4;
+  }
+
+  /* Status Badges / Pills */
+  .pill {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border border-transparent;
+  }
+  .pill-info {
+    @apply bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-200 dark:border-blue-800;
+  }
+  .pill-success {
+    @apply bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800;
+  }
+  .pill-warning {
+    @apply bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/30 dark:text-amber-200 dark:border-amber-800;
+  }
+  .pill-error {
+    @apply bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-200 dark:border-red-800;
+  }
+  .pill-muted {
+    @apply bg-paper text-muted border-border;
+  }
+
+  /* Stat & Bento Icons */
+  .stat-icon {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center shrink-0;
+  }
+
+  /* Section Eyebrow (e.g. 01 / LIVE QUEUE) */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted mb-1 font-mono;
+  }
+  .section-eyebrow .n {
+    @apply text-blue-600 font-extrabold;
+  }
+
+  /* Quick action and press states */
+  .btn-press {
+    @apply transition-all duration-150 active:scale-[0.97] cursor-pointer;
+  }
+  .card-interactive {
+    @apply transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.99] cursor-pointer;
+  }
+  .card-interactive:hover {
+    box-shadow: var(--elevation-2);
+  }
+
+  /* Skip link */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed top-3 left-3 z-[100] px-4 py-2 rounded-xl bg-blue-700 text-white text-sm font-bold shadow-modal;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slideDown 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-slide-up {
+  animation: slideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slim scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--color-ink) / 0.18);
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(var(--color-ink) / 0.32);
 }
 
-/* Interactive click & motion utilities — used sparingly and consistently */
-@layer components {
-  .btn-press {
-    @apply transition-all duration-150 active:scale-[0.97] cursor-pointer;
-  }
-
-  .card-interactive {
-    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover active:scale-[0.99] active:translate-y-0 cursor-pointer;
-  }
-
-  .shimmer-badge {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.35) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2.5s infinite;
-  }
-
-  .option-pill {
-    @apply px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all duration-150 cursor-pointer inline-flex items-center gap-1.5;
-  }
+/* BMDC standard A4 prescription printing */
+@page {
+  size: A4 portrait;
+  margin: 12mm 10mm;
 }
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(16px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-16px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-slide-up { animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-slide-down { animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-slide-right { animation: slideInRight 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-slide-left { animation: slideInLeft 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Printable prescription styling */
 @media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    width: 210mm;
+  }
   body * {
     visibility: hidden;
   }
-  #printable-prescription, #printable-prescription * {
+  #printable-prescription,
+  #printable-prescription * {
     visibility: visible;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   #printable-prescription {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 190mm;
+    margin: 0;
+    padding: 0;
+    font-size: 11pt;
+    line-height: 1.45;
+    color: #000;
+    background: #fff;
+  }
+  #printable-prescription .rx-row,
+  #printable-prescription .no-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  #printable-prescription .print-hide,
+  .no-print {
+    display: none !important;
   }
 }
