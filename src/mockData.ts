@@ -723,12 +723,17 @@ export const mockPostGradQuestions: PostGradQuestion[] = [
 export interface ForumPost {
   id: string;
   authorNameBn: string;
+  authorNameEn: string;
   authorTitleBn: string;
+  authorTitleEn: string;
   authorAvatar: string;
   createdAtBn: string;
+  createdAtEn: string;
   categoryBn: string;
+  categoryEn: string;
   title: string;
   content: string;
+  contentEn?: string;
   upvotes: number;
   commentsCount: number;
 }
@@ -737,24 +742,34 @@ export const mockForumPosts: ForumPost[] = [
   {
     id: 'f1',
     authorNameBn: 'ডা. সায়রা আফরিন',
+    authorNameEn: 'Dr. Saira Afrin',
     authorTitleBn: 'কার্ডিওলজিস্ট, ন্যাশনাল হার্ট ফাউন্ডেশন',
+    authorTitleEn: 'Cardiologist, National Heart Foundation',
     authorAvatar: 'https://images.unsplash.com/photo-1594824813512-58e1c667088b?auto=format&fit=crop&w=100&q=80',
     createdAtBn: '২ ঘণ্টা আগে',
+    createdAtEn: '2 hours ago',
     categoryBn: 'ECG কেস রিভিউ',
+    categoryEn: 'ECG Review',
     title: 'ECG Case: Hyperacute T waves in Leads V1-V4 (Early Anterior STEMI)',
     content: 'A 52-year-old diabetic male presented with acute retrosternal chest tightness for 45 minutes. The initial ECG shows prominent symmetrical peaked T waves with slight ST elevation in V2-V4. Remember, early recognition of hyperacute T waves before marked ST elevation saves precious myocardium!',
+    contentEn: 'A 52-year-old diabetic male presented with acute retrosternal chest tightness for 45 minutes. The initial ECG shows prominent symmetrical peaked T waves with slight ST elevation in V2-V4. Remember, early recognition of hyperacute T waves before marked ST elevation saves precious myocardium!',
     upvotes: 42,
     commentsCount: 14
   },
   {
     id: 'f2',
     authorNameBn: 'আয়ান চৌধুরী',
+    authorNameEn: 'Ayan Chowdhury',
     authorTitleBn: '৫ম বর্ষ এমবিবিএস শিক্ষার্থী, ডিএমসি (K-78)',
+    authorTitleEn: '5th Year MBBS Student, DMC (K-78)',
     authorAvatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80',
     createdAtBn: '৫ ঘণ্টা আগে',
+    createdAtEn: '5 hours ago',
     categoryBn: 'ক্লিনিক্যাল হিস্ট্রি',
+    categoryEn: 'Clinical History',
     title: 'Ward 1 Case Discussion: Dengue with Severe Thrombocytopenia',
     content: 'আজকে ওয়ার্ডে ভর্তি এক রোগীর প্লাটিলেট কাউন্ট ১৫,০০০/uL এ নেমে গিয়েছিল, কিন্তু কোনো ফ্রাঙ্ক ব্লিডিং ছিল না। ফ্লুইড ম্যানেজমেন্ট প্রটোকল কঠোরভাবে মানা হচ্ছে। প্লাটিলেট ট্রান্সফিউশনের সুনির্দিষ্ট নির্দেশনাবলী নিয়ে সিনিয়র ডাক্তারদের পরামর্শ আশা করছি।',
+    contentEn: 'Today an admitted patient in Ward 1 had platelet count drop to 15,000/uL without active frank bleeding. Fluid resuscitation protocol is being strictly maintained. Seeking advice from senior consultants on specific indications for platelet transfusion.',
     upvotes: 28,
     commentsCount: 9
   }
