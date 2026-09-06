@@ -18,7 +18,8 @@ import {
   Sparkles,
   MapPin,
   Stethoscope,
-  BadgeCheck
+  BadgeCheck,
+  Info
 } from 'lucide-react';
 
 interface PrescriptionsPageProps {
@@ -308,15 +309,18 @@ export const PrescriptionsPage: React.FC<PrescriptionsPageProps> = ({ onBack, in
                         </div>
 
                         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted pt-1 pl-7">
-                          <span>
-                            ⏱ {tr('Timing:', 'নিয়ম:')} <strong className="text-ink">{formatMealTiming(med.mealTiming)}</strong>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5 text-muted shrink-0" />
+                            <span>{tr('Timing:', 'নিয়ম:')}</span> <strong className="text-ink">{formatMealTiming(med.mealTiming)}</strong>
                           </span>
-                          <span>
-                            ⏳ {tr('Duration:', 'মেয়াদ:')} <strong className="text-ink">{formatDuration(med.durationDays, med.durationBn)}</strong>
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-3.5 h-3.5 text-muted shrink-0" />
+                            <span>{tr('Duration:', 'মেয়াদ:')}</span> <strong className="text-ink">{formatDuration(med.durationDays, med.durationBn)}</strong>
                           </span>
                           {med.specialInstruction && (
-                            <span className="text-teal-700 dark:text-teal-400 font-medium">
-                              ℹ️ {med.specialInstruction}
+                            <span className="text-teal-700 dark:text-teal-400 font-medium flex items-center gap-1">
+                              <Info className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                              <span>{med.specialInstruction}</span>
                             </span>
                           )}
                         </div>

@@ -36,7 +36,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Student Welcome Banner (OpenGovtBD card style) */}
       <ScrollReveal animation="fade-down" duration={450}>
-        <div className="card card-pad bg-gradient-to-r from-purple-800 via-indigo-900 to-slate-950 text-white shadow-elevation-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="card card-pad bg-gradient-to-r from-purple-700 via-indigo-700 to-violet-800 text-white shadow-elevation-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <img
               src={currentUser?.avatar || 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80'}

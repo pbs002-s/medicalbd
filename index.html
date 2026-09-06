@@ -22,11 +22,10 @@
           document.title = lang === 'bn'
             ? 'স্বাস্থ্যসেতু বিডি (ShasthoSetu BD) — ওপেনহেলথ বিডি'
             : 'ShasthoSetu BD — OpenHealthBD';
-          var theme = localStorage.getItem('shasthosetu_theme');
-          var dark =
-            theme === 'dark' ||
-            (theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          var theme = localStorage.getItem('shasthosetu_theme') || 'light';
+          var dark = theme === 'dark';
           if (dark) root.classList.add('dark');
+          else root.classList.remove('dark');
           root.style.colorScheme = dark ? 'dark' : 'light';
           root.dataset.mood = localStorage.getItem('shasthosetu_mood') || 'setu';
         } catch (e) {}

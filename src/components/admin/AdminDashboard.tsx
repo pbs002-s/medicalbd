@@ -30,7 +30,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onOpenTVDisplay 
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Admin Header Banner (OpenGovtBD style) */}
       <ScrollReveal animation="fade-down" duration={450}>
-        <div className="card card-pad bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-elevation-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="card card-pad bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 text-white shadow-elevation-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="p-1.5 rounded-xl bg-blue-500/20 text-blue-400">

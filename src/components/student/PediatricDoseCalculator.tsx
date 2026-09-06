@@ -166,26 +166,26 @@ export const PediatricDoseCalculator: React.FC = () => {
       </div>
 
       {/* Result Card */}
-      <div className="p-5 sm:p-6 rounded-3xl bg-slate-900 text-white space-y-4 shadow-elevation-2">
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-slate-800 pb-3">
+      <div className="card card-pad bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 text-ink space-y-4 shadow-elevation-1">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-border pb-3">
           <div>
-            <span className="text-[10px] text-blue-400 font-bold uppercase tracking-wider block">
+            <span className="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider block">
               {tr('Calculated Dose Result', 'নির্ধারিত ডোজ ফলাফল')}
             </span>
-            <h3 className="text-base font-bold text-white mt-0.5">
+            <h3 className="text-base font-bold text-ink mt-0.5">
               {isBn ? `${drug.name} — ${drug.nameBn}` : drug.name}
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-muted mt-0.5">
               {isBn ? drug.ruleBn : drug.ruleEn || drug.ruleBn}
             </p>
           </div>
 
           {drug.mgPerKg > 0 && (
             <div className="text-right">
-              <div className="px-3 py-1 bg-blue-500/20 text-blue-200 border border-blue-500/30 rounded-xl text-sm font-mono font-black">
+              <div className="px-3 py-1 bg-blue-600 text-white rounded-xl text-sm font-mono font-black shadow-xs">
                 {num(result.singleDoseMg)} mg / {tr('dose', 'ডোজ')}
               </div>
-              <div className="text-[10px] text-slate-400 font-mono mt-1">
+              <div className="text-[10px] text-muted font-mono mt-1">
                 {tr('Daily total', 'দৈনিক মোট')} {num(result.dailyDoseMg)} mg ({num(drug.dosesPerDay)} {tr('times/day', 'বার')})
               </div>
             </div>
@@ -193,8 +193,8 @@ export const PediatricDoseCalculator: React.FC = () => {
         </div>
 
         {result.cappedByCeiling && (
-          <div className="p-2.5 rounded-xl bg-amber-950/60 border border-amber-700/60 text-amber-200 text-[11px] flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-[11px] flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <span>
               {tr(
                 'Calculated dose exceeded adult ceiling — capped at maximum adult single dose.',
@@ -205,36 +205,36 @@ export const PediatricDoseCalculator: React.FC = () => {
         )}
 
         {(isBn ? result.fixedRegimenBn : (result.fixedRegimenEn || result.fixedRegimenBn)) ? (
-          <div className="p-3 rounded-xl bg-slate-800/80 flex items-start gap-2.5 text-xs">
-            <Droplets className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-            <span className="font-semibold text-white">
+          <div className="p-3 rounded-xl bg-surface border border-border flex items-start gap-2.5 text-xs text-ink shadow-2xs">
+            <Droplets className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+            <span className="font-semibold text-ink">
               {isBn ? result.fixedRegimenBn : (result.fixedRegimenEn || result.fixedRegimenBn)}
             </span>
           </div>
         ) : (
           <div className="space-y-2">
-            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+            <span className="text-[10px] text-muted font-bold uppercase tracking-wider">
               {tr('Dose Volumes by Available Preparation', 'বাজারে প্রাপ্ত প্রস্তুতি অনুযায়ী পরিমাণ')}
             </span>
             {result.volumes.map((volume) => (
               <div
                 key={volume.preparation.label}
-                className="p-3 rounded-xl bg-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs"
+                className="p-3 rounded-xl bg-surface border border-border flex flex-wrap items-center justify-between gap-2 text-xs text-ink shadow-2xs"
               >
                 <div className="min-w-0">
-                  <div className="font-bold text-white">{volume.preparation.label}</div>
-                  <div className="text-[10px] text-slate-400">{volume.preparation.brands}</div>
+                  <div className="font-bold text-ink">{volume.preparation.label}</div>
+                  <div className="text-[10px] text-muted">{volume.preparation.brands}</div>
                 </div>
                 <div className="flex items-center gap-2 font-mono">
-                  <span className="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-200 border border-blue-500/30 font-black">
+                  <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200 border border-blue-200 dark:border-blue-800 font-black">
                     {num(volume.ml)} ml
                   </span>
-                  <span className="text-slate-400 text-[11px]">
+                  <span className="text-muted text-[11px]">
                     ≈ {num(volume.teaspoons)} {tr('teaspoons', 'চা চামচ')}
                   </span>
                   {volume.drops !== undefined && (
-                    <span className="text-slate-400 text-[11px] flex items-center gap-1">
-                      <Syringe className="w-3 h-3" />
+                    <span className="text-muted text-[11px] flex items-center gap-1">
+                      <Syringe className="w-3 h-3 text-blue-600" />
                       {num(volume.drops)} {tr('drops', 'ফোঁটা')}
                     </span>
                   )}
@@ -244,13 +244,13 @@ export const PediatricDoseCalculator: React.FC = () => {
           </div>
         )}
 
-        <div className="p-2.5 rounded-xl bg-red-950/60 border border-red-800/60 text-red-200 text-[11px] flex items-start gap-2">
-          <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+        <div className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-300 text-[11px] flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
           <span>{isBn ? drug.warningBn : (drug.warningEn || drug.warningBn)}</span>
         </div>
 
-        <p className="text-[10px] text-slate-500 flex items-start gap-1.5">
-          <Calculator className="w-3 h-3 shrink-0 mt-0.5" />
+        <p className="text-[10px] text-muted flex items-start gap-1.5">
+          <Calculator className="w-3 h-3 text-muted shrink-0 mt-0.5" />
           {tr(
             'Clinical decision support tool for students — verify with senior medical officer before prescribing.',
             'শিক্ষার্থীদের হিসাব যাচাইয়ের সহায়ক টুল — প্রেসক্রাইব করার আগে সিনিয়র চিকিৎসকের অনুমোদন নিন।'

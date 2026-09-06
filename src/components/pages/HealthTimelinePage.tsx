@@ -11,7 +11,8 @@ import {
   Stethoscope,
   FlaskConical,
   Pill,
-  Activity
+  Activity,
+  AlertTriangle
 } from 'lucide-react';
 
 interface HealthTimelinePageProps {
@@ -180,8 +181,9 @@ export const HealthTimelinePage: React.FC<HealthTimelinePageProps> = ({ onBack }
           {/* Allergies & Chronic Conditions */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div className="p-3 bg-white/10 rounded-2xl border border-white/15">
-              <span className="text-[11px] text-red-300 font-bold block mb-1">
-                ⚠️ {tr('Known Drug Allergies:', 'চিহ্নিত ড্রাগ এলার্জি (Allergies):')}
+              <span className="text-[11px] text-red-300 font-bold flex items-center gap-1 mb-1">
+                <AlertTriangle className="w-3.5 h-3.5 text-red-300" />
+                <span>{tr('Known Drug Allergies:', 'চিহ্নিত ড্রাগ এলার্জি (Allergies):')}</span>
               </span>
               <div className="flex flex-wrap gap-1.5">
                 <span className="px-2 py-0.5 rounded-md bg-red-500/20 text-red-200 border border-red-400/30 text-[11px] font-semibold">
@@ -194,8 +196,9 @@ export const HealthTimelinePage: React.FC<HealthTimelinePageProps> = ({ onBack }
             </div>
 
             <div className="p-3 bg-white/10 rounded-2xl border border-white/15">
-              <span className="text-[11px] text-teal-300 font-bold block mb-1">
-                🩺 {tr('Chronic Conditions:', 'দীর্ঘমেয়াদী স্বাস্থ্য অবস্থা (Chronic Conditions):')}
+              <span className="text-[11px] text-teal-300 font-bold flex items-center gap-1 mb-1">
+                <Stethoscope className="w-3.5 h-3.5 text-teal-300" />
+                <span>{tr('Chronic Conditions:', 'দীর্ঘমেয়াদী স্বাস্থ্য অবস্থা (Chronic Conditions):')}</span>
               </span>
               <div className="flex flex-wrap gap-1.5">
                 <span className="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-200 border border-teal-400/30 text-[11px] font-semibold">
